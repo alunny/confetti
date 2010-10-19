@@ -28,4 +28,8 @@ describe Confetti::Config do
   it "has an author field, that is an author object" do
     @config.author.class.should be Confetti::Config::Author
   end
+
+  it "doesn't allow author to be clobbered" do
+    lambda { @config.author = "Andrew Lunny" }.should raise_error
+  end
 end
