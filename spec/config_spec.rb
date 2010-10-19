@@ -24,4 +24,8 @@ describe Confetti::Config do
     @config.description = "A Great App That Lets You Do Things"
     @config.description.should == "A Great App That Lets You Do Things"
   end
+
+  it "has an author field, that is an author object" do
+    @config.author.class.should be Confetti::Config::Author
+  end
 end
