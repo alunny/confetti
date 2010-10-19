@@ -1,3 +1,5 @@
+require 'confetti/version'
+require 'confetti/config'
+
 module Confetti
-  # Your code goes here...
 end
