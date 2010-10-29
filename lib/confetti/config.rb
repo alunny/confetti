@@ -35,6 +35,7 @@ module Confetti
     end
 
     class Feature
+      attr_accessor :name, :required
     end
   end
 end
