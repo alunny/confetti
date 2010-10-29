@@ -19,6 +19,7 @@ module Confetti
     end
 
     class License
+      attr_accessor :text, :href
     end
   end
 end
