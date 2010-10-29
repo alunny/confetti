@@ -1,6 +1,6 @@
 module Confetti
   class Config
-    attr_accessor :name, :package, :version, :description
+    attr_accessor :package, :version, :description, :height, :width
     attr_reader :author
 
     def initialize
