@@ -24,6 +24,7 @@ module Confetti
     end
 
     class Content
+      attr_accessor :src, :type, :encoding
     end
   end
 end
