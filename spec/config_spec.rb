@@ -58,5 +58,13 @@ describe Confetti::Config do
     it "doesn't allow author to be clobbered" do
       lambda { @config.author = "Andrew Lunny" }.should raise_error
     end
+
+    it "has a license field, that is a license object" do
+      @config.license.should be_a Confetti::Config::License
+    end
+
+    it "doesn't allow license to be clobbered" do
+      lambda { @config.license = "MIT" }.should raise_error
+    end
   end
 end
