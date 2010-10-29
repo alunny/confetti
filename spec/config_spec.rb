@@ -44,7 +44,9 @@ describe Confetti::Config do
 
   #### child elements
 
-  it "has a name field, that is a name object"
+  it "has a name field, that is a name object" do
+    @config.name.should be_a Confetti::Config::Name
+  end
 
   it "has an author field, that is an author object" do
     @config.author.should be_a Confetti::Config::Author
