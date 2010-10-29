@@ -47,7 +47,7 @@ describe Confetti::Config do
   it "has a name field, that is a name object"
 
   it "has an author field, that is an author object" do
-    @config.author.class.should be Confetti::Config::Author
+    @config.author.should be_a Confetti::Config::Author
   end
 
   it "doesn't allow author to be clobbered" do
