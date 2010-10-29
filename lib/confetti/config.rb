@@ -8,6 +8,7 @@ module Confetti
     end
 
     class Author
+      attr_accessor :name, :href, :email
     end
   end
 end
