@@ -66,5 +66,13 @@ describe Confetti::Config do
     it "doesn't allow license to be clobbered" do
       lambda { @config.license = "MIT" }.should raise_error
     end
+
+    it "has a content field, that is a content object" do
+      @config.content.should be_a Confetti::Config::Content
+    end
+
+    it "doesn't allow content to be clobbered" do
+      lambda { @config.content = "foo.html" }.should raise_error
+    end
   end
 end
