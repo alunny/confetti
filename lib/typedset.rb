@@ -6,6 +6,9 @@ require "set"
 # I should follow these things
 
 class TypedSet < Set
+  attr_reader :klass
+  alias set_class klass
+
   def initialize (klass, *args)
     raise ArgumentError, "require a Class object" unless klass.class == Class
     @klass = klass

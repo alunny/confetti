@@ -26,6 +26,10 @@ describe TypedSet do
       @new_set = TypedSet.new String
     end
 
+    it "should expose the given class as set_class" do
+      @new_set.set_class.should be String
+    end
+
     it "should not allow #add with different classes" do
       lambda { @new_set.add 12 }.should raise_error ArgumentError
     end
