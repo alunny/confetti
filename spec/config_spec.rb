@@ -77,6 +77,18 @@ describe Confetti::Config do
   end
 
   describe "widget child elements (zero or more)" do
+    it "has an icon_set field, that is a TypedSet" do
+      @config.icon_set.should be_a TypedSet
+    end
 
+    it "icon_set should be typed to icon objects" do
+      @config.icon_set.set_class.should be Confetti::Config::Icon
+    end
+
+    it "should not allow icon_set to be clobbered" do
+      lambda { 
+        @config.icon_set = ['icon.png', 'icon-hires.png']
+      }.should raise_error
+    end
   end
 end
