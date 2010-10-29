@@ -2,7 +2,7 @@ module Confetti
   class Config
     attr_accessor :package, :version, :description, :height, :width
     attr_reader :author, :viewmodes, :name, :license, 
-                :content, :icon_set
+                :content, :icon_set, :feature_set
 
     def initialize
       @author       = Author.new
@@ -10,6 +10,7 @@ module Confetti
       @license      = License.new
       @content      = Content.new
       @icon_set     = TypedSet.new Icon
+      @feature_set  = TypedSet.new Feature
       @viewmodes    = []
     end
 
@@ -31,6 +32,9 @@ module Confetti
 
     class Icon
       attr_accessor :src, :height, :width
+    end
+
+    class Feature
     end
   end
 end

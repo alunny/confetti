@@ -90,5 +90,19 @@ describe Confetti::Config do
         @config.icon_set = ['icon.png', 'icon-hires.png']
       }.should raise_error
     end
+
+    it "has an feature_set field, that is a TypedSet" do
+      @config.feature_set.should be_a TypedSet
+    end
+
+    it "feature_set should be typed to feature objects" do
+      @config.feature_set.set_class.should be Confetti::Config::Feature
+    end
+
+    it "should not allow feature_set to be clobbered" do
+      lambda { 
+        @config.feature_set = ['Geolocation', 'Acceleration']
+      }.should raise_error
+    end
   end
 end
