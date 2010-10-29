@@ -42,7 +42,7 @@ describe Confetti::Config do
     end
   end
 
-  describe "widget child elements" do
+  describe "widget child elements (zero or one, per locale)" do
     it "has a name field, that is a name object" do
       @config.name.should be_a Confetti::Config::Name
     end
@@ -74,5 +74,9 @@ describe Confetti::Config do
     it "doesn't allow content to be clobbered" do
       lambda { @config.content = "foo.html" }.should raise_error
     end
+  end
+
+  describe "widget child elements (zero or more)" do
+
   end
 end
