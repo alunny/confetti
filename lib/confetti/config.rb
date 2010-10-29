@@ -1,10 +1,11 @@
 module Confetti
   class Config
     attr_accessor :package, :version, :description, :height, :width
-    attr_reader :author
+    attr_reader :author, :viewmodes
 
     def initialize
       @author = Author.new
+      @viewmodes = []
     end
 
     class Author

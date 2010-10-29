@@ -27,7 +27,15 @@ describe Confetti::Config do
     @config.width.should == 500
   end
 
-  it "has a list of viewmodes"
+  it "has a list of viewmodes" do
+    @config.viewmodes.should be_an Array
+  end
+
+  it "should let viewmodes be appended" do
+    @config.viewmodes << "windowed"
+    @config.viewmodes << "floating"
+    @config.viewmodes.should == ["windowed","floating"]
+  end
 
   it "has a writable and readable description field" do
     lambda { @config.description = "A Great App That Lets You Do Things" }.should_not raise_error
