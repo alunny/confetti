@@ -14,6 +14,7 @@ module Confetti
     end
 
     class Name
+      attr_accessor :name, :shortname
     end
   end
 end
