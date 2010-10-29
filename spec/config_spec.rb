@@ -104,5 +104,22 @@ describe Confetti::Config do
         @config.feature_set = ['Geolocation', 'Acceleration']
       }.should raise_error
     end
+
+    it "has an preference_set field, that is a TypedSet" do
+      @config.preference_set.should be_a TypedSet
+    end
+
+    it "preference_set should be typed to preference objects" do
+      @config.preference_set.set_class.should be Confetti::Config::Preference
+    end
+
+    it "should not allow preference_set to be clobbered" do
+      lambda { 
+        @config.preference_set = { 
+          'Autorotate' => false, 
+          'Notification' => 'silent'
+        }
+      }.should raise_error
+    end
   end
 end
