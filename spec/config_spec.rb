@@ -47,6 +47,10 @@ describe Confetti::Config do
       @config.name.should be_a Confetti::Config::Name
     end
 
+    it "doesn't allow name to be clobbered" do
+      lambda { @config.name = "Stellar Game" }.should raise_error
+    end
+
     it "has an author field, that is an author object" do
       @config.author.should be_a Confetti::Config::Author
     end
