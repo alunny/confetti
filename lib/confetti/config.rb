@@ -30,6 +30,7 @@ module Confetti
     end
 
     class Icon
+      attr_accessor :src, :height, :width
     end
   end
 end
