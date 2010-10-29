@@ -40,6 +40,7 @@ module Confetti
     end
 
     class Preference
+      attr_accessor :name, :value, :readonly
     end
   end
 end
