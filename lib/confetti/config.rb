@@ -13,7 +13,7 @@ module Confetti
     Feature     = Class.new Struct.new(:name, :required)
     Preference  = Class.new Struct.new(:name, :value, :readonly)
 
-    def initialize
+    def initialize(*args)
       @author           = Author.new
       @name             = Name.new
       @license          = License.new
@@ -22,6 +22,9 @@ module Confetti
       @feature_set      = TypedSet.new Feature
       @preference_set   = TypedSet.new Preference
       @viewmodes        = []
+    end
+
+    def write_for_android(destination)
     end
   end
 end
