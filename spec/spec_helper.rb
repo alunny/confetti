@@ -1,7 +1,15 @@
 require "confetti"
 
 module HelpfulPaths
-  @spec_dir         = File.dirname(__FILE__)
-  @fixture_dir      = @spec_dir + "/fixtures"
-  @templates_dir    = File.expand_path "../lib/confetti/templates", @spec_dir
+  SPEC_DIR         = File.dirname(__FILE__)
+  FIXTURE_DIR      = SPEC_DIR + "/fixtures"
+  TEMPLATES_DIR    = File.expand_path "../lib/confetti/templates", SPEC_DIR
+
+  def fixture_dir
+    FIXTURE_DIR
+  end
+
+  def templates_dir
+    TEMPLATES_DIR
+  end
 end
