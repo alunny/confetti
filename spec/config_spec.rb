@@ -122,4 +122,16 @@ describe Confetti::Config do
       }.should raise_error
     end
   end
+
+  describe " - platform generation" do
+    describe "Android" do
+      it "should read in the Android template"
+
+      it "should return an Android config string"
+    end
+  end
+
+  describe " - platform writing" do
+    describe "Android"
+  end
 end
