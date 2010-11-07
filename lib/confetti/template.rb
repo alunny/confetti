@@ -1,4 +1,4 @@
 module Confetti
-  class Template
+  class Template < Mustache
   end
 end
