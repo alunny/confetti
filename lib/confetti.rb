@@ -11,6 +11,10 @@ Bundler.require :default
 # internal dependencies
 require 'typedset'
 require 'confetti/version'
+
 require 'confetti/template'
+require 'confetti/templates/base'
+require 'confetti/templates/android'
+
 require 'confetti/config'
 require 'confetti/config/feature'
