@@ -1,4 +1,4 @@
-require "typedset"
+require "spec_helper"
 
 describe TypedSet do
   it "should fail without a class being passed in" do

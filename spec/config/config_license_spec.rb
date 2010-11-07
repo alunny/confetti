@@ -1,4 +1,4 @@
-require 'confetti'
+require 'spec_helper'
 
 describe Confetti::Config::License do
   before do

@@ -1,4 +1,4 @@
-require 'confetti'
+require 'spec_helper'
 
 describe Confetti::Template::Android do
   it "should inherit from the base template" do

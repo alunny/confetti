@@ -1,4 +1,4 @@
-require 'confetti'
+require 'spec_helper'
 
 describe Confetti::Config::Feature do
   before do
