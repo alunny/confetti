@@ -1,12 +1,14 @@
 require 'confetti'
 
+FIXTURE_DIR = File.dirname(__FILE__) + "/fixtures"
+
 describe 'General usage:' do
   it "should read config.xml and spit out AndroidManifest.xml" do
-    config_the_first = Confetti::Config.new "fixtures/config_the_first.xml"
-    config_the_first.write_for_android "fixtures/android_manifest_first.xml"
+    config = Confetti::Config.new "#{ FIXTURE_DIR }/config.xml"
+    config.write_for_android "#{ FIXTURE_DIR }/AndroidManifest_output.xml"
 
-    desired_output = File.read "fixtures/android_the_first.xml"
-    actual_output = File.read "fixtures/android_manifest_first.xml"
+    desired_output  = File.read "#{ FIXTURE_DIR }/AndroidManifest_expected.xml"
+    actual_output   = File.read "#{ FIXTURE_DIR }/AndroidManifest_output.xml"
     actual_output.should == desired_output
   end
 end
