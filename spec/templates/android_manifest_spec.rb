@@ -14,4 +14,11 @@ describe Confetti::Template::AndroidManifest do
   it "should have the template_file \"android.mustache\" in the confetti/templates dir" do
     AndroidTemplate.template_file.should == "#{ templates_dir }/android_manifest.mustache"
   end
+
+  describe "templated attributes" do
+    subject { @template = AndroidTemplate.new }
+
+    it { should respond_to :package_name }
+    it { should respond_to :class_name }
+  end
 end
