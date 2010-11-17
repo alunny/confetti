@@ -1,5 +1,7 @@
 module Confetti
   class Config
+    include Helpers
+
     attr_accessor :package, :version, :description, :height, :width
     attr_reader :author, :viewmodes, :name, :license, :content, 
                 :icon_set, :feature_set, :preference_set

@@ -11,6 +11,7 @@ Bundler.require :default
 # internal dependencies
 require 'typedset'
 require 'confetti/version'
+require 'confetti/helpers'
 
 require 'confetti/template'
 require 'confetti/templates/base'
