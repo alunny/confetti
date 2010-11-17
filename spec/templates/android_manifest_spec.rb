@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Confetti::Template::Android do
+describe Confetti::Template::AndroidManifest do
   include HelpfulPaths
 
   before :all do
-    AndroidTemplate = Confetti::Template::Android
+    AndroidTemplate = Confetti::Template::AndroidManifest
   end
 
   it "should inherit from the base template" do
@@ -12,6 +12,6 @@ describe Confetti::Template::Android do
   end
 
   it "should have the template_file \"android.mustache\" in the confetti/templates dir" do
-    AndroidTemplate.template_file.should == "#{ templates_dir }/android.mustache"
+    AndroidTemplate.template_file.should == "#{ templates_dir }/android_manifest.mustache"
   end
 end

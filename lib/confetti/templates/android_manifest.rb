@@ -1,6 +1,6 @@
 module Confetti
   module Template
-    class Android < Base
+    class AndroidManifest < Base
     end
   end
 end

@@ -177,10 +177,10 @@ describe Confetti::Config do
   end
 
   describe " - platform generation" do
-    describe "Android" do
-      it "should read in the Android template"
+    describe "#write_android_manifest" do
+      it "should create an AndroidManifest view"
 
-      it "should return an Android config string"
+      it "should call #render on the AndroidManifest view"
     end
   end
 

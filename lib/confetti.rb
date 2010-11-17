@@ -18,7 +18,7 @@ require 'confetti/helpers'
 
 require 'confetti/template'
 require 'confetti/templates/base'
-require 'confetti/templates/android'
+require 'confetti/templates/android_manifest'
 
 require 'confetti/config'
 require 'confetti/config/feature'
