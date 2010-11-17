@@ -1,3 +1,6 @@
+# stdlib
+require "rexml/document"
+
 # external dependencies
 begin
   require "bundler/setup"

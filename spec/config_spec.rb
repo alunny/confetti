@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Confetti::Config do
+  include HelpfulPaths
   before do
     @config = Confetti::Config.new
   end
@@ -143,6 +144,31 @@ describe Confetti::Config do
       @blank_config.stub(:is_file?).and_return(true)
       @blank_config.should_receive(:populate_from_xml).with("config.xml")
       @blank_config.send :initialize, "config.xml"
+    end
+  end
+
+  describe "#populate_from_xml" do
+    it "should try to read the passed filename" do
+      File.should_receive(:read).with("config.xml")
+      lambda {
+        @config.populate_from_xml "config.xml"
+      }.should raise_error
+    end
+
+    it "should raise an error if can't parse" do
+      lambda {
+        @config.populate_from_xml("foo.goo")
+      }.should raise_error
+    end
+
+    describe "when setting attributes" do
+      before do
+        @config.populate_from_xml(fixture_dir + "/config.xml")
+      end
+
+      it "should populate the app's package when present in config.xml" do
+        @config.package.should == "com.alunny.confetti"
+      end
     end
   end
 
