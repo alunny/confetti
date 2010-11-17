@@ -123,6 +123,29 @@ describe Confetti::Config do
     end
   end
 
+  describe "#initialize with file" do
+    before do
+      # pretty gross rspec
+      @blank_config = Confetti::Config.new
+    end
+
+    it "should not call #is_file? if no arguments are passed" do
+      @blank_config.should_not_receive(:is_file?)
+      @blank_config.send :initialize
+    end
+
+    it "should call #is_file? with an argument passed" do
+      @blank_config.should_receive(:is_file?)
+      @blank_config.send :initialize, "config.xml"
+    end
+
+    it "should call #populate_from_xml with a file passed" do
+      @blank_config.stub(:is_file?).and_return(true)
+      @blank_config.should_receive(:populate_from_xml).with("config.xml")
+      @blank_config.send :initialize, "config.xml"
+    end
+  end
+
   describe " - platform generation" do
     describe "Android" do
       it "should read in the Android template"

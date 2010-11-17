@@ -24,6 +24,13 @@ module Confetti
       @feature_set      = TypedSet.new Feature
       @preference_set   = TypedSet.new Preference
       @viewmodes        = []
+
+      if args.length > 0 && is_file?(args.first)
+        populate_from_xml args.first
+      end
+    end
+
+    def populate_from_xml(xml_file)
     end
 
     def write_for_android(destination)
