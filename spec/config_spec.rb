@@ -161,13 +161,17 @@ describe Confetti::Config do
       }.should raise_error
     end
 
-    describe "when setting attributes" do
+    describe "when setting attributes from config.xml" do
       before do
         @config.populate_from_xml(fixture_dir + "/config.xml")
       end
 
-      it "should populate the app's package when present in config.xml" do
+      it "should populate the app's package when present" do
         @config.package.should == "com.alunny.confetti"
+      end
+
+      it "should populate the app's name when present" do
+        @config.name.name.should == "Confetti Sample App"
       end
     end
   end

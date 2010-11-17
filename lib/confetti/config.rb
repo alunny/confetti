@@ -31,10 +31,17 @@ module Confetti
     end
 
     def populate_from_xml(xml_file)
-      config_doc = REXML::Document.new(File.read(xml_file))
-      fail "no doc parsed" unless config_doc.root
+      config_doc = REXML::Document.new(File.read(xml_file)).root
+      fail "no doc parsed" unless config_doc
 
-      self.package = config_doc.root.attributes["id"]
+      @package = config_doc.attributes["id"]
+
+      config_doc.elements.each do |ele|
+        case ele.name
+        when "name"
+          @name = Name.new(ele.text.strip, ele.attributes["shortname"])
+        end
+      end
     end
 
     def write_for_android(destination)
