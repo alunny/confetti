@@ -1,3 +1,5 @@
+CURRENT_DIR = File.dirname(__FILE__)
+
 # stdlib
 require "rexml/document"
 
@@ -18,7 +20,9 @@ require 'confetti/helpers'
 
 require 'confetti/template'
 require 'confetti/templates/base'
-require 'confetti/templates/android_manifest'
+Dir[File.join(CURRENT_DIR, 'confetti', 'templates', '*')].each do |file|
+  require file if File.extname(file) == ".rb"
+end
 
 require 'confetti/config'
 require 'confetti/config/feature'
