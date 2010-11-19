@@ -20,4 +20,10 @@ describe Confetti::Template::JavaChecks do
       end
     end
   end
+
+  describe "#convert_to_java_identifier" do
+    it "should not affect a valid identifier"
+
+    it "should convert all invalid characters to underscores"
+  end
 end
