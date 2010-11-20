@@ -47,6 +47,10 @@ describe Confetti::Template::AndroidManifest do
       it "should set class_name correctly" do
         @template.class_name.should == "Awesome_App"
       end
+
+      it "should render the correct AndroidManifest" do
+        @template.render.should == File.read("#{ fixture_dir }/android_manifest_spec.xml")
+      end
     end
   end
 end
