@@ -178,15 +178,19 @@ describe Confetti::Config do
 
   describe " - platform generation" do
     describe "android" do
-      describe "#generate_android_manifest" do
-        before do
-          @config.package = "com.alunny.confetti"
-          @config.name.name = "Confetti Sample App"
-        end
+      before do
+        @config.package = "com.whoever.awesome.app"
+        @config.name.name = "Awesome App"
+      end
 
+      describe "#generate_android_manifest" do
         it "should create a new AndroidManifest template" do
           @config.generate_android_manifest.should be_a Confetti::Template::AndroidManifest
         end
+      end
+
+      describe "#write_android_manifest" do
+        it "should write the correct AndroidManifest.xml to the fs"
       end
     end
   end
