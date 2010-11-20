@@ -44,7 +44,8 @@ module Confetti
       end
     end
 
-    def write_for_android(destination)
+    def generate_android_manifest
+      Confetti::Template::AndroidManifest.new(self)
     end
   end
 end
