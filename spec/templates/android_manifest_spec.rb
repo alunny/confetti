@@ -21,4 +21,32 @@ describe Confetti::Template::AndroidManifest do
     it { should respond_to :package_name }
     it { should respond_to :class_name }
   end
+
+  describe "when passed a config object" do
+    before do
+      @config = Confetti::Config.new
+      @config.name.name = "Awesome App"
+      @config.package = "com.whoever.awesome.app"
+    end
+
+    it "should accept the config object" do
+      lambda {
+        AndroidTemplate.new(@config)
+      }.should_not raise_error
+    end
+
+    describe "templated attributes" do
+      before do
+        @template = AndroidTemplate.new(@config)
+      end
+
+      it "should set package_name correctly" do
+        @template.package_name.should == "com.whoever.awesome.app"
+      end
+
+      it "should set class_name correctly" do
+        @template.class_name.should == "Awesome_App"
+      end
+    end
+  end
 end
