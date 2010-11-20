@@ -18,4 +18,8 @@ describe Confetti::Template::Base do
   it "should find the template and render without error" do
     lambda { BaseTemplate.new.render }.should_not raise_error
   end
+
+  it "should accept a config object passed in" do
+    lambda { BaseTemplate.new }.should_not raise_error
+  end
 end
