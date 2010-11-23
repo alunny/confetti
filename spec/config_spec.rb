@@ -190,7 +190,18 @@ describe Confetti::Config do
       end
 
       describe "#write_android_manifest" do
-        it "should write the correct AndroidManifest.xml to the fs"
+        it "should write the rendered AndroidManifest.xml to the fs" do
+          contents = "foo"
+          template = mock(Confetti::Template::AndroidManifest)
+          output = mock(IO)
+
+          @config.should_receive(:generate_android_manifest).and_return(template)
+          template.should_receive(:render).and_return(contents)
+          @config.should_receive(:open).and_yield(output)
+          output.should_receive(:puts).with(contents)
+
+          @config.write_android_manifest "my_directory/AndroidManifest.xml"
+        end
       end
     end
   end
