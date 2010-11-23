@@ -45,7 +45,7 @@ describe Confetti::Template::AndroidManifest do
       end
 
       it "should set class_name correctly" do
-        @template.class_name.should == "Awesome_App"
+        @template.class_name.should == "AwesomeApp"
       end
 
       it "should render the correct AndroidManifest" do
