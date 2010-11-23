@@ -30,7 +30,11 @@ describe Confetti::Template::JavaChecks do
       convert_to_java_identifier("Foo").should == "Foo"
     end
 
-    it "should convert all invalid characters to underscores" do
+    it "should remove spaces" do
+      convert_to_java_identifier("Sample App").should == "SampleApp"
+    end
+
+    it "should convert non-space invalid characters to underscores" do
       convert_to_java_identifier("Foo:Bar").should == "Foo_Bar"
     end
 

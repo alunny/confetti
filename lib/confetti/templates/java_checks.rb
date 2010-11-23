@@ -6,7 +6,7 @@ module Confetti
       end
 
       def convert_to_java_identifier(str)
-        str.sub(/^\d/,"_").gsub(/[^a-zA-Z0-9_]/,"_")
+        str.sub(/^\d/,"_").gsub(/\s/,"").gsub(/[^a-zA-Z0-9_]/,"_")
       end
 
       def is_java_package_id(str)
