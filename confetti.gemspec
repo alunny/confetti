@@ -21,5 +21,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "mustache", "0.11.2"
-  s.add_development_dependency "rspec", "~> 2.0.1"
+  s.add_development_dependency "rspec", "~> 2.1.0"
+  s.add_development_dependency "cucumber"
+  s.add_development_dependency "aruba"
 end
