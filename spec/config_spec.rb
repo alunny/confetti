@@ -190,17 +190,30 @@ describe Confetti::Config do
       end
 
       describe "#write_android_manifest" do
+        before do
+          @contents = "foo"
+          @template = Confetti::Template::AndroidManifest.new
+          @output = mock(IO)
+
+          @config.should_receive(:generate_android_manifest).and_return(@template)
+          @template.should_receive(:render).and_return(@contents)
+          @output.should_receive(:puts).with(@contents)
+        end
+
         it "should write the rendered AndroidManifest.xml to the fs" do
-          contents = "foo"
-          template = mock(Confetti::Template::AndroidManifest)
-          output = mock(IO)
+          filepath = "my_directory/AndroidManifest.xml"
+          @config.should_receive(:open).with(filepath, 'w').and_yield(@output)
 
-          @config.should_receive(:generate_android_manifest).and_return(template)
-          template.should_receive(:render).and_return(contents)
-          @config.should_receive(:open).and_yield(output)
-          output.should_receive(:puts).with(contents)
+          @config.write_android_manifest filepath
+        end
 
-          @config.write_android_manifest "my_directory/AndroidManifest.xml"
+        describe "when no filepath is passed" do
+          it "should write the rendered AndroidManifest.xml to the default location" do
+            default_path = File.join(Dir.pwd, "AndroidManifest.xml")
+            @config.should_receive(:open).with(default_path, 'w').and_yield(@output)
+
+            @config.write_android_manifest
+          end
         end
       end
     end

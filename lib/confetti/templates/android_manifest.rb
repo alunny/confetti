@@ -14,6 +14,10 @@ module Confetti
       def class_name
         convert_to_java_identifier(@config.name.name) if @config
       end
+
+      def output_filename
+        "AndroidManifest.xml"
+      end
     end
   end
 end

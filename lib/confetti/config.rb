@@ -48,10 +48,11 @@ module Confetti
       Confetti::Template::AndroidManifest.new(self)
     end
 
-    def write_android_manifest filepath
-      open(filepath, 'w') do |f|
-        f.puts generate_android_manifest.render
-      end
+    def write_android_manifest(filepath=nil)
+      template = generate_android_manifest
+      filepath ||= File.join(Dir.pwd, template.output_filename)
+
+      open(filepath, 'w') { |f| f.puts template.render }
     end
   end
 end

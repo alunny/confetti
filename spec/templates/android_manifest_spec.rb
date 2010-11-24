@@ -22,6 +22,12 @@ describe Confetti::Template::AndroidManifest do
     it { should respond_to :class_name }
   end
 
+  describe "default values" do
+    it "should define output filename as \"AndroidManifest.xml\"" do
+      AndroidTemplate.new.output_filename.should == "AndroidManifest.xml"
+    end
+  end
+
   describe "when passed a config object" do
     before do
       @config = Confetti::Config.new
