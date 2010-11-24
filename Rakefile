@@ -1,9 +1,14 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-desc "run all specs (is the default)"
+desc "run all specs"
 task :spec do
  system "bundle exec rspec spec"
+end
+
+desc "run all cucumber features"
+task :features do
+  system "bundle exec cucumber features"
 end
 
 namespace :spec do
@@ -11,4 +16,4 @@ namespace :spec do
   # whenever
 end
 
-task :default => :spec
+task :default => [:features, :spec]
