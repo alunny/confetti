@@ -7,3 +7,4 @@ Feature: Android
 		When I'm in the fixtures directory
 		And I run "confetti generate android_manifest"
 		Then a file named "AndroidManifest.xml" should exist
+		And the "AndroidManifest.xml" file should be identical to "AndroidManifest_expected.xml"
