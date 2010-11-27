@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Confetti::Config do
+  include ConfigHelpers
   include HelpfulPaths
+
   before do
     @config = Confetti::Config.new
   end
@@ -176,80 +178,9 @@ describe Confetti::Config do
     end
   end
 
-  describe " - platform generation" do
-    describe "android" do
-      before do
-        @config.package = "com.whoever.awesome.app"
-        @config.name.name = "Awesome App"
-      end
+  describe "config generation" do
+    it_should_have_generate_and_write_methods_for :android_manifest
 
-      describe "#generate_android_manifest" do
-        it "should create a new AndroidManifest template" do
-          @config.generate_android_manifest.should be_a Confetti::Template::AndroidManifest
-        end
-      end
-
-      describe "#write_android_manifest" do
-        before do
-          @contents = "foo"
-          @template = Confetti::Template::AndroidManifest.new
-          @output = mock(IO)
-
-          @config.should_receive(:generate_android_manifest).and_return(@template)
-          @template.should_receive(:render).and_return(@contents)
-          @output.should_receive(:puts).with(@contents)
-        end
-
-        it "should write the rendered AndroidManifest.xml to the fs" do
-          filepath = "my_directory/AndroidManifest.xml"
-          @config.should_receive(:open).with(filepath, 'w').and_yield(@output)
-
-          @config.write_android_manifest filepath
-        end
-
-        describe "when no filepath is passed" do
-          it "should write the rendered AndroidManifest.xml to the default location" do
-            default_path = File.join(Dir.pwd, "AndroidManifest.xml")
-            @config.should_receive(:open).with(default_path, 'w').and_yield(@output)
-
-            @config.write_android_manifest
-          end
-        end
-      end
-
-      describe "#generate_android_strings" do
-        it "should create a new Android strings.xml template" do
-          @config.generate_android_strings.should be_a Confetti::Template::AndroidStrings
-        end
-      end
-
-      describe "#write_android_strings" do
-        before do
-          @contents = "foo"
-          @template = Confetti::Template::AndroidStrings.new
-          @output = mock(IO)
-
-          @config.should_receive(:generate_android_strings).and_return(@template)
-          @template.should_receive(:render).and_return(@contents)
-          @output.should_receive(:puts).with(@contents)
-        end
-
-        it "should write the rendered strings.xml to the fs" do
-          filepath = "my_directory/strings.xml"
-          @config.should_receive(:open).with(filepath, 'w').and_yield(@output)
-
-          @config.write_android_strings filepath
-        end
-
-        describe "when no filepath is passed" do
-          it "should write the rendered strings.xml to the default location" do
-            default_path = File.join(Dir.pwd, "strings.xml")
-            @config.should_receive(:open).with(default_path, 'w').and_yield(@output)
-
-            @config.write_android_strings
-          end
-        end
-      end
-    end
+    it_should_have_generate_and_write_methods_for :android_strings
   end
 end
