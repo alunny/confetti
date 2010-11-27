@@ -44,26 +44,28 @@ module Confetti
       end
     end
 
-    def generate_android_manifest
-      Confetti::Template::AndroidManifest.new(self)
-    end
+    # generate and write methods, per template
+    [:android_manifest, :android_strings].each do |config_type|
+      class_name = config_type.to_s.split("_").collect do |s|
+        s.capitalize
+      end.join
+      template_class = Confetti::Template.const_get(class_name)
 
-    def write_android_manifest(filepath=nil)
-      template = generate_android_manifest
-      filepath ||= File.join(Dir.pwd, template.output_filename)
+      generate_method = "generate_#{ config_type }".to_sym
+      write_method    = "write_#{ config_type }".to_sym
 
-      open(filepath, 'w') { |f| f.puts template.render }
-    end
+      send :define_method, generate_method do
+        template_class.new(self)
+      end
 
-    def generate_android_strings
-      Confetti::Template::AndroidStrings.new(self)
-    end
+      send :define_method, write_method do |*args|
+        filepath = args.first
 
-    def write_android_strings(filepath=nil)
-      template = generate_android_strings
-      filepath ||= File.join(Dir.pwd, template.output_filename)
+        template = send generate_method
+        filepath ||= File.join(Dir.pwd, template.output_filename)
 
-      open(filepath, 'w') { |f| f.puts template.render }
+        open(filepath, 'w') { |f| f.puts template.render }
+      end
     end
   end
 end
