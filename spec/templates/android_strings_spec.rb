@@ -4,26 +4,26 @@ describe Confetti::Template::AndroidStrings do
   include HelpfulPaths
 
   before :all do
-    AndroidTemplate = Confetti::Template::AndroidStrings
+    @template_class = Confetti::Template::AndroidStrings
   end
 
   it "should inherit from the base template" do
-    AndroidTemplate.superclass.should be Confetti::Template::Base
+    @template_class.superclass.should be Confetti::Template::Base
   end
 
   it "should have the template_file \"android_strings.mustache\" in the confetti/templates dir" do
-    AndroidTemplate.template_file.should == "#{ templates_dir }/android_strings.mustache"
+    @template_class.template_file.should == "#{ templates_dir }/android_strings.mustache"
   end
 
   describe "templated attributes" do
-    subject { @template = AndroidTemplate.new }
+    subject { @template = @template_class.new }
 
     it { should respond_to :app_name }
   end
 
   describe "default values" do
     it "should define output filename as \"strings.xml\"" do
-      AndroidTemplate.new.output_filename.should == "strings.xml"
+      @template_class.new.output_filename.should == "strings.xml"
     end
   end
 
@@ -35,13 +35,13 @@ describe Confetti::Template::AndroidStrings do
 
     it "should accept the config object" do
       lambda {
-        AndroidTemplate.new(@config)
+        @template_class.new(@config)
       }.should_not raise_error
     end
 
     describe "templated attributes" do
       before do
-        @template = AndroidTemplate.new(@config)
+        @template = @template_class.new(@config)
       end
 
       it "should set app_name correctly" do

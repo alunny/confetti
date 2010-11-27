@@ -4,19 +4,19 @@ describe Confetti::Template::AndroidManifest do
   include HelpfulPaths
 
   before :all do
-    AndroidTemplate = Confetti::Template::AndroidManifest
+    @template_class = Confetti::Template::AndroidManifest
   end
 
   it "should inherit from the base template" do
-    AndroidTemplate.superclass.should be Confetti::Template::Base
+    @template_class.superclass.should be Confetti::Template::Base
   end
 
   it "should have the template_file \"android.mustache\" in the confetti/templates dir" do
-    AndroidTemplate.template_file.should == "#{ templates_dir }/android_manifest.mustache"
+    @template_class.template_file.should == "#{ templates_dir }/android_manifest.mustache"
   end
 
   describe "templated attributes" do
-    subject { @template = AndroidTemplate.new }
+    subject { @template = @template_class.new }
 
     it { should respond_to :package_name }
     it { should respond_to :class_name }
@@ -24,7 +24,7 @@ describe Confetti::Template::AndroidManifest do
 
   describe "default values" do
     it "should define output filename as \"AndroidManifest.xml\"" do
-      AndroidTemplate.new.output_filename.should == "AndroidManifest.xml"
+      @template_class.new.output_filename.should == "AndroidManifest.xml"
     end
   end
 
@@ -37,13 +37,13 @@ describe Confetti::Template::AndroidManifest do
 
     it "should accept the config object" do
       lambda {
-        AndroidTemplate.new(@config)
+        @template_class.new(@config)
       }.should_not raise_error
     end
 
     describe "templated attributes" do
       before do
-        @template = AndroidTemplate.new(@config)
+        @template = @template_class.new(@config)
       end
 
       it "should set package_name correctly" do
