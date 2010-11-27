@@ -7,7 +7,7 @@ module Confetti
     attr_reader :author, :viewmodes, :name, :license, :content, 
                 :icon_set, :feature_set, :preference_set
 
-    generate_and_write :android_manifest, :android_strings
+    generate_and_write :android_manifest, :android_strings, :webos_appinfo
 
     # classes that represent child elements
     Author      = Class.new Struct.new(:name, :href, :email)

@@ -182,5 +182,7 @@ describe Confetti::Config do
     it_should_have_generate_and_write_methods_for :android_manifest
 
     it_should_have_generate_and_write_methods_for :android_strings
+
+    it_should_have_generate_and_write_methods_for :webos_appinfo
   end
 end
