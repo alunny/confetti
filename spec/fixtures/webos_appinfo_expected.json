@@ -1,0 +1,9 @@
+{
+	"id": "com.whoever.awesome.app",
+	"version": "1.0.0",
+	"vendor": "Nitobi",
+	"type": "web",
+	"main": "index.html",
+	"title": "Awesome App",
+	"icon": "icon.png"
+}
