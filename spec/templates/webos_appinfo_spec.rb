@@ -46,7 +46,7 @@ describe Confetti::Template::WebosAppinfo do
         @template = @template_class.new(@config)
       end
 
-      it "should set package_name correctly" do
+      it "should set app_id correctly" do
         @template.app_id.should == "com.whoever.awesome.app"
       end
 
