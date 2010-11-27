@@ -54,5 +54,16 @@ module Confetti
 
       open(filepath, 'w') { |f| f.puts template.render }
     end
+
+    def generate_android_strings
+      Confetti::Template::AndroidStrings.new(self)
+    end
+
+    def write_android_strings(filepath=nil)
+      template = generate_android_strings
+      filepath ||= File.join(Dir.pwd, template.output_filename)
+
+      open(filepath, 'w') { |f| f.puts template.render }
+    end
   end
 end
