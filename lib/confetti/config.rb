@@ -1,10 +1,13 @@
 module Confetti
   class Config
     include Helpers
+    self.extend TemplateHelper
 
     attr_accessor :package, :version, :description, :height, :width
     attr_reader :author, :viewmodes, :name, :license, :content, 
                 :icon_set, :feature_set, :preference_set
+
+    generate_and_write :android_manifest, :android_strings
 
     # classes that represent child elements
     Author      = Class.new Struct.new(:name, :href, :email)
@@ -41,30 +44,6 @@ module Confetti
         when "name"
           @name = Name.new(ele.text.strip, ele.attributes["shortname"])
         end
-      end
-    end
-
-    # generate and write methods, per template
-    [:android_manifest, :android_strings].each do |config_type|
-      class_name = config_type.to_s.split("_").collect do |s|
-        s.capitalize
-      end.join
-      template_class = Confetti::Template.const_get(class_name)
-
-      generate_method = "generate_#{ config_type }".to_sym
-      write_method    = "write_#{ config_type }".to_sym
-
-      send :define_method, generate_method do
-        template_class.new(self)
-      end
-
-      send :define_method, write_method do |*args|
-        filepath = args.first
-
-        template = send generate_method
-        filepath ||= File.join(Dir.pwd, template.output_filename)
-
-        open(filepath, 'w') { |f| f.puts template.render }
       end
     end
   end

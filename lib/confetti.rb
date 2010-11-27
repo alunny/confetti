@@ -24,6 +24,7 @@ require 'confetti/templates/java_checks'
 Dir[File.join(CURRENT_DIR, 'confetti', 'templates', '*')].each do |file|
   require file if File.extname(file) == ".rb"
 end
+require 'confetti/template_helper'
 
 require 'confetti/config'
 require 'confetti/config/feature'
