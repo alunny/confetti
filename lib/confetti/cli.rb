@@ -7,7 +7,13 @@ module Confetti
       config_xml = File.join(Dir.pwd, "config.xml")
 
       config = Confetti::Config.new(config_xml)
-      config.write_android_manifest
+      msg = "write_#{ output_file }".to_sym
+
+      begin
+        config.send msg
+      rescue
+        fail "Confetti Failed: format #{ output_file } unsupported"
+      end
     end
   end
 end
