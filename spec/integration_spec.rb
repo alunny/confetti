@@ -51,6 +51,15 @@ describe 'Writing Output' do
     end
   end
 
+  context "Blackberry Widgets" do
+    it "should read config.xml and spit out bb-config.xml" do
+      @output_file = "#{ fixture_dir }/blackberry_widget_config_output.xml"
+      @config.write_blackberry_widgets_config @output_file
+
+      files_should_match @output_file, "#{ fixture_dir }/blackberry_widget_config_expected.xml"
+    end
+  end
+
   after do
     FileUtils.rm @output_file if File.exist? @output_file
   end
