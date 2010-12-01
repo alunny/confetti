@@ -20,6 +20,7 @@ describe Confetti::Template::WebosAppinfo do
 
     it { should respond_to :app_id }
     it { should respond_to :app_name }
+    it { should respond_to :version }
   end
 
   describe "default values" do
@@ -33,6 +34,7 @@ describe Confetti::Template::WebosAppinfo do
       @config = Confetti::Config.new
       @config.name.name = "Awesome App"
       @config.package = "com.whoever.awesome.app"
+      @config.version = "1.0.0"
     end
 
     it "should accept the config object" do
@@ -56,6 +58,38 @@ describe Confetti::Template::WebosAppinfo do
 
       it "should render the correct AndroidManifest" do
         @template.render.should == File.read("#{ fixture_dir }/webos_appinfo_expected.json")
+      end
+
+      describe "#version method" do
+        it "should return the default (0.0.1) when version is not set" do
+          @config.version = nil
+          @template.version.should == "0.0.1"
+        end
+
+        it "should raise an error if version isn't even close" do
+          @config.version = 'breakfast'
+          lambda { @template.version }.should raise_error
+        end
+
+        it "should add empty digits if string has one segment" do
+          @config.version = '1'
+          @template.version.should == "1.0.0"
+        end
+
+        it "should add empty digits if string has two segments" do
+          @config.version = '1.1'
+          @template.version.should == "1.1.0"
+        end
+
+        it "should truncate extra digits if string has too many segments" do
+          @config.version = '1.2.3.4.5'
+          @template.version.should == "1.2.3"
+        end
+
+        it "should return config.version when it is valid" do
+          @config.version = '0.1.0'
+          @template.version.should == "0.1.0"
+        end
       end
     end
   end
