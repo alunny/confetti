@@ -42,6 +42,15 @@ describe 'Writing Output' do
     end
   end
 
+  context "Symbian.wrt" do
+    it "should read config.xml and spit out info.plist" do
+      @output_file = "#{ fixture_dir }/symbian_wrt_info_output.plist"
+      @config.write_symbian_wrt_info @output_file
+
+      files_should_match @output_file, "#{ fixture_dir }/symbian_wrt_info_expected.plist"
+    end
+  end
+
   after do
     FileUtils.rm @output_file if File.exist? @output_file
   end
