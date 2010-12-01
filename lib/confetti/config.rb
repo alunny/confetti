@@ -48,6 +48,8 @@ module Confetti
         when "author"
           @author = Author.new(ele.text.strip, ele.attributes["href"], 
                                ele.attributes["email"])
+        when "description"
+          @description = ele.text.strip
         end
       end
     end

@@ -180,6 +180,11 @@ describe Confetti::Config do
         @config.version.should == "1.0.0"
       end
 
+      it "should populate the app's description when present" do
+        desc = "This is a sample config.xml for integration testing with Confetti"
+        @config.description.should == desc
+      end
+
       describe "widget Author" do
         it "should populate the author's name" do
           @config.author.name.should == "Andrew Lunny"
