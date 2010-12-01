@@ -11,7 +11,8 @@ rescue LoadError
   require "bundler/setup"
 end
 
-Bundler.require :default
+require "thor"
+require "mustache"
 
 # internal dependencies
 require 'typedset'
