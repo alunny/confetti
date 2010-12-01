@@ -179,6 +179,20 @@ describe Confetti::Config do
       it "should populate the app's version when present" do
         @config.version.should == "1.0.0"
       end
+
+      describe "widget Author" do
+        it "should populate the author's name" do
+          @config.author.name.should == "Andrew Lunny"
+        end
+
+        it "should populate the author's href (url)" do
+          @config.author.href.should == "http://alunny.github.com"
+        end
+
+        it "should populate the author's email" do
+          @config.author.email.should == "alunny@gmail.com"
+        end
+      end
     end
   end
 

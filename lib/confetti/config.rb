@@ -44,6 +44,9 @@ module Confetti
         case ele.name
         when "name"
           @name = Name.new(ele.text.strip, ele.attributes["shortname"])
+        when "author"
+          @author = Author.new(ele.text.strip, ele.attributes["href"], 
+                               ele.attributes["email"])
         end
       end
     end
