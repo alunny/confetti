@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Nokia//DTD PLIST 1.0//EN" "http://www.nokia.com/DTDs/plist-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>DisplayName</key>
+  <string>Awesome App</string>
+  <key>Identifier</key>
+  <string>com.whoever.awesome.app</string>
+  <key>Version</key>
+  <string>1.0.0</string>
+  <key>MainHTML</key>
+  <string>index.html</string>
+  <key>MiniViewEnabled</key>
+  <false/>
+</dict>
+</plist>
+
