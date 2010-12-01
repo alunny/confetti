@@ -1,17 +1,34 @@
 require 'spec_helper'
 
-describe 'General usage:' do
+describe 'Writing Output' do
   include HelpfulPaths
+  include FileHelpers
 
-  it "should read config.xml and spit out AndroidManifest.xml" do
-    output_file = "#{ fixture_dir }/AndroidManifest_output.xml"
-    config = Confetti::Config.new "#{ fixture_dir }/config.xml"
-    config.write_android_manifest output_file
+  before do
+    @config = Confetti::Config.new "#{ fixture_dir }/config.xml"
+  end
 
-    desired_output  = File.read "#{ fixture_dir }/AndroidManifest_expected.xml"
-    actual_output   = File.read output_file
-    actual_output.should == desired_output
+  context "Android" do
+    it "should read config.xml and spit out AndroidManifest.xml" do
+      @output_file = "#{ fixture_dir }/AndroidManifest_output.xml"
+      @config.write_android_manifest @output_file
 
-    FileUtils.rm output_file
+      files_should_match @output_file, "#{ fixture_dir }/AndroidManifest_expected.xml"
+    end
+
+    it "should read config.xml and spit out strings.xml" do
+      @output_file = "#{ fixture_dir }/android_strings_output.xml"
+      @config.write_android_strings @output_file
+
+      files_should_match @output_file, "#{ fixture_dir }/android_strings_expected.xml"
+    end
+  end
+
+  context "webOS" do
+    it "should read config.xml and spit out appinfo.json"
+  end
+
+  after do
+    FileUtils.rm @output_file if File.exist? @output_file
   end
 end

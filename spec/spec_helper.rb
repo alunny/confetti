@@ -14,6 +14,12 @@ module HelpfulPaths
   end
 end
 
+module FileHelpers
+  def files_should_match(file_one, file_two = nil)
+    File.read(file_one).should == File.read(file_two)
+  end
+end
+
 module ConfigHelpers
   def self.included(base)
     base.extend(WriteAndGenerateMacros)
