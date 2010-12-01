@@ -25,7 +25,12 @@ describe 'Writing Output' do
   end
 
   context "webOS" do
-    it "should read config.xml and spit out appinfo.json"
+    it "should read config.xml and spit out appinfo.json" do
+      @output_file = "#{ fixture_dir }/appinfo_output.json"
+      @config.write_webos_appinfo @output_file
+
+      files_should_match @output_file, "#{ fixture_dir }/appinfo_expected.json"
+    end
   end
 
   after do

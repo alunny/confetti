@@ -1,0 +1,9 @@
+{
+	"id": "com.alunny.confetti",
+	"version": "1.0.0",
+	"vendor": "Andrew Lunny",
+	"type": "web",
+	"main": "index.html",
+	"title": "Confetti Sample App",
+	"icon": "icon.png"
+}
