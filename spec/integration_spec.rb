@@ -33,6 +33,15 @@ describe 'Writing Output' do
     end
   end
 
+  context "iOS" do
+    it "should read config.xml and spit out Info.plist" do
+      @output_file = "#{ fixture_dir }/ios_info_output.plist"
+      @config.write_ios_info @output_file
+
+      files_should_match @output_file, "#{ fixture_dir }/ios_info_expected.plist"
+    end
+  end
+
   after do
     FileUtils.rm @output_file if File.exist? @output_file
   end
