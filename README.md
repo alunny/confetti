@@ -1,5 +1,31 @@
 # Confetti
 
+> Write mobile app configuration files based on a W3C Widget compliant `config.xml` file
+
+## Installation
+
+`gem install confetti`
+
+## Usage
+
+    $ confetti generate android_manifest
+
+or, from Ruby
+
+    require "confetti"
+    c_whatever = Confetti::Config.new "/some/dir/config.xml"
+    c_whatever.write_android_manifest "/some/dir/AndroidManifest.xml"
+
+Supported outputs right now: `android_manifest`, `android_strings`, `webos_appinfo`, `ios_info`, `symbian_wrt_info`, `blackberry_widgets_config`
+
+## Roadmap
+
+* extra platforms: Windows Phone 7, who knows what else
+* conversion from platform to platform (iOS to Android, or whatever)
+* support for platform-specific preferences, and features as PhoneGap APIs
+  * you can see the config.xml file @ http://github.com/phonegap/phonegap-start for a sample of where we plan to go
+* maybe some documentation (let's not go crazy)
+
 ## How to Add a New Platform
 
 Let's say you want write a `nintendo_ds_config` generator:
