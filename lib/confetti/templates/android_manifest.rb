@@ -18,6 +18,10 @@ module Confetti
       def output_filename
         "AndroidManifest.xml"
       end
+
+      def version
+        @config.version || '0.0.1'
+      end
     end
   end
 end

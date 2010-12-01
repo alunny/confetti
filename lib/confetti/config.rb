@@ -38,6 +38,7 @@ module Confetti
       fail "no doc parsed" unless config_doc
 
       @package = config_doc.attributes["id"]
+      @version = config_doc.attributes["version"]
 
       config_doc.elements.each do |ele|
         case ele.name

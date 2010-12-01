@@ -54,6 +54,10 @@ describe Confetti::Template::AndroidManifest do
         @template.class_name.should == "AwesomeApp"
       end
 
+      it "should use the default version" do
+        @template.version.should == "0.0.1"
+      end
+
       it "should render the correct AndroidManifest" do
         @template.render.should == File.read("#{ fixture_dir }/android_manifest_spec.xml")
       end

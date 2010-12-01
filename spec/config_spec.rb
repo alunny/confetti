@@ -175,6 +175,10 @@ describe Confetti::Config do
       it "should populate the app's name when present" do
         @config.name.name.should == "Confetti Sample App"
       end
+
+      it "should populate the app's version when present" do
+        @config.version.should == "1.0.0"
+      end
     end
   end
 
