@@ -31,6 +31,10 @@ module Confetti
         end
       end
 
+      def vendor
+        @config.author.name
+      end
+
       private
         def fix_version(str)
           segments = str.split('.')

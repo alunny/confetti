@@ -34,6 +34,7 @@ describe Confetti::Template::WebosAppinfo do
       @config = Confetti::Config.new
       @config.name.name = "Awesome App"
       @config.package = "com.whoever.awesome.app"
+      @config.author.name = "Bruce Lee"
       @config.version = "1.0.0"
     end
 
@@ -54,6 +55,10 @@ describe Confetti::Template::WebosAppinfo do
 
       it "should set class_name correctly" do
         @template.app_name.should == "Awesome App"
+      end
+
+      it "should set vendor correctly" do
+        @template.vendor.should == "Bruce Lee"
       end
 
       it "should render the correct AndroidManifest" do
