@@ -8,7 +8,7 @@ module Confetti
                 :icon_set, :feature_set, :preference_set
 
     generate_and_write  :android_manifest, :android_strings, :webos_appinfo,
-                        :ios_info, :symbian_wrt_info
+                        :ios_info, :symbian_wrt_info, :blackberry_widgets_config
 
     # classes that represent child elements
     Author      = Class.new Struct.new(:name, :href, :email)
