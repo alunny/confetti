@@ -50,6 +50,9 @@ module Confetti
                                ele.attributes["email"])
         when "description"
           @description = ele.text.strip
+        when "icon"
+          @icon_set << Icon.new(ele.attributes["src"], ele.attributes["height"],
+                                ele.attributes["width"])
         end
       end
     end

@@ -198,6 +198,24 @@ describe Confetti::Config do
           @config.author.email.should == "alunny@gmail.com"
         end
       end
+
+      describe "icons" do
+        it "should append icons to the icon_set" do
+          @config.icon_set.size.should be 1
+        end
+
+        it "should set the icon's src correctly" do
+          @config.icon_set.first.src.should == "icon.png"
+        end
+
+        it "should set the icon's height correctly" do
+          @config.icon_set.first.height.should == "150"
+        end
+
+        it "should set the icon's width correctly" do
+          @config.icon_set.first.width.should == "200"
+        end
+      end
     end
   end
 

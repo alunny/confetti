@@ -14,7 +14,7 @@
 		Andrew Lunny
 	</author>
 
-	<icon src="icon.png" />
+	<icon src="icon.png" height="150" width="200" />
 
 	<feature name="http://api.phonegap.com/1.0/geolocation"/>
 	<feature name="http://api.phonegap.com/1.0/network"/>
