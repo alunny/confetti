@@ -232,4 +232,20 @@ describe Confetti::Config do
 
     it_should_have_generate_and_write_methods_for :blackberry_widgets_config
   end
+
+  describe "#icon helper" do
+    it "should return nil if no icon has been set" do
+      @config.icon.should be_nil
+    end
+
+    describe "when populated correctly" do
+      before do
+        @config = Confetti::Config.new(fixture_dir + "/config.xml")
+      end
+
+      it "should return an icon" do
+        @config.icon.should be_a Confetti::Config::Icon
+      end
+    end
+  end
 end

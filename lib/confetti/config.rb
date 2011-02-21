@@ -56,5 +56,9 @@ module Confetti
         end
       end
     end
+
+    def icon
+      @icon_set.first
+    end
   end
 end
