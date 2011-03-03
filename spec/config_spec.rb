@@ -163,6 +163,12 @@ describe Confetti::Config do
       }.should raise_error
     end
 
+    it "should raise an error with malformed xml" do
+      lambda {
+        @config.populate_from_xml("#{ fixture_dir }/bad_config.xml")
+      }.should raise_error ArgumentError
+    end
+
     describe "when setting attributes from config.xml" do
       before do
         @config.populate_from_xml(fixture_dir + "/config.xml")

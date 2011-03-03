@@ -35,7 +35,12 @@ module Confetti
     end
 
     def populate_from_xml(xml_file)
-      config_doc = REXML::Document.new(File.read(xml_file)).root
+      begin
+        config_doc = REXML::Document.new(File.read(xml_file)).root
+      rescue REXML::ParseException
+        raise ArgumentError, "malformed config.xml"
+      end
+
       fail "no doc parsed" unless config_doc
 
       @package = config_doc.attributes["id"]
