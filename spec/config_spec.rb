@@ -221,6 +221,17 @@ describe Confetti::Config do
         it "should set the icon's width correctly" do
           @config.icon_set.first.width.should == "200"
         end
+
+        describe "with multiple icons" do
+          before do
+            @config = Confetti::Config.new
+            @config.populate_from_xml(fixture_dir + "/config-icons.xml")
+          end
+
+          it "should populate all of the icon_set" do
+            @config.icon_set.size.should be 2
+          end
+        end
       end
     end
   end
@@ -239,18 +250,42 @@ describe Confetti::Config do
     it_should_have_generate_and_write_methods_for :blackberry_widgets_config
   end
 
-  describe "#icon helper" do
-    it "should return nil if no icon has been set" do
-      @config.icon.should be_nil
+  describe "icon helpers" do
+    describe "if no icon has been set" do
+      it "#icon should return nil" do
+        @config.icon.should be_nil
+      end
+
+      it "#biggest_icon should return nil" do
+        @config.biggest_icon.should be_nil
+      end
     end
 
-    describe "when populated correctly" do
+    describe "with a single icon" do
       before do
         @config = Confetti::Config.new(fixture_dir + "/config.xml")
       end
 
-      it "should return an icon" do
+      it "#icon should return an icon" do
         @config.icon.should be_a Confetti::Config::Icon
+      end
+
+      it "#biggest_icon should return an icon" do
+        @config.biggest_icon.should be_a Confetti::Config::Icon
+      end
+    end
+
+    describe "with multiple icons" do
+      before do
+        @config.populate_from_xml(fixture_dir + "/config-icons.xml")
+      end
+
+      it "#icon should return a single icon" do
+        @config.icon.should be_a Confetti::Config::Icon
+      end
+
+      it "#biggest_icon should return the bigger of the two" do
+        @config.biggest_icon.src.should == "bigicon.png"
       end
     end
   end

@@ -65,5 +65,9 @@ module Confetti
     def icon
       @icon_set.first
     end
+
+    def biggest_icon
+      @icon_set.max { |a,b| a.width.to_i <=> b.width.to_i }
+    end
   end
 end
