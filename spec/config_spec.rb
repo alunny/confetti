@@ -174,6 +174,11 @@ describe Confetti::Config do
         @config.populate_from_xml(fixture_dir + "/config.xml")
       end
 
+      it "should keep a reference to the xml doc" do
+        @config.xml_doc.should_not == nil
+        @config.xml_doc.class.should == REXML::Element 
+      end
+
       it "should populate the app's package when present" do
         @config.package.should == "com.alunny.confetti"
       end
