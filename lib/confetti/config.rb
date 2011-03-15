@@ -5,7 +5,7 @@ module Confetti
 
     attr_accessor :package, :version, :description, :height, :width
     attr_reader :author, :viewmodes, :name, :license, :content, 
-                :icon_set, :feature_set, :preference_set
+                :icon_set, :feature_set, :preference_set, :xml_doc
 
     generate_and_write  :android_manifest, :android_strings, :webos_appinfo,
                         :ios_info, :symbian_wrt_info, :blackberry_widgets_config
@@ -42,6 +42,9 @@ module Confetti
       end
 
       fail "no doc parsed" unless config_doc
+
+      # save reference to xml doc
+      @xml_doc = config_doc
 
       @package = config_doc.attributes["id"]
       @version = config_doc.attributes["version"]
