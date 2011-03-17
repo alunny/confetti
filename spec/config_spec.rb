@@ -248,7 +248,7 @@ describe Confetti::Config do
             @config.icon_set.size.should be 1
             @config.icon_set.first.extras.should_not == nil
             @config.icon_set.first.extras.length.should be 1
-            @config.icon_set.first.extras["rim:hover"].should == "true"
+            @config.icon_set.first.extras["hover"].should == "true"
           end
         end
       end

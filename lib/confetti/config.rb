@@ -15,7 +15,7 @@ module Confetti
     Name        = Class.new Struct.new(:name, :shortname)
     License     = Class.new Struct.new(:text, :href)
     Content     = Class.new Struct.new(:src, :type, :encoding)
-    Icon        = Class.new Struct.new(:src, :height, :width)
+    Icon        = Class.new Struct.new(:src, :height, :width, :extras)
     Feature     = Class.new Struct.new(:name, :required)
     Preference  = Class.new Struct.new(:name, :value, :readonly)
 
@@ -59,8 +59,17 @@ module Confetti
         when "description"
           @description = ele.text.strip
         when "icon"
+          extras = {}
+          as = ele.attributes
+          standards_attrs = ["src", "height", "width"]
+          as.keys.each do |k|
+            if standards_attrs.include?(k)
+              next
+            end
+            extras[k] = as[k]
+          end
           @icon_set << Icon.new(ele.attributes["src"], ele.attributes["height"],
-                                ele.attributes["width"])
+                                ele.attributes["width"], extras)
         end
       end
     end
