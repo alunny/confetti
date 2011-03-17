@@ -237,6 +237,20 @@ describe Confetti::Config do
             @config.icon_set.size.should be 2
           end
         end
+
+        describe "with custom icon attributes" do
+          before do
+            @config = Confetti::Config.new
+            @config.populate_from_xml(fixture_dir + "/config-icons-custom-attribs.xml")
+          end
+
+          it "should populate icon non-standards attributes to extras field" do
+            @config.icon_set.size.should be 1
+            @config.icon_set.first.extras.should_not == nil
+            @config.icon_set.first.extras.length.should be 1
+            @config.icon_set.first.extras["rim:hover"].should == "true"
+          end
+        end
       end
 
       describe "features" do
