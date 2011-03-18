@@ -258,9 +258,12 @@ describe Confetti::Config do
           @config.feature_set.size.should be 3
         end
 
-        it "should set the feature name correctly" do
+        it "should include the right features" do
           # first tends to be last listed in xml document
-          @config.feature_set.first.name.should == "http://api.phonegap.com/1.0/notification"
+          features_names = @config.feature_set.map { |f| f.name }
+          features_names.should include "http://api.phonegap.com/1.0/geolocation"
+          features_names.should include "http://api.phonegap.com/1.0/camera"
+          features_names.should include "http://api.phonegap.com/1.0/notification"
         end
       end
     end

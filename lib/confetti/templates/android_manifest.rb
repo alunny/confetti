@@ -38,6 +38,7 @@ module Confetti
         permissions = []
         phonegap_api = /http\:\/\/api.phonegap.com\/1[.]0\/(\w+)/
         feature_names = @config.feature_set.map { |f| f.name }
+        feature_names.sort
 
         feature_names.each do |f|
           feature_name = f.match(phonegap_api)[1] if f.match(phonegap_api)
