@@ -60,17 +60,11 @@ module Confetti
         when "description"
           @description = ele.text.strip
         when "icon"
-          extras = {}
-          as = ele.attributes
-          standards_attrs = ["src", "height", "width"]
-          as.keys.each do |k|
-            if standards_attrs.include?(k)
-              next
-            end
-            extras[k] = as[k]
+          extras = attr.keys.inject({}) do |hash, key|
+            hash[key] = attr[key] unless Icon.public_instance_methods.include? key
+            hash
           end
-          @icon_set << Icon.new(ele.attributes["src"], ele.attributes["height"],
-                                ele.attributes["width"], extras)
+          @icon_set << Icon.new(attr["src"], attr["height"], attr["width"], extras)
         when "feature"
           @feature_set  << Feature.new(attr["name"], attr["required"])
         end
