@@ -63,4 +63,25 @@ describe Confetti::Template::AndroidManifest do
       end
     end
   end
+
+  describe "permissions method" do
+    before do
+      @config = Confetti::Config.new
+
+      camera_feature  = Confetti::Config::Feature.new("http://api.phonegap.com/1.0/camera", nil)
+      network_feature = Confetti::Config::Feature.new("http://api.phonegap.com/1.0/network", nil)
+      media_feature   = Confetti::Config::Feature.new("http://api.phonegap.com/1.0/media", nil)
+
+      @config.feature_set << camera_feature
+      @config.feature_set << network_feature
+      @config.feature_set << media_feature
+
+      @template = @template_class.new(@config)
+    end
+
+    it "should return all of the permissions" do
+      # 1 camera, 1 network, 2 media
+      @template.permissions.size.should be 4
+    end
+  end
 end
