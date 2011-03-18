@@ -33,6 +33,12 @@ describe Confetti::Template::AndroidManifest do
       @config = Confetti::Config.new
       @config.name.name = "Awesome App"
       @config.package = "com.whoever.awesome.app"
+
+      network_feature = Confetti::Config::Feature.new("http://api.phonegap.com/1.0/network", nil)
+      media_feature = Confetti::Config::Feature.new("http://api.phonegap.com/1.0/media", nil)
+
+      @config.feature_set << network_feature
+      @config.feature_set << media_feature
     end
 
     it "should accept the config object" do

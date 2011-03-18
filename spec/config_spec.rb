@@ -245,7 +245,8 @@ describe Confetti::Config do
         end
 
         it "should set the feature name correctly" do
-          @config.feature_set.first.name.should == "http://api.phonegap.com/1.0/geolocation"
+          # first tends to be last listed in xml document
+          @config.feature_set.first.name.should == "http://api.phonegap.com/1.0/notification"
         end
       end
     end
