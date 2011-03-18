@@ -241,7 +241,7 @@ describe Confetti::Config do
 
       describe "features" do
         it "should append features to the feature set" do
-          @config.feature_set.size.should be 1
+          @config.feature_set.size.should be 3
         end
 
         it "should set the feature name correctly" do

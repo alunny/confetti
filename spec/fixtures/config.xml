@@ -17,4 +17,6 @@
 	<icon src="icon.png" height="150" width="200" />
 
 	<feature name="http://api.phonegap.com/1.0/geolocation" required="true"/>
+	<feature name="http://api.phonegap.com/1.0/camera" required="true"/>
+	<feature name="http://api.phonegap.com/1.0/notification" required="true"/>
 </widget>
