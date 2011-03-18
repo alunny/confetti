@@ -238,6 +238,16 @@ describe Confetti::Config do
           end
         end
       end
+
+      describe "features" do
+        it "should append features to the feature set" do
+          @config.feature_set.size.should be 1
+        end
+
+        it "should set the feature name correctly" do
+          @config.feature_set.first.name.should == "http://api.phonegap.com/1.0/geolocation"
+        end
+      end
     end
   end
 

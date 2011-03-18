@@ -50,17 +50,19 @@ module Confetti
       @version = config_doc.attributes["version"]
 
       config_doc.elements.each do |ele|
+        attr = ele.attributes
+
         case ele.name
         when "name"
-          @name = Name.new(ele.text.strip, ele.attributes["shortname"])
+          @name = Name.new(ele.text.strip, attr["shortname"])
         when "author"
-          @author = Author.new(ele.text.strip, ele.attributes["href"], 
-                               ele.attributes["email"])
+          @author = Author.new(ele.text.strip, attr["href"], attr["email"])
         when "description"
           @description = ele.text.strip
         when "icon"
-          @icon_set << Icon.new(ele.attributes["src"], ele.attributes["height"],
-                                ele.attributes["width"])
+          @icon_set     << Icon.new(attr["src"], attr["height"], attr["width"])
+        when "feature"
+          @feature_set  << Feature.new(attr["name"], attr["required"])
         end
       end
     end

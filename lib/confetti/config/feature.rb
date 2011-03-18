@@ -5,8 +5,9 @@ module Confetti
 
       Param = Class.new
 
-      def initialize
+      def initialize(name, src)
         @param_set = TypedSet.new Param
+        super name, src
       end
     end
   end

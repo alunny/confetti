@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Confetti::Config::Feature do
   before do
-    @feature = Confetti::Config::Feature.new
+    @feature = Confetti::Config::Feature.new("Geolocation", nil)
   end
 
   it "should have a readable and writable name field" do
