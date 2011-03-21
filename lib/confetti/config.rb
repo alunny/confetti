@@ -1,6 +1,7 @@
 module Confetti
   class Config
     include Helpers
+    include PhoneGap
     self.extend TemplateHelper
 
     attr_accessor :package, :version, :description, :height, :width
