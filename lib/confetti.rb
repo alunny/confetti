@@ -18,6 +18,7 @@ require "mustache"
 require 'typedset'
 require 'confetti/version'
 require 'confetti/helpers'
+require 'confetti/phonegap'
 
 require 'confetti/template'
 require 'confetti/templates/base'
