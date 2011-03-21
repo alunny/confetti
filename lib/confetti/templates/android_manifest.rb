@@ -47,6 +47,7 @@ module Confetti
           permissions.concat(associated_permissions) if associated_permissions
         end
 
+        permissions.sort!
         permissions.map { |f| { :name => f } }
       end
     end
