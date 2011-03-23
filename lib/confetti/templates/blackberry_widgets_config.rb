@@ -1,10 +1,6 @@
 module Confetti
   module Template
     class BlackberryWidgetsConfig < Base
-      def widget_version
-        @config.version
-      end
-
       def widget_id
         @config.package
       end
@@ -30,7 +26,7 @@ module Confetti
       end
 
       def output_filename
-        "bb-config.xml"
+        "config.xml"
       end
     end
   end
