@@ -28,7 +28,6 @@ module Confetti
       @icon_set         = TypedSet.new Icon
       @feature_set      = TypedSet.new Feature
       @preference_set   = TypedSet.new Preference
-      @license          = ""
       @viewmodes        = []
 
       if args.length > 0 && is_file?(args.first)
@@ -70,7 +69,7 @@ module Confetti
         when "feature"
           @feature_set  << Feature.new(attr["name"], attr["required"])
         when "license"
-          @license = ele.text.strip
+          @license = License.new(ele.text.strip, attr["href"])
         end
       end
     end
