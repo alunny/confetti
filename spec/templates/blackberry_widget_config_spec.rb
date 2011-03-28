@@ -29,8 +29,8 @@ describe Confetti::Template::BlackberryWidgetsConfig do
   end
 
   describe "default values" do
-    it "should define output filename as \"bb-config.xml\"" do
-      @template_class.new.output_filename.should == "bb-config.xml"
+    it "should define output filename as \"config.xml\"" do
+      @template_class.new.output_filename.should == "config.xml"
     end
   end
 
