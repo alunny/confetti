@@ -52,7 +52,7 @@ describe 'Writing Output' do
   end
 
   context "Blackberry Widgets" do
-    it "should read config.xml and spit out bb-config.xml" do
+    it "should read config.xml and spit out config.xml" do
       @output_file = "#{ fixture_dir }/blackberry_widget_config_output.xml"
       @config.write_blackberry_widgets_config @output_file
 
