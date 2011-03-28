@@ -65,10 +65,6 @@ describe Confetti::Template::BlackberryWidgetsConfig do
         @template.widget_name.should == "Awesome App"
       end
 
-      it "should set version correctly" do
-        @template.widget_version.should == "1.0.0"
-      end
-
       it "should set description correctly" do
         @template.widget_description.should == "My New App, by Bruce Lee"
       end
