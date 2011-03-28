@@ -25,6 +25,14 @@ module Confetti
         @config.description
       end
 
+      def license_href
+        @config.license.href
+      end
+
+      def license_text
+        @config.license.text
+      end
+
       def output_filename
         "config.xml"
       end
