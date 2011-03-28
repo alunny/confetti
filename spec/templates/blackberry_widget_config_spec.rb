@@ -18,13 +18,14 @@ describe Confetti::Template::BlackberryWidgetsConfig do
   describe "templated attributes" do
     subject { @template = @template_class.new }
 
-    it { should respond_to :widget_version }
     it { should respond_to :widget_id }
     it { should respond_to :widget_name }
     it { should respond_to :author_name }
     it { should respond_to :author_email }
     it { should respond_to :author_href }
     it { should respond_to :widget_description }
+    it { should respond_to :license_text }
+    it { should respond_to :license_href }
   end
 
   describe "default values" do
