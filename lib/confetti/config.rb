@@ -6,7 +6,8 @@ module Confetti
 
     attr_accessor :package, :version, :description, :height, :width
     attr_reader :author, :viewmodes, :name, :license, :content, 
-                :icon_set, :feature_set, :preference_set, :xml_doc
+                :icon_set, :feature_set, :preference_set, :xml_doc,
+                :splash_set
 
     generate_and_write  :android_manifest, :android_strings, :webos_appinfo,
                         :ios_info, :symbian_wrt_info, :blackberry_widgets_config
