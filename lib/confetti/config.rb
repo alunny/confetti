@@ -16,7 +16,7 @@ module Confetti
     Name        = Class.new Struct.new(:name, :shortname)
     License     = Class.new Struct.new(:text, :href)
     Content     = Class.new Struct.new(:src, :type, :encoding)
-    Icon        = Class.new Struct.new(:src, :height, :width, :extras)
+    Image       = Class.new Struct.new(:src, :height, :width, :extras)
     Feature     = Class.new Struct.new(:name, :required)
     Preference  = Class.new Struct.new(:name, :value, :readonly)
 
@@ -25,8 +25,9 @@ module Confetti
       @name             = Name.new
       @license          = License.new
       @content          = Content.new
-      @icon_set         = TypedSet.new Icon
+      @icon_set         = TypedSet.new Image
       @feature_set      = TypedSet.new Feature
+      @splash_set       = TypedSet.new Image
       @preference_set   = TypedSet.new Preference
       @viewmodes        = []
 
@@ -61,11 +62,11 @@ module Confetti
         when "description"
           @description = ele.text.strip
         when "icon"
-          extras = attr.keys.inject({}) do |hash, key|
-            hash[key] = attr[key] unless Icon.public_instance_methods.include? key
-            hash
-          end
-          @icon_set << Icon.new(attr["src"], attr["height"], attr["width"], extras)
+          extras = grab_extras attr
+          @icon_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
+        when "splash"
+          extras = grab_extras attr
+          @splash_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
         when "feature"
           @feature_set  << Feature.new(attr["name"], attr["required"])
         when "license"
@@ -80,6 +81,14 @@ module Confetti
 
     def biggest_icon
       @icon_set.max { |a,b| a.width.to_i <=> b.width.to_i }
+    end
+
+    def grab_extras(attributes)
+      extras = attributes.keys.inject({}) do |hash, key|
+        hash[key] = attributes[key] unless Image.public_instance_methods.include? key
+        hash
+      end
+      extras
     end
   end
 end
