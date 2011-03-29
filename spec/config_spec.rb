@@ -84,8 +84,8 @@ describe Confetti::Config do
       @config.icon_set.should be_a TypedSet
     end
 
-    it "icon_set should be typed to icon objects" do
-      @config.icon_set.set_class.should be Confetti::Config::Icon
+    it "icon_set should be typed to Image objects" do
+      @config.icon_set.set_class.should be Confetti::Config::Image
     end
 
     it "should not allow icon_set to be clobbered" do
@@ -210,6 +210,40 @@ describe Confetti::Config do
         end
       end
 
+      describe "splash screens" do
+        it "should append splash screens to the splash_set" do
+          @config.splash_set.size.should be 1
+        end
+        
+        it "should set the splash screen's src correctly" do
+          @config.splash_set.first.src.should == "mainsplash.png"
+        end
+
+        it "should set the splash screen's height correctly" do
+          @config.splash_set.first.height.should == "480"
+        end
+
+        it "should set the splash screen's width correctly" do
+          @config.splash_set.first.width.should == "360"
+        end
+
+        describe "with custom splash screen attributes" do
+          before do
+            @config = Confetti::Config.new
+            @config.populate_from_xml(fixture_dir + "/config-icons-custom-attribs.xml")
+          end
+
+          it "should populate splash screen non-standards attributes to extras field" do
+            @config.splash_set.size.should be 1
+            @config.splash_set.first.extras.should_not == nil
+            @config.splash_set.first.extras.length.should be 1
+            @config.splash_set.first.extras["main"].should == "true"
+          end
+
+        end
+
+      end
+
       describe "icons" do
         it "should append icons to the icon_set" do
           @config.icon_set.size.should be 1
@@ -250,6 +284,7 @@ describe Confetti::Config do
             @config.icon_set.first.extras.length.should be 1
             @config.icon_set.first.extras["hover"].should == "true"
           end
+
         end
       end
 
@@ -299,12 +334,12 @@ describe Confetti::Config do
         @config = Confetti::Config.new(fixture_dir + "/config.xml")
       end
 
-      it "#icon should return an icon" do
-        @config.icon.should be_a Confetti::Config::Icon
+      it "#icon should return an Image" do
+        @config.icon.should be_a Confetti::Config::Image
       end
 
-      it "#biggest_icon should return an icon" do
-        @config.biggest_icon.should be_a Confetti::Config::Icon
+      it "#biggest_icon should return an Image" do
+        @config.biggest_icon.should be_a Confetti::Config::Image
       end
     end
 
@@ -313,8 +348,8 @@ describe Confetti::Config do
         @config.populate_from_xml(fixture_dir + "/config-icons.xml")
       end
 
-      it "#icon should return a single icon" do
-        @config.icon.should be_a Confetti::Config::Icon
+      it "#icon should return a single Image" do
+        @config.icon.should be_a Confetti::Config::Image
       end
 
       it "#biggest_icon should return the bigger of the two" do
