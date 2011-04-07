@@ -57,11 +57,11 @@ module Confetti
 
         case ele.name
         when "name"
-          @name = Name.new(ele.text.strip, attr["shortname"])
+          @name = Name.new(ele.text.nil? ? "" : ele.text.strip, attr["shortname"])
         when "author"
-          @author = Author.new(ele.text.strip, attr["href"], attr["email"])
+          @author = Author.new(ele.text.nil? ? "" : ele.text.strip, attr["href"], attr["email"])
         when "description"
-          @description = ele.text.strip
+          @description = ele.text.nil? ? "" : ele.text.strip
         when "icon"
           extras = grab_extras attr
           @icon_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
@@ -71,7 +71,7 @@ module Confetti
         when "feature"
           @feature_set  << Feature.new(attr["name"], attr["required"])
         when "license"
-          @license = License.new(ele.text.strip, attr["href"])
+          @license = License.new(ele.text.nil? ? "" : ele.text.strip, attr["href"])
         end
       end
     end

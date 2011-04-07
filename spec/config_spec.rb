@@ -174,9 +174,32 @@ describe Confetti::Config do
         @config.populate_from_xml(fixture_dir + "/config.xml")
       end
 
+      describe "that has empty tags" do
+        before do
+          @config.populate_from_xml(fixture_dir + "/empty_elements.xml")
+        end
+
+        it "should set the author to the empty string" do
+          @config.author.name.should == ""
+        end
+
+        it "should set the name to the empty string" do
+          @config.name.name.should == ""
+        end
+
+        it "should set the description to the empty string" do
+          @config.description.should == ""
+        end
+
+        it "should set the license to the empty string" do
+          @config.license.text.should == ""
+        end
+
+      end
+
       it "should keep a reference to the xml doc" do
         @config.xml_doc.should_not == nil
-        @config.xml_doc.class.should == REXML::Element 
+        @config.xml_doc.class.should == REXML::Element
       end
 
       it "should populate the app's package when present" do

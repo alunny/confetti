@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+  xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "com.alunny.confetti"
+	version 	= "1.0.0">
+
+  <name />
+
+  <description />
+
+  <license href="http://www.opensource.org/licenses/mit-license.php" />
+
+	<author href="http://alunny.github.com"
+    email="alunny@gmail.com" />
+	<icon src="icon.png" height="150" width="200" />
+
+  <gap:splash src="mainsplash.png" height="480" width="360" />
+
+	<feature name="http://api.phonegap.com/1.0/geolocation" required="true"/>
+	<feature name="http://api.phonegap.com/1.0/camera" required="true"/>
+	<feature name="http://api.phonegap.com/1.0/notification" required="true"/>
+</widget>
