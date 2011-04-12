@@ -14,9 +14,14 @@ describe Confetti::Config do
       @config.package.should == "com.alunny.greatapp"
     end
 
-    it "has a writable and readable version field" do
-      lambda { @config.version = "0.1.0" }.should_not raise_error
-      @config.version.should == "0.1.0"
+    it "has a writable and readable version_string field" do
+      lambda { @config.version_string = "0.1.0" }.should_not raise_error
+      @config.version_string.should == "0.1.0"
+    end
+
+    it "has a writable and readable version_code field" do
+      lambda { @config.version_code = 12 }.should_not raise_error
+      @config.version_code.should == 12
     end
 
     it "has a writable and readable height field" do
@@ -210,8 +215,8 @@ describe Confetti::Config do
         @config.name.name.should == "Confetti Sample App"
       end
 
-      it "should populate the app's version when present" do
-        @config.version.should == "1.0.0"
+      it "should populate the app's version_string when present" do
+        @config.version_string.should == "1.0.0"
       end
 
       it "should populate the app's description when present" do

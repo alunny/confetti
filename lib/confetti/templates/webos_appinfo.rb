@@ -20,12 +20,12 @@ module Confetti
       end
 
       def version
-        if @config.version.nil?
+        if @config.version_string.nil?
           '0.0.1'
-        elsif @config.version.match /^(\d)+[.](\d)+[.](\d)+$/
-          @config.version
-        elsif @config.version.match /^((\d)+[.])*(\d)+$/
-          fix_version(@config.version)
+        elsif @config.version_string.match /^(\d)+[.](\d)+[.](\d)+$/
+          @config.version_string
+        elsif @config.version_string.match /^((\d)+[.])*(\d)+$/
+          fix_version(@config.version_string)
         else
           fail "need a valid version number of the form 0.0.0"
         end

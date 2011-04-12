@@ -39,7 +39,7 @@ describe Confetti::Template::BlackberryWidgetsConfig do
       @config = Confetti::Config.new
       @config.name.name = "Awesome App"
       @config.package = "com.whoever.awesome.app"
-      @config.version = "1.0.0"
+      @config.version_string = "1.0.0"
       @config.author.name = "Bruce Lee"
       @config.author.email = "blee@hotmail.com"
       @config.author.href = "http://brucelee.cn"

@@ -6,7 +6,7 @@ module Confetti
       end
 
       def version
-        @config.version
+        @config.version_string
       end
 
       def display_name

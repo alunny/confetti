@@ -34,7 +34,7 @@ describe Confetti::Template::IosInfo do
       @config = Confetti::Config.new
       @config.name.name = "Awesome App"
       @config.package = "com.whoever.awesome.app"
-      @config.version = "1.0.0"
+      @config.version_string = "1.0.0"
     end
 
     it "should accept the config object" do

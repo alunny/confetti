@@ -5,6 +5,10 @@ module Confetti
         @config.package
       end
 
+      def version
+        @config.version_string || "0.0.1"
+      end
+      
       def widget_name
         @config.name.name
       end

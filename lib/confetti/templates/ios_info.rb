@@ -6,7 +6,7 @@ module Confetti
       end
 
       def bundle_version
-        @config.version
+        @config.version_string
       end
 
       def product_name

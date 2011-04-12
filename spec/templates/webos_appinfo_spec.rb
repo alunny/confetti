@@ -35,7 +35,7 @@ describe Confetti::Template::WebosAppinfo do
       @config.name.name = "Awesome App"
       @config.package = "com.whoever.awesome.app"
       @config.author.name = "Bruce Lee"
-      @config.version = "1.0.0"
+      @config.version_string = "1.0.0"
     end
 
     it "should accept the config object" do
@@ -66,33 +66,33 @@ describe Confetti::Template::WebosAppinfo do
       end
 
       describe "#version method" do
-        it "should return the default (0.0.1) when version is not set" do
-          @config.version = nil
+        it "should return the default (0.0.1) when version_string is not set" do
+          @config.version_string = nil
           @template.version.should == "0.0.1"
         end
 
-        it "should raise an error if version isn't even close" do
-          @config.version = 'breakfast'
+        it "should raise an error if version_string isn't even close" do
+          @config.version_string = 'breakfast'
           lambda { @template.version }.should raise_error
         end
 
         it "should add empty digits if string has one segment" do
-          @config.version = '1'
+          @config.version_string = '1'
           @template.version.should == "1.0.0"
         end
 
         it "should add empty digits if string has two segments" do
-          @config.version = '1.1'
+          @config.version_string = '1.1'
           @template.version.should == "1.1.0"
         end
 
         it "should truncate extra digits if string has too many segments" do
-          @config.version = '1.2.3.4.5'
+          @config.version_string = '1.2.3.4.5'
           @template.version.should == "1.2.3"
         end
 
         it "should return config.version when it is valid" do
-          @config.version = '0.1.0'
+          @config.version_string = '0.1.0'
           @template.version.should == "0.1.0"
         end
       end

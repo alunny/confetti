@@ -4,7 +4,7 @@ module Confetti
     include PhoneGap
     self.extend TemplateHelper
 
-    attr_accessor :package, :version, :description, :height, :width
+    attr_accessor :package, :version_string, :version_code, :description, :height, :width
     attr_reader :author, :viewmodes, :name, :license, :content, 
                 :icon_set, :feature_set, :preference_set, :xml_doc,
                 :splash_set
@@ -50,7 +50,7 @@ module Confetti
       @xml_doc = config_doc
 
       @package = config_doc.attributes["id"]
-      @version = config_doc.attributes["version"]
+      @version_string = config_doc.attributes["version"]
 
       config_doc.elements.each do |ele|
         attr = ele.attributes

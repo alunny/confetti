@@ -31,7 +31,11 @@ module Confetti
       end
 
       def version
-        @config.version || '0.0.1'
+        @config.version_string || '0.0.1'
+      end
+
+      def version_code
+        @config.version_code || '1'
       end
 
       def permissions
