@@ -55,5 +55,9 @@ describe Confetti::Template::JavaChecks do
     it "should not accept a dot-first string" do
       is_java_package_id(".com.alunny.foo").should be_false
     end
+
+    it "should not accept a single java identifier" do
+      is_java_package_id("a27a4").should be_false
+    end
   end
 end

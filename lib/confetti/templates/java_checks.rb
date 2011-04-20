@@ -10,8 +10,10 @@ module Confetti
       end
 
       def is_java_package_id(str)
+        components = str.split('.', -1)
+
         # second param to #split ensures can't be dot-terminated
-        str.split('.', -1).all? { |s| is_java_identifier(s) }
+        components.length > 1 and components.all? { |s| is_java_identifier(s) }
       end
     end
   end
