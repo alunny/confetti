@@ -57,21 +57,31 @@ module ConfigHelpers
             @output = mock(IO)
 
             @config.should_receive(generate_method).and_return(@template)
-            @template.should_receive(:render).and_return(@contents)
-            @output.should_receive(:puts).with(@contents)
           end
 
           it "should write the rendered #{ default_filename } to the fs" do
             filepath = "my_directory/#{ default_filename }"
             @config.should_receive(:open).with(filepath, 'w').and_yield(@output)
+            @template.should_receive(:render).and_return(@contents)
+            @output.should_receive(:puts).with(@contents)
 
             @config.send(write_method, filepath)
+          end
+
+          it "should not write to the fs if the render call fails" do
+            filepath = "my_directory/#{ default_filename }"
+            @template.should_receive(:render).and_raise(IOError)
+            @config.should_not_receive(:open).with(filepath, 'w')
+
+            lambda { @config.send(write_method, filepath) }.should raise_error
           end
 
           describe "when no filepath is passed" do
             it "should write the rendered #{ default_filename } to the default location" do
               default_path = File.join(Dir.pwd, default_filename)
               @config.should_receive(:open).with(default_path, 'w').and_yield(@output)
+              @template.should_receive(:render).and_return(@contents)
+              @output.should_receive(:puts).with(@contents)
 
               @config.send(write_method)
             end

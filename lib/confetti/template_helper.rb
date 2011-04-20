@@ -18,9 +18,15 @@ module Confetti
           filepath = args.first
 
           template = send generate_method
-          filepath ||= File.join(Dir.pwd, template.output_filename)
 
-          open(filepath, 'w') { |f| f.puts template.render }
+          begin
+            output = template.render
+            filepath ||= File.join(Dir.pwd, template.output_filename)
+
+            open(filepath, 'w') { |f| f.puts output }
+          rescue
+            raise IOError, "unable to write template file"
+          end
         end
       end
     end
