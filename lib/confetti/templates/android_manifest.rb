@@ -15,11 +15,7 @@ module Confetti
       }
 
       def package_name
-        if @config
-          if is_java_package_id(@config.package)
-            @config.package
-          end
-        end
+        convert_to_java_package_id(@config.package)
       end
 
       def class_name
