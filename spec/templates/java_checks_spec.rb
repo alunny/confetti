@@ -59,5 +59,34 @@ describe Confetti::Template::JavaChecks do
     it "should not accept a single java identifier" do
       is_java_package_id("a27a4").should be_false
     end
+
+    it "should not accept a package with hypens in there" do
+      is_java_package_id("com.makalumedia.rock-am-ring").should be_false
+    end
+  end
+
+  describe "#convert_to_java_package_id" do
+    it "should not affect a valid package id" do
+      pkg = "com.alunny.foo"
+      convert_to_java_package_id(pkg).should == pkg
+    end
+
+    it "should strip out incorrect characters" do
+      pkg = "com.makalumedia.rock-am-ring"
+      fixed_pkg = "com.makalumedia.rock_am_ring"
+      convert_to_java_package_id(pkg).should == fixed_pkg
+    end
+
+    it "should strip out leading dots" do
+      pkg = ".com.alunny.foo"
+      fixed_pkg = "com.alunny.foo"
+      convert_to_java_package_id(pkg).should == fixed_pkg
+    end
+
+    it "should make sense of terrible identifiers" do
+      pkg = "http://BestBusU"
+      fixed_pkg = "com.http___BestBusU"
+      convert_to_java_package_id(pkg).should == fixed_pkg
+    end
   end
 end
