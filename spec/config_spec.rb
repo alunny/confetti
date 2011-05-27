@@ -385,4 +385,19 @@ describe Confetti::Config do
       end
     end
   end
+
+  describe "splash helpers" do
+    describe "if no splash screen has been set" do
+      it "#splash should return nil" do
+        @config.splash.should be_nil
+      end
+    end
+
+    describe "with a single splash screen" do # config.xml
+      it "#splash should return an Image" do
+        @config.populate_from_xml "#{ fixture_dir }/config.xml"
+        @config.splash.should be_a Confetti::Config::Image
+      end
+    end
+  end
 end

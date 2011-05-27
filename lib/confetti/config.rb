@@ -84,6 +84,10 @@ module Confetti
       @icon_set.max { |a,b| a.width.to_i <=> b.width.to_i }
     end
 
+    def splash
+      @splash_set.first
+    end
+
     def grab_extras(attributes)
       extras = attributes.keys.inject({}) do |hash, key|
         hash[key] = attributes[key] unless Image.public_instance_methods.include? key
