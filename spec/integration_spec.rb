@@ -54,6 +54,7 @@ describe 'Writing Output' do
   context "Blackberry Widgets" do
     it "should read config.xml and spit out config.xml" do
       @output_file = "#{ fixture_dir }/blackberry_widget_config_output.xml"
+      @config.phonegap_version = "0.9.5.1"
       @config.write_blackberry_widgets_config @output_file
 
       files_should_match @output_file, "#{ fixture_dir }/blackberry_widget_config_expected.xml"

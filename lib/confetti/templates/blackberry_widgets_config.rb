@@ -37,6 +37,10 @@ module Confetti
         @config.license.text
       end
 
+      def phonegap_version
+        @config.phonegap_version
+      end
+
       def output_filename
         "config.xml"
       end

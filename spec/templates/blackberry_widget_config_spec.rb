@@ -44,6 +44,7 @@ describe Confetti::Template::BlackberryWidgetsConfig do
       @config.author.email = "blee@hotmail.com"
       @config.author.href = "http://brucelee.cn"
       @config.description = "My New App, by Bruce Lee"
+      @config.phonegap_version = "0.9.5.1"
     end
 
     it "should accept the config object" do
