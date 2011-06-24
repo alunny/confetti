@@ -3,6 +3,15 @@
     package="com.alunny.confetti"
     android:versionName="1.0.0"
     android:versionCode="1">
+
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:resizeable="true"
+        android:anyDensity="true"
+        />
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -22,4 +31,4 @@
     </application>
 	<uses-sdk android:minSdkVersion="2" />
 
-</manifest> 
+</manifest>
