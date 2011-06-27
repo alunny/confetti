@@ -98,4 +98,15 @@ describe Confetti::Template::AndroidManifest do
       permission_names.should == expected
     end
   end
+
+  describe "version code should be set" do
+    before do
+      @config = Confetti::Config.new
+      @config.populate_from_xml("#{fixture_dir}/config_with_version_code.xml")
+    end
+
+    it "should have set @config.version_code correctly" do
+      @config.version_code.should == "5"
+    end
+  end
 end

@@ -5,7 +5,7 @@ module Confetti
     self.extend TemplateHelper
 
     attr_accessor :package, :version_string, :version_code, :description, :height, :width
-    attr_reader :author, :viewmodes, :name, :license, :content, 
+    attr_reader :author, :viewmodes, :name, :license, :content,
                 :icon_set, :feature_set, :preference_set, :xml_doc,
                 :splash_set
 
@@ -51,6 +51,7 @@ module Confetti
 
       @package = config_doc.attributes["id"]
       @version_string = config_doc.attributes["version"]
+      @version_code = config_doc.attributes["versionCode"]
 
       config_doc.elements.each do |ele|
         attr = ele.attributes
