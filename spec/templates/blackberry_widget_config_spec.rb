@@ -90,50 +90,60 @@ describe Confetti::Template::BlackberryWidgetsConfig do
     end
   end
 
-  describe "Given a orientation should used correct mode" do
+  describe "with orientation specified" do
     before do
-      @config = Confetti::Config.new()
+      @config = Confetti::Config.new
       @config.populate_from_xml("#{ fixture_dir }/config_with_orientation.xml")
       @config.phonegap_version = "0.9.5.1"
       @template = @template_class.new(@config)
     end
 
-    it "Should define landscape only" do
+    it "should use the one in the config.xml file" do
       @template.render.should == File.read("#{ fixture_dir }/blackberry/blackberry_widget_config_spec_with_expected_orientation.xml")
     end
   end
 
-  describe "Given an config file with no id or version number" do
+  describe "#widget_id" do
     before do
-      @config = Confetti::Config.new()
-      @config.populate_from_xml("#{ fixture_dir }/blackberry/blackberry_widget_config_no_version_or_id.xml")
-
-      @blackberryWidgetsConfig = Confetti::Template::BlackberryWidgetsConfig.new(@config)
+      @config = Confetti::Config.new
+      @template = @template_class.new(@config)
     end
 
-    it "Should provide provide a valid version when none is specified or has an empty string" do
-      @blackberryWidgetsConfig.version.should == "0.0.1"
+    it "should be the default when @config.package is nil" do
+      @config.package = nil
+      @template.widget_id.should == "com.default.noname"
     end
 
-    it "Should provide provide a valid version when none is specified or has an empty string" do
-      @blackberryWidgetsConfig.widget_id.should == "com.default.noname"
+    it "should be the default when @config.package is an empty string" do
+      @config.package = ""
+      @template.widget_id.should == "com.default.noname"
+    end
+
+    it "should be @config.package when that's set" do
+      @config.package = "com.what.not"
+      @template.widget_id.should == "com.what.not"
     end
   end
 
-  describe "Given an config file with a VALID id or version number" do
+  describe "#version" do
     before do
-      @config = Confetti::Config.new()
-      @config.populate_from_xml("#{ fixture_dir }/config.xml")
-
-      @blackberryWidgetsConfig = Confetti::Template::BlackberryWidgetsConfig.new(@config)
+      @config = Confetti::Config.new
+      @template = @template_class.new(@config)
     end
 
-    it "Should provide provide a valid version when SPECIFIED" do
-      @blackberryWidgetsConfig.version.should == "1.0.0"
+    it "should be the default when @config.version_string is nil" do
+      @config.version_string = nil
+      @template.version.should == "0.0.1"
     end
 
-    it "Should provide provide a valid version when SPECIFIED" do
-      @blackberryWidgetsConfig.widget_id.should == "com.alunny.confetti"
+    it "should be the default when @config.version_string is an empty string" do
+      @config.version_string = ""
+      @template.version.should == "0.0.1"
+    end
+
+    it "should be @config.version_string when that's set" do
+      @config.version_string = "1.0.0"
+      @template.version.should == "1.0.0"
     end
   end
 end

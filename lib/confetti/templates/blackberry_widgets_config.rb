@@ -1,9 +1,8 @@
 module Confetti
   module Template
     class BlackberryWidgetsConfig < Base
-
       def widget_id
-        if @config.package.empty? or @config.package.nil?
+        if @config.package.nil? or @config.package.empty?
           "com.default.noname"
         else
           @config.package
@@ -11,7 +10,7 @@ module Confetti
       end
 
       def version
-        if @config.version_string.empty? or @config.version_string.nil?
+        if @config.version_string.nil? or @config.version_string.empty?
           "0.0.1"
         else
           @config.version_string
