@@ -1,6 +1,7 @@
 module Confetti
   module Template
     class BlackberryWidgetsConfig < Base
+
       def widget_id
         @config.package
       end
@@ -8,7 +9,7 @@ module Confetti
       def version
         @config.version_string || "0.0.1"
       end
-      
+
       def widget_name
         @config.name.name
       end
@@ -44,6 +45,23 @@ module Confetti
       def output_filename
         "config.xml"
       end
+
+      def app_orientations
+
+        @@landscape_orientation = ["landscape"]
+        @@portrait_orientation = ["portrait"]
+        @@default = ["auto"]
+
+        @@valid_orientations = {
+          "default" => @@default,
+          "landscape" => @@landscape_orientation,
+          "portrait" => @@portrait_orientation
+        }
+
+        super
+
+      end
+
     end
   end
 end

@@ -65,4 +65,16 @@ describe Confetti::Template::IosInfo do
       end
     end
   end
+
+  describe "Given a orientation should used correct mode" do
+    before do
+      @config = Confetti::Config.new()
+      @config.populate_from_xml("#{ fixture_dir }/config_with_orientation.xml")
+      @template = @template_class.new(@config)
+    end
+
+    it "Should define landscape only" do
+      @template.render.should == File.read("#{ fixture_dir }/ios_info_spec_expected_orientation.plist")
+    end
+  end
 end

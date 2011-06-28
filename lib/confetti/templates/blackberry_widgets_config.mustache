@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Widget Configuration Reference: http://docs.blackberry.com/en/developers/deliverables/15274/ -->
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:rim="http://www.blackberry.com/ns/widgets" 
-  version="{{ version }}" 
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:rim="http://www.blackberry.com/ns/widgets"
+  version="{{ version }}"
   id="{{ widget_id }}">
 <name>{{ widget_name }}</name>
 <author href="{{ author_href }}" email="{{ author_email }}">{{ author_name }}</author>
@@ -27,4 +27,5 @@
 <rim:loadingScreen backgroundColor="#000000" foregroundImage="resources/loading_foreground.png" onFirstLaunch="true">
   <rim:transitionEffect type="fadeOut"/>
 </rim:loadingScreen>
+<rim:orientation mode="{{app_orientations}}" />
 </widget>

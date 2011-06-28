@@ -34,6 +34,22 @@ module Confetti
         @config.version_code || '1'
       end
 
+      def app_orientations
+
+        @@landscape_orientation = ["landscape"]
+        @@portrait_orientation = ["portrait"]
+        @@default = ["unspecified"]
+
+        @@valid_orientations = {
+          "default" => @@default,
+          "landscape" => @@landscape_orientation,
+          "portrait" => @@portrait_orientation
+        }
+
+        super
+
+      end
+
       def permissions
         permissions = []
         phonegap_api = /http\:\/\/api.phonegap.com\/1[.]0\/(\w+)/

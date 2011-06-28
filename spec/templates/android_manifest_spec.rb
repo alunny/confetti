@@ -109,4 +109,17 @@ describe Confetti::Template::AndroidManifest do
       @config.version_code.should == "5"
     end
   end
+
+  describe "Given a orientation should used correct mode" do
+    before do
+      @config = Confetti::Config.new()
+      @config.populate_from_xml("#{ fixture_dir }/config_with_orientation.xml")
+
+      @template = @template_class.new(@config)
+    end
+
+    it "Should define landscape only" do
+      @template.render.should == File.read("#{ fixture_dir }/android_manifest_spec_with_expected_orientation.xml")
+    end
+  end
 end

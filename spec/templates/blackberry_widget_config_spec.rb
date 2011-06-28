@@ -89,4 +89,18 @@ describe Confetti::Template::BlackberryWidgetsConfig do
       end
     end
   end
+
+  describe "Given a orientation should used correct mode" do
+    before do
+      @config = Confetti::Config.new()
+      @config.populate_from_xml("#{ fixture_dir }/config_with_orientation.xml")
+      @config.phonegap_version = "0.9.5.1"
+      @template = @template_class.new(@config)
+    end
+
+    it "Should define landscape only" do
+      @template.render.should == File.read("#{ fixture_dir }/blackberry_widget_config_spec_with_expected_orientation.xml")
+    end
+  end
+
 end

@@ -19,7 +19,7 @@
   <icon src="img/beer_48.png" width="48" height="48" />
   <icon src="img/beer_36.png" width="36" height="36" />
 
-  <preference name="orientation" value="default" />
+  <preference name="orientation" value="landscape" />
 
   <gap:splash src="img/garrett_cropped2.png" />
 </widget>

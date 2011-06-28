@@ -4,10 +4,10 @@ module Confetti
     include PhoneGap
     self.extend TemplateHelper
 
-    attr_accessor :package, :version_string, :version_code, :description, :height, :width
+    attr_accessor :package, :version_string, :version_code, :description, :height, :width, :orientation
     attr_reader :author, :viewmodes, :name, :license, :content,
                 :icon_set, :feature_set, :preference_set, :xml_doc,
-                :splash_set, :orientation
+                :splash_set
 
     generate_and_write  :android_manifest, :android_strings, :webos_appinfo,
                         :ios_info, :symbian_wrt_info, :blackberry_widgets_config

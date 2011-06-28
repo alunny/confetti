@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Widget Configuration Reference: http://docs.blackberry.com/en/developers/deliverables/15274/ -->
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:rim="http://www.blackberry.com/ns/widgets" 
-  version="1.0.0" 
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:rim="http://www.blackberry.com/ns/widgets"
+  version="1.0.0"
   id="com.alunny.confetti">
 <name>Confetti Sample App</name>
 <author href="http://alunny.github.com" email="alunny@gmail.com">Andrew Lunny</author>
@@ -47,4 +47,5 @@ THE SOFTWARE.</license>
 <rim:loadingScreen backgroundColor="#000000" foregroundImage="resources/loading_foreground.png" onFirstLaunch="true">
   <rim:transitionEffect type="fadeOut"/>
 </rim:loadingScreen>
+<rim:orientation mode="auto" />
 </widget>

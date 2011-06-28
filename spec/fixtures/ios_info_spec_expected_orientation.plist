@@ -8,36 +8,34 @@
     </array>
     <key>UISupportedInterfaceOrientations~ipad</key>
     <array>
-        {{# app_orientations }}
-        <string>{{ to_s }}</string>
-        {{/ app_orientations }}
-    </array>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+        </array>
     <key>UISupportedInterfaceOrientations</key>
     <array>
-        {{# app_orientations }}
-        <string>{{ to_s }}</string>
-        {{/ app_orientations }}
-    </array>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+        </array>
     <key>CFBundleDevelopmentRegion</key>
     <string>English</string>
     <key>CFBundleDisplayName</key>
-    <string>{{ product_name }}</string>
+    <string>John Garrett Drinking Game</string>
     <key>CFBundleExecutable</key>
     <string>${EXECUTABLE_NAME}</string>
     <key>CFBundleIconFile</key>
     <string>icon.png</string>
     <key>CFBundleIdentifier</key>
-    <string>{{ bundle_identifier }}</string>
+    <string>com.nitobi.johngarrett</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>{{ product_name }}</string>
+    <string>John Garrett Drinking Game</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleVersion</key>
-    <string>{{ bundle_version }}</string>
+    <string>1.0</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSMainNibFile</key>
