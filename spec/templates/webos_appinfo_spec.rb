@@ -62,7 +62,7 @@ describe Confetti::Template::WebosAppinfo do
       end
 
       it "should render the correct appinfo.json" do
-        @template.render.should == File.read("#{ fixture_dir }/webos_appinfo_spec.json")
+        @template.render.should == File.read("#{ fixture_dir }/webos/webos_appinfo_spec.json")
       end
 
       describe "#version method" do

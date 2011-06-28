@@ -65,7 +65,7 @@ describe Confetti::Template::AndroidManifest do
       end
 
       it "should render the correct AndroidManifest" do
-        @template.render.should == File.read("#{ fixture_dir }/android_manifest_spec.xml")
+        @template.render.should == File.read("#{ fixture_dir }/android/android_manifest_spec.xml")
       end
     end
   end
@@ -119,7 +119,7 @@ describe Confetti::Template::AndroidManifest do
     end
 
     it "Should define landscape only" do
-      @template.render.should == File.read("#{ fixture_dir }/android_manifest_spec_with_expected_orientation.xml")
+      @template.render.should == File.read("#{ fixture_dir }/android/android_manifest_spec_with_expected_orientation.xml")
     end
   end
 end

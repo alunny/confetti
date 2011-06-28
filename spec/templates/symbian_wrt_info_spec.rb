@@ -61,7 +61,7 @@ describe Confetti::Template::SymbianWrtInfo do
       end
 
       it "should render the correct info.plist" do
-        @template.render.should == File.read("#{ fixture_dir }/symbian_wrt_info_spec.plist")
+        @template.render.should == File.read("#{ fixture_dir }/symbian/symbian_wrt_info_spec.plist")
       end
     end
   end

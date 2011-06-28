@@ -85,7 +85,7 @@ describe Confetti::Template::BlackberryWidgetsConfig do
       end
 
       it "should render the correct config.xml" do
-        @template.render.should == File.read("#{ fixture_dir }/blackberry_widget_config_spec.xml")
+        @template.render.should == File.read("#{ fixture_dir }/blackberry/blackberry_widget_config_spec.xml")
       end
     end
   end
@@ -99,7 +99,7 @@ describe Confetti::Template::BlackberryWidgetsConfig do
     end
 
     it "Should define landscape only" do
-      @template.render.should == File.read("#{ fixture_dir }/blackberry_widget_config_spec_with_expected_orientation.xml")
+      @template.render.should == File.read("#{ fixture_dir }/blackberry/blackberry_widget_config_spec_with_expected_orientation.xml")
     end
   end
 

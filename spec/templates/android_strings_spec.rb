@@ -49,7 +49,7 @@ describe Confetti::Template::AndroidStrings do
       end
 
       it "should render the correct AndroidManifest" do
-        @template.render.should == File.read("#{ fixture_dir }/android_strings_spec.xml")
+        @template.render.should == File.read("#{ fixture_dir }/android/android_strings_spec.xml")
       end
     end
   end

@@ -61,7 +61,7 @@ describe Confetti::Template::IosInfo do
       end
 
       it "should render the correct Info.plist" do
-        @template.render.should == File.read("#{ fixture_dir }/ios_info_spec.plist")
+        @template.render.should == File.read("#{ fixture_dir }/ios/ios_info_spec.plist")
       end
     end
   end
@@ -74,7 +74,7 @@ describe Confetti::Template::IosInfo do
     end
 
     it "Should define landscape only" do
-      @template.render.should == File.read("#{ fixture_dir }/ios_info_spec_expected_orientation.plist")
+      @template.render.should == File.read("#{ fixture_dir }/ios/ios_info_spec_expected_orientation.plist")
     end
   end
 end
