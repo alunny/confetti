@@ -103,4 +103,37 @@ describe Confetti::Template::BlackberryWidgetsConfig do
     end
   end
 
+  describe "Given an config file with no id or version number" do
+    before do
+      @config = Confetti::Config.new()
+      @config.populate_from_xml("#{ fixture_dir }/blackberry/blackberry_widget_config_no_version_or_id.xml")
+
+      @blackberryWidgetsConfig = Confetti::Template::BlackberryWidgetsConfig.new(@config)
+    end
+
+    it "Should provide provide a valid version when none is specified or has an empty string" do
+      @blackberryWidgetsConfig.version.should == "0.0.1"
+    end
+
+    it "Should provide provide a valid version when none is specified or has an empty string" do
+      @blackberryWidgetsConfig.widget_id.should == "com.default.noname"
+    end
+  end
+
+  describe "Given an config file with a VALID id or version number" do
+    before do
+      @config = Confetti::Config.new()
+      @config.populate_from_xml("#{ fixture_dir }/config.xml")
+
+      @blackberryWidgetsConfig = Confetti::Template::BlackberryWidgetsConfig.new(@config)
+    end
+
+    it "Should provide provide a valid version when SPECIFIED" do
+      @blackberryWidgetsConfig.version.should == "1.0.0"
+    end
+
+    it "Should provide provide a valid version when SPECIFIED" do
+      @blackberryWidgetsConfig.widget_id.should == "com.alunny.confetti"
+    end
+  end
 end
