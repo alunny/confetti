@@ -4,7 +4,8 @@ module Confetti
     include PhoneGap
     self.extend TemplateHelper
 
-    attr_accessor :package, :version_string, :version_code, :description, :height, :width, :orientation
+    attr_accessor :package, :version_string, :version_code, :description,
+                  :height, :width
     attr_reader :author, :viewmodes, :name, :license, :content,
                 :icon_set, :feature_set, :preference_set, :xml_doc,
                 :splash_set
@@ -20,7 +21,6 @@ module Confetti
     Image       = Class.new Struct.new(:src, :height, :width, :extras)
     Feature     = Class.new Struct.new(:name, :required)
     Preference  = Class.new Struct.new(:name, :value, :readonly)
-    Orientation = Class.new Struct.new(:mode)
 
     def initialize(*args)
       @author           = Author.new
@@ -32,7 +32,6 @@ module Confetti
       @splash_set       = TypedSet.new Image
       @preference_set   = TypedSet.new Preference
       @viewmodes        = []
-      @orientation      = Orientation
 
       if args.length > 0 && is_file?(args.first)
         populate_from_xml args.first
@@ -77,8 +76,6 @@ module Confetti
           @preference_set << Preference.new(attr["name"], attr["value"], attr["readonly"])
         when "license"
           @license = License.new(ele.text.nil? ? "" : ele.text.strip, attr["href"])
-        when "orientation"
-          @orientation = orientation
         end
       end
     end
@@ -95,8 +92,17 @@ module Confetti
       @splash_set.first
     end
 
+    # simple helper for grabbing chosen orientation, or the default
+    # returns one of :portrait, :landscape, or :default
     def orientation
-      @preference_set.detect { |pref| pref.name == "orientation" }
+      values = %w{portrait landscape default}
+      pref = @preference_set.detect { |pref| pref.name == "orientation" }
+
+      unless pref && pref.value
+        :default
+      else
+        values.include?(pref.value) ? pref.value.to_sym : :default
+      end
     end
 
     def grab_extras(attributes)

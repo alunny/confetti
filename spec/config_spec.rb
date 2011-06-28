@@ -400,4 +400,38 @@ describe Confetti::Config do
       end
     end
   end
+
+  describe "orientation helper" do
+    it "should be :default with none set" do
+      c = Confetti::Config.new
+      c.orientation.should be :default
+    end
+
+    describe "with an orientation preference" do
+      before do
+        @config = Confetti::Config.new
+        @orientation_pref = Confetti::Config::Preference.new "orientation"
+        @config.preference_set << @orientation_pref
+      end
+
+      it "should be :default when no value is set" do
+        @config.orientation.should be :default
+      end
+
+      it "should be :landscape when the value is 'landscape'" do
+        @orientation_pref.value = "landscape"
+        @config.orientation.should be :landscape
+      end
+
+      it "should be :portrait when the value is 'portrait'" do
+        @orientation_pref.value = "portrait"
+        @config.orientation.should be :portrait
+      end
+
+      it "should be :default when the value is unexpected" do
+        @orientation_pref.value = "topwise"
+        @config.orientation.should be :default
+      end
+    end
+  end
 end
