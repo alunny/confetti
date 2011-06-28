@@ -1,6 +1,12 @@
 module Confetti
   module Template
     class BlackberryWidgetsConfig < Base
+      ORIENTATIONS_MAP = {
+        :default => "auto",
+        :landscape => "landscape",
+        :portrait => "portrait"
+      }
+
       def widget_id
         if @config.package.nil? or @config.package.empty?
           "com.default.noname"
@@ -53,22 +59,9 @@ module Confetti
         "config.xml"
       end
 
-      def app_orientations
-
-        @@landscape_orientation = ["landscape"]
-        @@portrait_orientation = ["portrait"]
-        @@default = ["auto"]
-
-        @@valid_orientations = {
-          "default" => @@default,
-          "landscape" => @@landscape_orientation,
-          "portrait" => @@portrait_orientation
-        }
-
-        super
-
+      def app_orientation
+        ORIENTATIONS_MAP[@config.orientation]
       end
-
     end
   end
 end

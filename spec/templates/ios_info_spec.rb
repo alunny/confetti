@@ -66,15 +66,39 @@ describe Confetti::Template::IosInfo do
     end
   end
 
-  describe "Given a orientation should used correct mode" do
+  describe "#app_orientations" do
     before do
-      @config = Confetti::Config.new()
-      @config.populate_from_xml("#{ fixture_dir }/config_with_orientation.xml")
+      @config = Confetti::Config.new
+      @orientation_pref = Confetti::Config::Preference.new "orientation"
+      @config.preference_set << @orientation_pref
       @template = @template_class.new(@config)
+
+      @portrait = %w{UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown}
+      @landscape = %w{UIInterfaceOrientationLandscapeRight UIInterfaceOrientationLandscapeLeft}
+      @default = @portrait + @landscape
     end
 
-    it "Should define landscape only" do
-      @template.render.should == File.read("#{ fixture_dir }/ios/ios_info_spec_expected_orientation.plist")
+    it "should return the right array for portrait orientation" do
+      @orientation_pref.value = "portrait"
+
+      # check that contents are matching
+      # a little longwinded
+      difference = @portrait - @template.app_orientations
+      difference.should be_empty
+    end
+
+    it "should return the right array for landscape orientation" do
+      @orientation_pref.value = "landscape"
+
+      difference = @landscape - @template.app_orientations
+      difference.should be_empty
+    end
+
+    it "should return the right array for default orientation" do
+      @orientation_pref.value = "default"
+
+      difference = @default - @template.app_orientations
+      difference.should be_empty
     end
   end
 end

@@ -90,16 +90,27 @@ describe Confetti::Template::BlackberryWidgetsConfig do
     end
   end
 
-  describe "with orientation specified" do
+  describe "#app_orientation" do
     before do
       @config = Confetti::Config.new
-      @config.populate_from_xml("#{ fixture_dir }/config_with_orientation.xml")
-      @config.phonegap_version = "0.9.5.1"
+      @orientation_pref = Confetti::Config::Preference.new "orientation"
+      @config.preference_set << @orientation_pref
       @template = @template_class.new(@config)
     end
 
-    it "should use the one in the config.xml file" do
-      @template.render.should == File.read("#{ fixture_dir }/blackberry/blackberry_widget_config_spec_with_expected_orientation.xml")
+    it "should return the right array for portrait orientation" do
+      @orientation_pref.value = "portrait"
+      @template.app_orientation.should == "portrait"
+    end
+
+    it "should return the right array for landscape orientation" do
+      @orientation_pref.value = "landscape"
+      @template.app_orientation.should == "landscape"
+    end
+
+    it "should return the right array for default orientation" do
+      @orientation_pref.value = "default"
+      @template.app_orientation.should == "auto"
     end
   end
 

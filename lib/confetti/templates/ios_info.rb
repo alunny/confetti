@@ -1,6 +1,22 @@
 module Confetti
   module Template
     class IosInfo < Base
+      ORIENTATIONS_MAP = {
+        :landscape => [
+          "UIInterfaceOrientationLandscapeLeft",
+          "UIInterfaceOrientationLandscapeRight"
+        ],
+        :portrait => [
+          "UIInterfaceOrientationPortrait",
+          "UIInterfaceOrientationPortraitUpsideDown"
+        ],
+        :default => [
+          "UIInterfaceOrientationLandscapeLeft",
+          "UIInterfaceOrientationLandscapeRight",
+          "UIInterfaceOrientationPortrait",
+          "UIInterfaceOrientationPortraitUpsideDown"
+        ]
+      }
 
       def bundle_identifier
         @config.package
@@ -19,20 +35,8 @@ module Confetti
       end
 
       def app_orientations
-        
-        @@landscape_orientation = ["UIInterfaceOrientationLandscapeLeft", "UIInterfaceOrientationLandscapeRight"]
-        @@portrait_orientation = ["UIInterfaceOrientationPortrait", "UIInterfaceOrientationPortraitUpsideDown"]
-        @@default = @@landscape_orientation | @@portrait_orientation
-
-        @@valid_orientations = {
-          "default" => @@default,
-          "landscape" => @@landscape_orientation,
-          "portrait" => @@portrait_orientation
-        }
-
-        super
+        ORIENTATIONS_MAP[@config.orientation]
       end
-
     end
   end
 end

@@ -14,6 +14,12 @@ module Confetti
         "network"       => ["ACCESS_NETWORK_STATE"]
       }
 
+      ORIENTATIONS_MAP = {
+        :default => "unspecified",
+        :landscape => "landscape",
+        :portrait => "portrait"
+      }
+
       def package_name
         convert_to_java_package_id(@config.package)
       end
@@ -34,20 +40,8 @@ module Confetti
         @config.version_code || '1'
       end
 
-      def app_orientations
-
-        @@landscape_orientation = ["landscape"]
-        @@portrait_orientation = ["portrait"]
-        @@default = ["unspecified"]
-
-        @@valid_orientations = {
-          "default" => @@default,
-          "landscape" => @@landscape_orientation,
-          "portrait" => @@portrait_orientation
-        }
-
-        super
-
+      def app_orientation
+        ORIENTATIONS_MAP[@config.orientation]
       end
 
       def permissions
