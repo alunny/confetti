@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = "confetti"
   s.version     = Confetti::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Andrew Lunny"]
+  s.authors     = ["Andrew Lunny", "Filip Maj", "Hardeep Shoker"]
   s.email       = ["alunny@gmail.com"]
   s.homepage    = "http://rubygems.org/gems/confetti"
   s.summary     = %q{Generate mobile app config files}
