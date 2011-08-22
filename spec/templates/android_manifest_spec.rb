@@ -86,13 +86,13 @@ describe Confetti::Template::AndroidManifest do
     end
 
     it "should return all of the permissions" do
-      # 1 camera, 1 network, 2 media
-      @template.permissions.size.should be 4
+      # 1 camera, 1 network, 3 media
+      @template.permissions.size.should be 5
     end
 
     # its dumb, but lets me test
     it "should be sorted alphabetically" do
-      expected = ["ACCESS_NETWORK_STATE", "CAMERA", "MODIFY_AUDIO_SETTINGS", "RECORD_AUDIO"]
+      expected = ["ACCESS_NETWORK_STATE", "CAMERA", "MODIFY_AUDIO_SETTINGS", "RECORD_AUDIO", "RECORD_VIDEO"]
       permission_names = @template.permissions.map { |f| f[:name] }
 
       permission_names.should == expected
