@@ -17,6 +17,7 @@ require "mustache"
 # internal dependencies
 require 'typedset'
 require 'confetti/version'
+require 'confetti/error'
 require 'confetti/helpers'
 require 'confetti/phonegap'
 

@@ -162,16 +162,16 @@ describe Confetti::Config do
       }.should raise_error
     end
 
-    it "should raise an error if can't parse" do
+    it "should raise an error if the file doesn't exist" do
       lambda {
         @config.populate_from_xml("foo.goo")
-      }.should raise_error
+      }.should raise_error Confetti::Config::FileError
     end
 
     it "should raise an error with malformed xml" do
       lambda {
         @config.populate_from_xml("#{ fixture_dir }/bad_config.xml")
-      }.should raise_error ArgumentError
+      }.should raise_error Confetti::Config::XMLError
     end
 
     describe "when setting attributes from config.xml" do
