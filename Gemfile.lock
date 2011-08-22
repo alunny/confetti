@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    confetti (0.3.2)
+    confetti (0.3.3)
       mustache (~> 0.11.2)
       thor (~> 0.14.3)
 

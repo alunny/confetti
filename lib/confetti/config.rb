@@ -4,6 +4,10 @@ module Confetti
     include PhoneGap
     self.extend TemplateHelper
 
+    class XMLError < Confetti::Error ; end
+
+    class FileError < Confetti::Error ; end
+
     attr_accessor :package, :version_string, :version_code, :description,
                   :height, :width
     attr_reader :author, :viewmodes, :name, :license, :content,
@@ -40,9 +44,12 @@ module Confetti
 
     def populate_from_xml(xml_file)
       begin
-        config_doc = REXML::Document.new(File.read(xml_file)).root
+        file = File.read(xml_file)
+        config_doc = REXML::Document.new(file).root
       rescue REXML::ParseException
-        raise ArgumentError, "malformed config.xml"
+        raise XMLError, "malformed config.xml"
+      rescue Errno::ENOENT
+        raise FileError, "file #{ xml_file } doesn't exist"
       end
 
       fail "no doc parsed" unless config_doc
