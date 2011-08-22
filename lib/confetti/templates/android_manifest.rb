@@ -4,19 +4,25 @@ module Confetti
       include JavaChecks
 
       GAP_PERMISSIONS_MAP = {
-        "camera"        => ["CAMERA"],
-        "notification"  => ["VIBRATE"],
-        "geolocation"   => ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION",
-            "ACCESS_LOCATION_EXTRA_COMMANDS"],
-        "media"         => ["RECORD_AUDIO", "MODIFY_AUDIO_SETTINGS"],
-        "contacts"      => ["READ_CONTACTS", "WRITE_CONTACTS"],
-        "file"          => ["WRITE_EXTERNAL_STORAGE"],
-        "network"       => ["ACCESS_NETWORK_STATE"]
+        "camera"        => %w{CAMERA},
+        "notification"  => %w{VIBRATE},
+        "geolocation"   => %w{ACCESS_COARSE_LOCATION
+                              ACCESS_FINE_LOCATION
+                              ACCESS_LOCATION_EXTRA_COMMANDS},
+        "media"         => %w{RECORD_AUDIO
+                              RECORD_VIDEO
+                              MODIFY_AUDIO_SETTINGS},
+        "contacts"      => %w{READ_CONTACTS
+                              WRITE_CONTACTS
+                              GET_ACCOUNTS},
+        "file"          => %w{WRITE_EXTERNAL_STORAGE},
+        "network"       => %w{ACCESS_NETWORK_STATE},
+        "battery"       => %w{BROADCAST_STICKY}
       }
 
       ORIENTATIONS_MAP = {
-        :default => "unspecified",
-        :landscape => "landscape",
+        :default    => "unspecified",
+        :landscape  => "landscape",
         :portrait => "portrait"
       }
 
