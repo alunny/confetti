@@ -107,7 +107,6 @@ describe Confetti::Template::AndroidManifest do
 
       it "should only render the INTERNET permission" do
         bare_manifest = File.read "#{ fixture_dir }/android/AndroidManifest_bare.xml"
-        puts @config.preference_set.inspect
         @template.render.should == bare_manifest
       end
     end

@@ -102,13 +102,13 @@ module Confetti
     # simple helper for grabbing chosen orientation, or the default
     # returns one of :portrait, :landscape, or :default
     def orientation
-      values = %w{portrait landscape default}
-      pref = @preference_set.detect { |pref| pref.name == "orientation" }
+      values = [:portrait, :landscape, :default]
+      choice = preference :orientation
 
-      unless pref && pref.value
+      unless choice and values.include?(choice)
         :default
       else
-        values.include?(pref.value) ? pref.value.to_sym : :default
+        choice
       end
     end
 
@@ -118,6 +118,15 @@ module Confetti
         hash
       end
       extras
+    end
+
+    # helper to retrieve a preference's value
+    # returns nil if the preference doesn't exist
+    def preference name
+      name = name.to_s
+      pref = @preference_set.detect { |pref| pref.name == name }
+
+      pref && pref.value && pref.value.to_sym
     end
   end
 end

@@ -434,4 +434,27 @@ describe Confetti::Config do
       end
     end
   end
+
+  describe "preference accessor" do
+    before do
+      @config = Confetti::Config.new
+      @pref = Confetti::Config::Preference.new "permissions", "none"
+      @config.preference_set << @pref
+    end
+
+    it "should return the value of the specified preference" do
+      @config.preference(:permissions).should == :none
+    end
+
+    it "should be nil when the preference is not set" do
+      @config.preference(:size).should be_nil
+    end
+
+    it "should be nil when the preference has no value" do
+      pref = Confetti::Config::Preference.new "privacy"
+      @config.preference_set << pref
+
+      @config.preference(:privacy).should be_nil
+    end
+  end
 end
