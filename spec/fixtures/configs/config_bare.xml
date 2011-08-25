@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+	id		= "com.app.bare"
+	version 	= "1.0.0">
+
+	<name>Confetti Bare App</name>
+
+	<description>
+		This is a sample config.xml with all Android permissions disabled
+	</description>
+
+	<author href="http://alunny.github.com"
+		email="hardeep.shoker@nitobi.com">
+		Hardeep Shoker
+	</author>
+
+	<icon src="smallicon.png" height="100" width="100" />
+	<icon src="bigicon.png"   height="200" width="200" />
+
+  <preference name="permissions" value="none"/>
+</widget>

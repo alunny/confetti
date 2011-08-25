@@ -97,6 +97,20 @@ describe Confetti::Template::AndroidManifest do
 
       permission_names.should == expected
     end
+
+    describe "when preference specifies no permissions" do
+      before do
+        bare_config = "#{ fixture_dir }/configs/config_bare.xml"
+        @config = Confetti::Config.new bare_config
+        @template = @template_class.new(@config)
+      end
+
+      it "should only render the INTERNET permission" do
+        bare_manifest = File.read "#{ fixture_dir }/android/AndroidManifest_bare.xml"
+        puts @config.preference_set.inspect
+        @template.render.should == bare_manifest
+      end
+    end
   end
 
   describe "version code should be set" do
