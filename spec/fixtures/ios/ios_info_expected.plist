@@ -5,7 +5,7 @@
     <key>CFBundleIconFiles</key>
     <array>
         <string>icon.png</string>
-    </array>
+        </array>
     <key>UISupportedInterfaceOrientations~ipad</key>
     <array>
         <string>UIInterfaceOrientationLandscapeLeft</string>

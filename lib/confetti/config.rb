@@ -9,10 +9,10 @@ module Confetti
     class FileError < Confetti::Error ; end
 
     attr_accessor :package, :version_string, :version_code, :description,
-                  :height, :width
+                  :height, :width, :plist_icon_set
     attr_reader :author, :viewmodes, :name, :license, :content,
                 :icon_set, :feature_set, :preference_set, :xml_doc,
-                :splash_set
+                :splash_set, :plist_icon_set
 
     generate_and_write  :android_manifest, :android_strings, :webos_appinfo,
                         :ios_info, :symbian_wrt_info, :blackberry_widgets_config
@@ -32,6 +32,7 @@ module Confetti
       @license          = License.new
       @content          = Content.new
       @icon_set         = TypedSet.new Image
+      @plist_icon_set   = [] 
       @feature_set      = TypedSet.new Feature
       @splash_set       = TypedSet.new Image
       @preference_set   = TypedSet.new Preference
@@ -74,6 +75,8 @@ module Confetti
         when "icon"
           extras = grab_extras attr
           @icon_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
+          # used for the info.plist file
+          @plist_icon_set << attr["src"]
         when "splash"
           extras = grab_extras attr
           @splash_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
@@ -85,9 +88,10 @@ module Confetti
           @license = License.new(ele.text.nil? ? "" : ele.text.strip, attr["href"])
         end
       end
-    end
 
-    def icon
+  end
+
+  def icon
       @icon_set.first
     end
 
