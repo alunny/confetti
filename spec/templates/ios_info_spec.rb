@@ -35,6 +35,7 @@ describe Confetti::Template::IosInfo do
       @config.name.name = "Awesome App"
       @config.package = "com.whoever.awesome.app"
       @config.version_string = "1.0.0"
+      @config.plist_icon_set = ['icon.png']
     end
 
     it "should accept the config object" do
@@ -99,6 +100,17 @@ describe Confetti::Template::IosInfo do
 
       difference = @default - @template.app_orientations
       difference.should be_empty
+    end
+  end
+
+  describe "ios icons" do
+    before do
+      @config = Confetti::Config.new("#{fixture_dir}/config_with_orientation.xml")
+      @template = @template_class.new(@config)
+    end
+
+    it "should populate the info.plist with the icons" do
+      @template.render.should == File.read("#{ fixture_dir }/ios/ios_info_spec_expected_orientation.plist")
     end
   end
 end

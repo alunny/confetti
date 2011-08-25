@@ -18,6 +18,10 @@ module Confetti
         ]
       }
 
+      def icons
+        @config.plist_icon_set
+      end
+
       def bundle_identifier
         @config.package
       end

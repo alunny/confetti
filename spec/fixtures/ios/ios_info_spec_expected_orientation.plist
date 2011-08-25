@@ -4,8 +4,10 @@
 <dict>
     <key>CFBundleIconFiles</key>
     <array>
-        <string>icon.png</string>
-    </array>
+        <string>img/beer_72.png</string>
+        <string>img/beer_48.png</string>
+        <string>img/beer_36.png</string>
+        </array>
     <key>UISupportedInterfaceOrientations~ipad</key>
     <array>
         <string>UIInterfaceOrientationLandscapeLeft</string>
@@ -41,6 +43,6 @@
     <key>NSMainNibFile</key>
     <string></string>
     <key>NSMainNibFile~ipad</key>
-    <string>-iPad</string>
+    <string></string>
 </dict>
 </plist>
