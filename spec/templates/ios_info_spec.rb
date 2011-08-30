@@ -36,6 +36,8 @@ describe Confetti::Template::IosInfo do
       @config.package = "com.whoever.awesome.app"
       @config.version_string = "1.0.0"
       @config.plist_icon_set = ['icon.png']
+      pref = Confetti::Config::Preference.new("universal", "true", nil)
+      @config.preference_set << pref    
     end
 
     it "should accept the config object" do
@@ -111,6 +113,17 @@ describe Confetti::Template::IosInfo do
 
     it "should populate the info.plist with the icons" do
       @template.render.should == File.read("#{ fixture_dir }/ios/ios_info_spec_expected_orientation.plist")
+    end
+  end
+
+  describe "should specify if the application is universal" do
+    before do
+       @config = Confetti::Config.new("#{fixture_dir}/config.xml")
+       @template = @template_class.new(@config)
+    end
+    
+    it "should should specify universal" do
+      @template.render.should == File.read("#{ fixture_dir }/ios/ios_info_expected.plist")
     end
   end
 end

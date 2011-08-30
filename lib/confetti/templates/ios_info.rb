@@ -38,6 +38,14 @@ module Confetti
         "Info.plist"
       end
 
+      def devices 
+        nibs = ["NSMainNibFile"]
+        @config.preference_set.each do |preference|
+          nibs << "NSMainNibFile~ipad"  if preference.name.match /^universal$/
+        end
+        nibs
+      end
+
       def app_orientations
         ORIENTATIONS_MAP[@config.orientation]
       end

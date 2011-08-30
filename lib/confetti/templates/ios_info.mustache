@@ -42,9 +42,9 @@
     <string>{{ bundle_version }}</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
-    <key>NSMainNibFile</key>
+    {{# devices }}
+    <key>{{ to_s }}</key>
     <string></string>
-    <key>NSMainNibFile~ipad</key>
-    <string></string>
+    {{/ devices }}
 </dict>
 </plist>
