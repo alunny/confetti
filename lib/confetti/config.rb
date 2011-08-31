@@ -65,27 +65,37 @@ module Confetti
       config_doc.elements.each do |ele|
         attr = ele.attributes
 
-        case ele.name
-        when "name"
-          @name = Name.new(ele.text.nil? ? "" : ele.text.strip, attr["shortname"])
-        when "author"
-          @author = Author.new(ele.text.nil? ? "" : ele.text.strip, attr["href"], attr["email"])
-        when "description"
-          @description = ele.text.nil? ? "" : ele.text.strip
-        when "icon"
-          extras = grab_extras attr
-          @icon_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
-          # used for the info.plist file
-          @plist_icon_set << attr["src"]
-        when "splash"
-          extras = grab_extras attr
-          @splash_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
-        when "feature"
-          @feature_set  << Feature.new(attr["name"], attr["required"])
-        when "preference"
-          @preference_set << Preference.new(attr["name"], attr["value"], attr["readonly"])
-        when "license"
-          @license = License.new(ele.text.nil? ? "" : ele.text.strip, attr["href"])
+        case ele.namespace
+
+        # W3C widget elements
+        when "http://www.w3.org/ns/widgets"
+          case ele.name
+          when "name"
+            @name = Name.new(ele.text.nil? ? "" : ele.text.strip, attr["shortname"])
+          when "author"
+            @author = Author.new(ele.text.nil? ? "" : ele.text.strip, attr["href"], attr["email"])
+          when "description"
+            @description = ele.text.nil? ? "" : ele.text.strip
+          when "icon"
+            extras = grab_extras attr
+            @icon_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
+            # used for the info.plist file
+            @plist_icon_set << attr["src"]
+          when "feature"
+            @feature_set  << Feature.new(attr["name"], attr["required"])
+          when "preference"
+            @preference_set << Preference.new(attr["name"], attr["value"], attr["readonly"])
+          when "license"
+            @license = License.new(ele.text.nil? ? "" : ele.text.strip, attr["href"])
+          end
+
+        # PhoneGap extensions (gap:)
+        when "http://phonegap.com/ns/1.0"
+          case ele.name
+          when "splash"
+            extras = grab_extras attr
+            @splash_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
+          end
         end
       end
 
