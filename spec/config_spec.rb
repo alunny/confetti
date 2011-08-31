@@ -329,6 +329,32 @@ describe Confetti::Config do
           features_names.should include "http://api.phonegap.com/1.0/notification"
         end
       end
+
+      describe "plugins" do
+        it "should append plugins to the plugin set" do
+          @config.plugin_set.size.should be 1
+        end
+
+        describe "created object" do
+          before do
+            @plugin = @config.plugin_set.first
+          end
+
+          it "should have the right name" do
+            @plugin.name.should == "ChildBrowser"
+          end
+
+          it "should have the right value" do
+            package = "com.phonegap.plugins.childBrowser.ChildBrowser"
+            @plugin.value.should == package
+          end
+
+          it "should have the right platforms" do
+            @plugin.platforms.size.should be 1
+            @plugin.platforms.first.should be :android
+          end
+        end
+      end
     end
   end
 
