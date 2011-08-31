@@ -11,8 +11,10 @@ module Confetti
 
       begin
         config.send msg
-      rescue
-        fail "Confetti Failed: format #{ output_file } unsupported"
+      rescue Confetti::Config::FiletypeError
+        fail "Confetti failed: #{ output_file } unsupported"
+      rescue Confetti::Error => e
+        fail "Confetti Failed: #{ e.message }"
       end
     end
   end

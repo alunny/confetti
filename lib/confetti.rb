@@ -29,5 +29,7 @@ Dir[File.join(CURRENT_DIR, 'confetti', 'templates', '*')].each do |file|
 end
 require 'confetti/template_helper'
 
+require 'confetti/cli'
+
 require 'confetti/config'
 require 'confetti/config/feature'

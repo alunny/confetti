@@ -8,6 +8,8 @@ module Confetti
 
     class FileError < Confetti::Error ; end
 
+    class FiletypeError < Confetti::Error ; end
+
     attr_accessor :package, :version_string, :version_code, :description,
                   :height, :width, :plist_icon_set
     attr_reader :author, :viewmodes, :name, :license, :content,
@@ -16,6 +18,18 @@ module Confetti
 
     generate_and_write  :android_manifest, :android_strings, :webos_appinfo,
                         :ios_info, :symbian_wrt_info, :blackberry_widgets_config
+
+    # handle bad generate/write calls
+    def method_missing(method_name, *args)
+      bad_call = /^(generate)|(write)_(.*)$/
+      matches = method_name.to_s.match(bad_call)
+
+      if matches
+        raise FiletypeError, "#{ matches[3] } not supported"
+      else
+        super method_name, *args
+      end
+    end
 
     # classes that represent child elements
     Author      = Class.new Struct.new(:name, :href, :email)
