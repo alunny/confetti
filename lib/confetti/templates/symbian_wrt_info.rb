@@ -6,7 +6,11 @@ module Confetti
       end
 
       def version
-        @config.version_string
+        if @config.version_string.nil? or @config.version_string.empty?      
+          "1.0"                                                                                  
+        else                                                                                    
+          @config.version_string                                                                
+        end    
       end
 
       def display_name

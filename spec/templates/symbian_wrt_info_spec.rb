@@ -60,6 +60,12 @@ describe Confetti::Template::SymbianWrtInfo do
         @template.version.should == "1.0.0"
       end
 
+      it "should set version correctly with not config.xml" do
+        @config = Confetti::Config.new
+        @template = @template_class.new(@config)
+        @template.version.should == "1.0"
+      end
+
       it "should render the correct info.plist" do
         @template.render.should == File.read("#{ fixture_dir }/symbian/symbian_wrt_info_spec.plist")
       end
