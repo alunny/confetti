@@ -35,6 +35,9 @@ describe Confetti::Template::SymbianWrtInfo do
       @config.name.name = "Awesome App"
       @config.package = "com.whoever.awesome.app"
       @config.version_string = "1.0.0"
+      @feature_set = TypedSet.new Confetti::Config::Feature
+      @feature_set << Confetti::Config::Feature.new("http://api.phonegap.com/1.0/network", "true")
+      @config.stub(:feature_set).and_return @feature_set
     end
 
     it "should accept the config object" do
