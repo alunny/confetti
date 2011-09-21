@@ -12,7 +12,7 @@
   <string>index.html</string>
   <key>MiniViewEnabled</key>
   <false/>
-  <key>AllowNetworkAccess<key/>
+  <key>AllowNetworkAccess</key>
   <true/>
 </dict>
 </plist>
