@@ -174,6 +174,13 @@ describe Confetti::Config do
       }.should raise_error Confetti::Config::XMLError
     end
 
+    it "should raise an error if no root node is found" do
+      File.stub(:read).and_return(nil)
+      lambda {
+        @config.populate_from_xml("#{ fixture_dir }/empty_non_existent.xml")
+      }.should raise_error Confetti::Config::XMLError
+    end
+
     describe "when setting attributes from config.xml" do
       before do
         @config.populate_from_xml(fixture_dir + "/config.xml")

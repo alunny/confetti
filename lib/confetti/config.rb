@@ -69,7 +69,9 @@ module Confetti
         raise FileError, "file #{ xml_file } doesn't exist"
       end
 
-      fail "no doc parsed" unless config_doc
+      if config_doc.nil?
+        raise XMLError, "no doc parsed"
+      end
 
       # save reference to xml doc
       @xml_doc = config_doc
