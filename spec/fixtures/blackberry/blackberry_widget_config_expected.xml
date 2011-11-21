@@ -38,6 +38,10 @@ THE SOFTWARE.</license>
 <feature id="blackberry.io.dir" required="true" version="1.0.0.0" />
 <feature id="blackberry.app" required="true" version="1.0.0.0" />
 <feature id="blackberry.app.event" required="true" version="1.0.0.0" />
+<feature id="blackberry.invoke" required="true" version="1.0.0.0" />
+<feature id="blackberry.invoke.MapsArguments" required="true" version="1.0.0.0" />
+<feature id="blackberry.system.event" />
+<feature id="blackberry.identity.phone" />
 <access subdomains="true" uri="file:///store/home"/>
 <access subdomains="true" uri="file:///SDCard"/>
 <access subdomains="true" uri="*" />
