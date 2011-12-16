@@ -274,9 +274,18 @@ describe Confetti::Config do
             @config.splash_set.first.extras.length.should be 1
             @config.splash_set.first.extras["main"].should == "true"
           end
-
         end
 
+        describe "with a blank splash screen attribute" do
+          before do
+            @config = Confetti::Config.new
+            @config.populate_from_xml(fixture_dir + "/configs/blank-splash.xml")
+          end
+
+          it "should not populate the splash set" do
+            @config.splash_set.should be_empty
+          end
+        end
       end
 
       describe "icons" do

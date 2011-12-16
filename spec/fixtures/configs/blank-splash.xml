@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "com.applicationcraft.appcb30e1871154400d94007f585e1a683c"
+	version 	= "0.1.1">
+
+	<name>Crunchbase</name>
+
+	<description>
+          Crunchbase
+	</description>
+
+	<author href="http://www.applicationcraft.com"
+		email="fmay@applicationcraft.com">
+		ApplicationCraft
+	</author>
+
+	<gap:platforms>
+		<gap:platform name="android" minVersion="2.1" />
+		<gap:platform name="webos" />
+		<gap:platform name="ios" />
+		<gap:platform name="symbian.wrt" />
+		<gap:platform name="blackberry" project="widgets"/>
+	</gap:platforms>
+
+	<icon src="icon.png"/>
+    <gap:splash src="" />
+
+    <feature name="http://api.phonegap.com/1.0/geolocation"/><feature name="http://api.phonegap.com/1.0/camera"/><feature name="http://api.phonegap.com/1.0/contacts"/><feature name="http://api.phonegap.com/1.0/file"/><feature name="http://api.phonegap.com/1.0/media"/><feature name="http://api.phonegap.com/1.0/notification"/><feature name="http://api.phonegap.com/1.0/network"/>
+</widget>

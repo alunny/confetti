@@ -111,6 +111,7 @@ module Confetti
         when "http://phonegap.com/ns/1.0"
           case ele.name
           when "splash"
+            next if attr["src"].nil? or attr["src"].empty?
             extras = grab_extras attr
             @splash_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
           when "plugin"
