@@ -157,4 +157,25 @@ describe Confetti::Template::BlackberryWidgetsConfig do
       @template.version.should == "1.0.0"
     end
   end
+
+  describe "#phonegap_version" do
+    before do
+      @config = Confetti::Config.new
+      @template = @template_class.new(@config)
+    end
+
+    it "should be '1.0.0' if none is defined" do
+      @template.phonegap_version.should == "1.0.0"
+    end
+
+    it "should be config.phonegap_version if that's below 1.0" do
+      @config.phonegap_version = "0.9.5.1"
+      @template.phonegap_version.should == "0.9.5.1"
+    end
+
+    it "should be '1.0.0' if it's above 1.0" do
+      @config.phonegap_version = "1.2.0"
+      @template.phonegap_version.should == "1.0.0"
+    end
+  end
 end

@@ -52,12 +52,28 @@ describe 'Writing Output' do
   end
 
   context "Blackberry Widgets" do
-    it "should read config.xml and spit out config.xml" do
-      @output_file = "#{ fixture_dir }/blackberry/blackberry_widget_config_output.xml"
-      @config.phonegap_version = "0.9.5.1"
-      @config.write_blackberry_widgets_config @output_file
+    describe "legacy Phonegap" do
+      before do
+        @config = Confetti::Config.new "#{ fixture_dir }/config_legacy.xml"
+      end
 
-      files_should_match @output_file, "#{ fixture_dir }/blackberry/blackberry_widget_config_expected.xml"
+      it "should read config.xml and spit out config.xml" do
+        @output_file = "#{ fixture_dir }/blackberry/blackberry_widget_config_output.xml"
+        @config.write_blackberry_widgets_config @output_file
+
+        files_should_match @output_file,
+          "#{ fixture_dir }/blackberry/blackberry_widget_config_legacy_expected.xml"
+      end
+    end
+
+    describe "current (>= 1.3.0) Phonegap" do
+      it "should read config.xml and spit out config.xml" do
+        @output_file = "#{ fixture_dir }/blackberry/blackberry_widget_config_output.xml"
+        @config.write_blackberry_widgets_config @output_file
+
+        files_should_match @output_file,
+          "#{ fixture_dir }/blackberry/blackberry_widget_config_expected.xml"
+      end
     end
   end
 

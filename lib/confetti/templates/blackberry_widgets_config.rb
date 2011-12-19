@@ -1,11 +1,30 @@
 module Confetti
   module Template
     class BlackberryWidgetsConfig < Base
+      @@legacy_template = File.read(
+        File.join(
+          File.dirname(__FILE__),
+          "blackberry_widgets_config_legacy.mustache"
+      ))
+
       ORIENTATIONS_MAP = {
         :default => "auto",
         :landscape => "landscape",
         :portrait => "portrait"
       }
+
+      def initialize *args
+        super *args
+
+        return self unless @config
+
+        # old = 0.x, 1.0, 1.1, or 1.2
+        old = /^(0)|(1[.][0-2])/
+
+        if @config.phonegap_version and @config.phonegap_version.match(old)
+          self.template = @@legacy_template
+        end
+      end
 
       def widget_id
         if @config.package.nil? or @config.package.empty?
@@ -52,7 +71,15 @@ module Confetti
       end
 
       def phonegap_version
-        @config.phonegap_version
+        # should be 1.0.0, unless below 1
+        # @config.phonegap_version
+        pg = @config.phonegap_version
+
+        if pg.nil? or pg.empty? or pg.match(/^1/)
+          "1.0.0"
+        else
+          pg
+        end
       end
 
       def output_filename

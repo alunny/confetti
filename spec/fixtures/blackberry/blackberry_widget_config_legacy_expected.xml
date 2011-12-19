@@ -27,9 +27,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</license>
-
 <feature id="blackberry.system" required="true" version="1.0.0.0" />
-<feature id="com.phonegap" required="true" version="1.0.0" />
+<feature id="phonegap" required="true" version="1.0.0" />
 <feature id="blackberry.find" required="true" version="1.0.0.0" />
 <feature id="blackberry.identity" required="true" version="1.0.0.0" />
 <feature id="blackberry.pim.Address" required="true" version="1.0.0.0" />
@@ -43,31 +42,14 @@ THE SOFTWARE.</license>
 <feature id="blackberry.invoke.MapsArguments" required="true" version="1.0.0.0" />
 <feature id="blackberry.system.event" />
 <feature id="blackberry.identity.phone" />
-
-<feature id="blackberry.media.camera" />
-<feature id="blackberry.ui.dialog" />
-
 <access subdomains="true" uri="file:///store/home"/>
 <access subdomains="true" uri="file:///SDCard"/>
 <access subdomains="true" uri="*" />
-
 <icon rim:hover="false" src="resources/icon.png"/>
 <icon rim:hover="true" src="resources/icon_hover.png"/>
-
 <content src="index.html"/>
-
-<rim:loadingScreen backgroundColor="#000000"
-  foregroundImage="resources/loading_foreground.png" onFirstLaunch="true">
-    <rim:transitionEffect type="fadeOut"/>
+<rim:loadingScreen backgroundColor="#000000" foregroundImage="resources/loading_foreground.png" onFirstLaunch="true">
+  <rim:transitionEffect type="fadeOut"/>
 </rim:loadingScreen>
-
 <rim:orientation mode="auto" />
-
-<rim:permissions>
-    <rim:permit>use_camera</rim:permit>
-    <rim:permit>read_device_identifying_information</rim:permit>
-    <rim:permit>access_shared</rim:permit>
-    <rim:permit>read_geolocation</rim:permit>
-</rim:permissions>
-
 </widget>
