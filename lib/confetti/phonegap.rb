@@ -1,7 +1,5 @@
 module Confetti
   module PhoneGap
-    attr_accessor :phonegap_version
-
     PHONEGAP_APIS = %w{camera notification geolocation media contacts file network}
 
     def add_stock_phonegap_apis
@@ -11,5 +9,20 @@ module Confetti
       end
     end
 
+    def phonegap_version
+      self.preference("phonegap-version").to_s
+    end
+
+    def phonegap_version= v
+      pref = self.preference_obj("phonegap-version")
+
+      if pref.nil?
+        pref = Confetti::Config::Preference.new("phonegap-version", v)
+        self.preference_set << pref
+      else
+        pref.value = v
+      end
+
+    end
   end
 end

@@ -159,8 +159,7 @@ module Confetti
     # helper to retrieve a preference's value
     # returns nil if the preference doesn't exist
     def preference name
-      name = name.to_s
-      pref = @preference_set.detect { |pref| pref.name == name }
+      pref = preference_obj(name)
 
       pref && pref.value && pref.value.to_sym
     end
@@ -171,6 +170,13 @@ module Confetti
       ele.children.
         select { |e| e.respond_to?(:name) and e.name == "platform" }.
         map { |e| e.attributes["name"].downcase.to_sym }
+    end
+
+    # mostly an internal method to help with weird cases
+    # in particular #phonegap_version
+    def preference_obj name
+      name = name.to_s
+      @preference_set.detect { |pref| pref.name == name }
     end
   end
 end
