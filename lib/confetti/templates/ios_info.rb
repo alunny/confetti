@@ -49,6 +49,10 @@ module Confetti
       def app_orientations
         ORIENTATIONS_MAP[@config.orientation]
       end
+
+      def fullscreen?
+        @config.preference(:fullscreen) == :true
+      end
     end
   end
 end

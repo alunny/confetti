@@ -46,5 +46,9 @@
     <key>{{ to_s }}</key>
     <string></string>
     {{/ devices }}
+    {{# fullscreen? }}
+    <key>UIStatusBarHidden</key>
+    <true/>
+    {{/ fullscreen? }}
 </dict>
 </plist>

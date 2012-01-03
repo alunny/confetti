@@ -118,12 +118,26 @@ describe Confetti::Template::IosInfo do
 
   describe "should specify if the application is universal" do
     before do
-       @config = Confetti::Config.new("#{fixture_dir}/config.xml")
-       @template = @template_class.new(@config)
+      @config = Confetti::Config.new("#{fixture_dir}/config.xml")
+      @template = @template_class.new(@config)
     end
     
     it "should should specify universal" do
       @template.render.should == File.read("#{ fixture_dir }/ios/ios_info_expected.plist")
+    end
+  end
+
+  describe "#fullscreen? method" do
+    it "should be false with no preference" do
+      config = Confetti::Config.new("#{fixture_dir}/config.xml")
+      template = @template_class.new(config)
+      template.fullscreen?.should be_false
+    end
+
+    it "should be true when the preference is set" do
+      config = Confetti::Config.new("#{fixture_dir}/config_fullscreen.xml")
+      template = @template_class.new(config)
+      template.fullscreen?.should be_true
     end
   end
 end
