@@ -1,6 +1,13 @@
 module Confetti
   module Template
     module JavaChecks
+      RESERVED_WORDS = %w{abstract assert boolean break byte case catch char
+        class const continue default do double else enum extends false final
+        finally float for goto if implements import instanceof int interface
+        long native new null package private protected public return short
+        static strictfp super switch synchronized this throw throws transient
+        true try void volatile while}
+
       def is_java_identifier(str)
         str.match(/^[a-zA-Z_][a-zA-Z0-9_]*$/)
       end
@@ -30,6 +37,11 @@ module Confetti
         fixed_bits.unshift('com') if fixed_bits.length == 1
 
         fixed_bits.join('.')
+      end
+
+      # checks whether str is a reserved word in Java
+      def reserved_word?(str)
+        RESERVED_WORDS.include?(str.downcase)
       end
     end
   end

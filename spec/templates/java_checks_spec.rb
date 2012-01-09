@@ -89,4 +89,18 @@ describe Confetti::Template::JavaChecks do
       convert_to_java_package_id(pkg).should == fixed_pkg
     end
   end
+
+  describe "#reserved_word?" do
+    it "should return true for reserved words" do
+      reserved_word?("void").should be_true
+    end
+
+    it "should return false for non-reserved words" do
+      reserved_word?("phonegap").should be_false
+    end
+
+    it "should return true for reserved words of any case" do
+      reserved_word?("Package").should be_true
+    end
+  end
 end
