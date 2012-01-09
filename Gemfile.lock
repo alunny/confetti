@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    confetti (0.4.7)
+    confetti (0.5.0)
       mustache (~> 0.11.2)
 
 GEM
