@@ -4,17 +4,21 @@ describe Confetti::Template::JavaChecks do
   include Confetti::Template::JavaChecks
 
   describe "#is_java_identifier" do
-    describe "should fail when" do
-      it "has invalid characters" do
+    describe "should fail with" do
+      it "invalid characters" do
         is_java_identifier("ooo:bu").should be_false
       end
 
-      it "begins with a number" do
+      it "an initial number" do
         is_java_identifier("12Class").should be_false
       end
 
-      it "should fail wtih an empty string" do
+      it "an empty string" do
         is_java_identifier('').should be_false
+      end
+
+      it "a reserved word" do
+        is_java_identifier('public').should be_false
       end
     end
 
@@ -40,6 +44,10 @@ describe Confetti::Template::JavaChecks do
 
     it "should convert an initial digit to an underscore" do
       convert_to_java_identifier("12Foo").should == "_2Foo"
+    end
+
+    it "should prefix a reserved word with an underscore" do
+      convert_to_java_identifier("public").should == "_public"
     end
   end
 

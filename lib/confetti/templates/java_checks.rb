@@ -9,10 +9,12 @@ module Confetti
         true try void volatile while}
 
       def is_java_identifier(str)
-        str.match(/^[a-zA-Z_][a-zA-Z0-9_]*$/)
+        str.match(/^[a-zA-Z_][a-zA-Z0-9_]*$/) and !reserved_word?(str)
       end
 
       def convert_to_java_identifier(str)
+        return "_#{ str }" if reserved_word?(str)
+
         str.
           sub(/^\d/,"_").
           gsub(/\s/,"").
