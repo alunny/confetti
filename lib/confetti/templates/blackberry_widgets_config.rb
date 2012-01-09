@@ -1,6 +1,8 @@
 module Confetti
   module Template
     class BlackberryWidgetsConfig < Base
+      include VersionHelper
+
       @@legacy_template = File.read(
         File.join(
           File.dirname(__FILE__),
@@ -35,11 +37,7 @@ module Confetti
       end
 
       def version
-        if @config.version_string.nil? or @config.version_string.empty?
-          "0.0.1"
-        else
-          @config.version_string
-        end
+        normalize_version(@config.version_string)
       end
 
       def widget_name

@@ -24,6 +24,9 @@ require 'confetti/phonegap'
 require 'confetti/template'
 require 'confetti/templates/base'
 require 'confetti/templates/java_checks'
+require 'confetti/templates/version_helper'
+
+# each platform template
 Dir[File.join(CURRENT_DIR, 'confetti', 'templates', '*')].each do |file|
   require file if File.extname(file) == ".rb"
 end
