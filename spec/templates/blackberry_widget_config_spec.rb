@@ -187,7 +187,7 @@ describe Confetti::Template::BlackberryWidgetsConfig do
     end
 
     it "should be true when the preference is set" do
-      config = Confetti::Config.new("#{fixture_dir}/configs/no-cursor.xml")
+      config = Confetti::Config.new("#{ configs_dir }/no-cursor.xml")
       template = @template_class.new(config)
       template.no_cursor?.should be_true
     end

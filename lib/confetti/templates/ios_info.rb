@@ -53,6 +53,10 @@ module Confetti
       def fullscreen?
         @config.preference(:fullscreen) == :true
       end
+
+      def prerendered_icon?
+        @config.preference("prerendered-icon") == :true
+      end
     end
   end
 end

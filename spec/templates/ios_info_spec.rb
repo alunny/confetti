@@ -140,4 +140,18 @@ describe Confetti::Template::IosInfo do
       template.fullscreen?.should be_true
     end
   end
+
+  describe "#prerendered_icon? method" do
+    it "should be false with no preference" do
+      config = Confetti::Config.new("#{fixture_dir}/config.xml")
+      template = @template_class.new(config)
+      template.prerendered_icon?.should be_false
+    end
+
+    it "should be true when the preference is set" do
+      config = Confetti::Config.new("#{ configs_dir }/prerendered.xml")
+      template = @template_class.new(config)
+      template.prerendered_icon?.should be_true
+    end
+  end
 end

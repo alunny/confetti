@@ -3,6 +3,7 @@ require "confetti"
 module HelpfulPaths
   SPEC_DIR         = File.dirname(__FILE__)
   FIXTURE_DIR      = SPEC_DIR + "/fixtures"
+  CONFIGS_DIR      = FIXTURE_DIR + "/configs"
   TEMPLATES_DIR    = File.expand_path "../lib/confetti/templates", SPEC_DIR
 
   def fixture_dir
@@ -11,6 +12,10 @@ module HelpfulPaths
 
   def templates_dir
     TEMPLATES_DIR
+  end
+
+  def configs_dir
+    CONFIGS_DIR
   end
 end
 
