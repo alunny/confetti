@@ -11,7 +11,6 @@ rescue LoadError
   require "bundler/setup"
 end
 
-require "thor"
 require "mustache"
 
 # internal dependencies
@@ -31,8 +30,6 @@ Dir[File.join(CURRENT_DIR, 'confetti', 'templates', '*')].each do |file|
   require file if File.extname(file) == ".rb"
 end
 require 'confetti/template_helper'
-
-require 'confetti/cli'
 
 require 'confetti/config'
 require 'confetti/config/feature'

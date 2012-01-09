@@ -1,4 +1,0 @@
-#!/usr/bin/env ruby
-
-require "confetti/cli"
-Confetti::CLI.start
