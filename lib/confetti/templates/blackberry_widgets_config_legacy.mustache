@@ -32,4 +32,7 @@
   <rim:transitionEffect type="fadeOut"/>
 </rim:loadingScreen>
 <rim:orientation mode="{{app_orientation}}" />
+{{# no_cursor? }}
+<rim:navigation />
+{{/ no_cursor? }}
 </widget>

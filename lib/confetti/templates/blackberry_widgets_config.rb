@@ -87,6 +87,10 @@ module Confetti
       def app_orientation
         ORIENTATIONS_MAP[@config.orientation]
       end
+
+      def no_cursor?
+        @config.preference("disable-cursor") == :true
+      end
     end
   end
 end

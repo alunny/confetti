@@ -178,4 +178,18 @@ describe Confetti::Template::BlackberryWidgetsConfig do
       @template.phonegap_version.should == "1.0.0"
     end
   end
+
+  describe "#no_cursor?" do
+    it "should be false with no preference" do
+      config = Confetti::Config.new("#{fixture_dir}/config.xml")
+      template = @template_class.new(config)
+      template.no_cursor?.should be_false
+    end
+
+    it "should be true when the preference is set" do
+      config = Confetti::Config.new("#{fixture_dir}/configs/no-cursor.xml")
+      template = @template_class.new(config)
+      template.no_cursor?.should be_true
+    end
+  end
 end

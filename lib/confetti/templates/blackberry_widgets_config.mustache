@@ -42,6 +42,9 @@
 </rim:loadingScreen>
 
 <rim:orientation mode="{{app_orientation}}" />
+{{# no_cursor? }}
+<rim:navigation />
+{{/ no_cursor? }}
 
 <rim:permissions>
     <rim:permit>use_camera</rim:permit>
