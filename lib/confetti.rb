@@ -25,10 +25,13 @@ require 'confetti/templates/base'
 require 'confetti/templates/java_checks'
 require 'confetti/templates/version_helper'
 
-# each platform template
-Dir[File.join(CURRENT_DIR, 'confetti', 'templates', '*')].each do |file|
-  require file if File.extname(file) == ".rb"
-end
+require 'confetti/templates/android_manifest'
+require 'confetti/templates/android_strings'
+require 'confetti/templates/blackberry_widgets_config'
+require 'confetti/templates/ios_info'
+require 'confetti/templates/symbian_wrt_info'
+require 'confetti/templates/webos_appinfo'
+
 require 'confetti/template_helper'
 
 require 'confetti/config'
