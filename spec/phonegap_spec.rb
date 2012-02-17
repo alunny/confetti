@@ -29,4 +29,37 @@ describe Confetti::PhoneGap do
       @obj.add_stock_phonegap_apis
     end
   end
+
+  describe "#plugins" do
+    before do
+      @obj.feature_set = []
+      childbrowser  = "http://plugins.phonegap.com/ChildBrowser/1.0.1"
+      fbconnect     = "http://plugins.phonegap.com/FBConnect/1.2.1/"
+      file_api      = "http://api.phonegap.com/1.0/file"
+
+      @obj.feature_set << Confetti::Config::Feature.new(childbrowser, nil)
+      @obj.feature_set << Confetti::Config::Feature.new(fbconnect, nil)
+      @obj.feature_set << Confetti::Config::Feature.new(file_api, nil)
+    end
+
+    it "should return an array with 2 entries" do
+      @obj.plugins.length.should be 2
+    end
+
+    it "should return an array with 2 Plugin objects" do
+      @obj.plugins.first.should be_a Confetti::PhoneGap::Plugin
+      @obj.plugins.last.should be_a Confetti::PhoneGap::Plugin
+    end
+
+    it "should return the right data as plugins" do
+      childbrowser = @obj.plugins.first
+      fbconnect = @obj.plugins.last
+
+      childbrowser.name.should == "ChildBrowser"
+      childbrowser.version.should == "1.0.1"
+
+      fbconnect.name.should == "FBConnect"
+      fbconnect.version.should == "1.2.1"
+    end
+  end
 end

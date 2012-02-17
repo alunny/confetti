@@ -1,6 +1,7 @@
 module Confetti
   module PhoneGap
     PHONEGAP_APIS = %w{camera notification geolocation media contacts file network}
+    Plugin        = Class.new Struct.new(:name, :version)
 
     def add_stock_phonegap_apis
       PHONEGAP_APIS.each do |api|
@@ -22,7 +23,21 @@ module Confetti
       else
         pref.value = v
       end
+    end
 
+    def plugins
+      p_name = /http:\/\/plugins[.]phonegap[.]com\/([^\/]*)\/([^\/]*)/
+
+      # find features corresponding to plugins
+      plugin_features = self.feature_set.select do |f|
+        f.name.match(p_name)
+      end
+
+      # turn matching features into plugins
+      plugin_features.map do |f|
+        matches = f.name.match(p_name)
+        Plugin.new(matches[1], matches[2])
+      end
     end
   end
 end
