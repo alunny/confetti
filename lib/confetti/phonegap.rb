@@ -30,7 +30,7 @@ module Confetti
 
       # find features corresponding to plugins
       plugin_features = self.feature_set.select do |f|
-        f.name.match(p_name)
+        !f.name.nil? && f.name.match(p_name)
       end
 
       # turn matching features into plugins

@@ -40,6 +40,7 @@ describe Confetti::PhoneGap do
       @obj.feature_set << Confetti::Config::Feature.new(childbrowser, nil)
       @obj.feature_set << Confetti::Config::Feature.new(fbconnect, nil)
       @obj.feature_set << Confetti::Config::Feature.new(file_api, nil)
+      @obj.feature_set << Confetti::Config::Feature.new(nil, nil)
     end
 
     it "should return an array with 2 entries" do
