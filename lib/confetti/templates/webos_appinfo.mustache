@@ -5,6 +5,6 @@
 	"type": "web",
 	"main": "index.html",
 	"title": "{{ app_name }}",
-	"uiRevision": "2",
-	"icon": "icon.png"
+	"icon": "icon.png",
+	"uiRevision": "{{# tablet_support? }}2{{/ tablet_support? }}"
 }

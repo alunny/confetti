@@ -27,6 +27,10 @@ module Confetti
       def vendor
         @config.author.name
       end
+
+      def tablet_support?
+        true unless @config.preference("target-device")
+      end
     end
   end
 end

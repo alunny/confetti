@@ -5,6 +5,6 @@
 	"type": "web",
 	"main": "index.html",
 	"title": "Confetti Sample App",
-	"uiRevision": "2",
-	"icon": "icon.png"
+	"icon": "icon.png",
+	"uiRevision": "2"
 }

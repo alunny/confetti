@@ -98,4 +98,24 @@ describe Confetti::Template::WebosAppinfo do
       end
     end
   end
+
+  describe "with tablets disabled" do
+    before do
+      handset_pref = Confetti::Config::Preference.new "target-device", "handset"
+
+      @config = Confetti::Config.new
+      @config.name.name = "Awesome App"
+      @config.package = "com.whoever.awesome.app"
+      @config.author.name = "Bruce Lee"
+      @config.version_string = "1.0.0"
+      @config.preference_set << handset_pref
+
+      @template = @template_class.new(@config)
+    end
+
+    it "should not write the uiRevision attribute" do
+      correct_outpt = File.read("#{ fixture_dir }/webos/appinfo_no_tablet.json")
+      @template.render.should == correct_outpt
+    end
+  end
 end
