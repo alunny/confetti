@@ -29,6 +29,7 @@ require 'confetti/templates/android_manifest'
 require 'confetti/templates/android_strings'
 require 'confetti/templates/blackberry_widgets_config'
 require 'confetti/templates/ios_info'
+require 'confetti/templates/ios_remote_plist'
 require 'confetti/templates/symbian_wrt_info'
 require 'confetti/templates/webos_appinfo'
 
