@@ -91,6 +91,13 @@ module Confetti
       def no_cursor?
         @config.preference("disable-cursor") == :true
       end
+
+      def framework_namespace
+        # phonegap = 0.x, 1.0, 1.1, 1.2, 1.3, 1.4
+        gap = @config.phonegap_version.match(/^(0)|(1[.][0-4])/)
+
+        gap ? 'com.phonegap' : 'org.apache.cordova'
+      end
     end
   end
 end

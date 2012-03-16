@@ -192,4 +192,32 @@ describe Confetti::Template::BlackberryWidgetsConfig do
       template.no_cursor?.should be_true
     end
   end
+
+  describe "#framework_namespace" do
+    before do
+      @config = Confetti::Config.new("#{fixture_dir}/config.xml")
+      @template = @template_class.new(@config)
+    end
+
+    it "should be org.apache.cordova by default" do
+      @config.phonegap_version = nil
+      @template.framework_namespace.should == 'org.apache.cordova'
+    end
+
+    it "should be com.phonegap for 0.x" do
+      @config.phonegap_version = '0.9.0'
+      @template.framework_namespace.should == 'com.phonegap'
+    end
+
+    it "should be com.phonegap for 1.4.1" do
+      @config.phonegap_version = '1.4.1'
+      @template.framework_namespace.should == 'com.phonegap'
+    end
+
+    it "should be org.apache.cordova for 1.5.0" do
+      @config.phonegap_version = '1.5.0'
+      @template.framework_namespace.should == 'org.apache.cordova'
+    end
+
+  end
 end
