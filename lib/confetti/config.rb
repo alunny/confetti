@@ -14,7 +14,7 @@ module Confetti
                   :height, :width, :plist_icon_set
     attr_reader :author, :viewmodes, :name, :license, :content,
                 :icon_set, :feature_set, :preference_set, :xml_doc,
-                :splash_set, :plist_icon_set, :plugin_set
+                :splash_set, :plist_icon_set, :plugin_set, :access_set
 
     generate_and_write  :android_manifest, :android_strings, :webos_appinfo,
                         :ios_info, :symbian_wrt_info, :blackberry_widgets_config,
@@ -41,6 +41,7 @@ module Confetti
     Feature     = Class.new Struct.new(:name, :required)
     Preference  = Class.new Struct.new(:name, :value, :readonly)
     Plugin      = Class.new Struct.new(:name, :value, :platforms)
+    Access      = Class.new Struct.new(:origin, :subdomains)
 
     def initialize(*args)
       @author           = Author.new
@@ -53,6 +54,7 @@ module Confetti
       @splash_set       = TypedSet.new Image
       @preference_set   = TypedSet.new Preference
       @plugin_set       = TypedSet.new Plugin
+      @access_set       = TypedSet.new Access
       @viewmodes        = []
 
       if args.length > 0 && is_file?(args.first)
@@ -106,6 +108,10 @@ module Confetti
             @preference_set << Preference.new(attr["name"], attr["value"], attr["readonly"])
           when "license"
             @license = License.new(ele.text.nil? ? "" : ele.text.strip, attr["href"])
+          when "access"
+            sub = attr["subdomains"]
+            sub = sub.nil? ? true : (sub != 'false')
+            @access_set << Access.new(attr["origin"], sub)
           end
 
         # PhoneGap extensions (gap:)

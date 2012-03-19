@@ -48,6 +48,9 @@ THE SOFTWARE.</license>
 	<feature name="http://api.phonegap.com/1.0/camera" required="true"/>
 	<feature name="http://api.phonegap.com/1.0/notification" required="true"/>
 
+  <access origin="http://foo.phonegap.com" />
+  <access origin="http://bar.phonegap.com" subdomains="false" />
+
   <gap:plugin name="ChildBrowser"
               value="com.phonegap.plugins.childBrowser.ChildBrowser">
     <platform name="android" />

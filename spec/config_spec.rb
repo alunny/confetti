@@ -371,6 +371,36 @@ describe Confetti::Config do
           end
         end
       end
+
+      describe "access" do
+        it "should append tags to the access set" do
+          @config.access_set.size.should be 2
+        end
+
+        describe "created access object" do
+          before do
+            @bar = @config.access_set.detect do |a|
+              a.origin == "http://bar.phonegap.com"
+            end
+            @foo = @config.access_set.detect do |a|
+              a.origin == "http://foo.phonegap.com"
+            end
+          end
+
+          it "should read the origins correctly" do
+            @foo.should be_true
+            @bar.should be_true # truthy (should exist)
+          end
+
+          it "should default subdomains to true" do
+            @foo.subdomains.should be_true
+          end
+
+          it "should allow subdomains to be set to false" do
+            @bar.subdomains.should be_false
+          end
+        end
+      end
     end
   end
 
