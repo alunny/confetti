@@ -50,7 +50,6 @@ THE SOFTWARE.</license>
 <access subdomains="true" uri="file:///store/home"/>
 <access subdomains="true" uri="file:///SDCard"/>
 <access subdomains="true" uri="*" />
-
 <icon rim:hover="false" src="resources/icon.png"/>
 <icon rim:hover="true" src="resources/icon_hover.png"/>
 

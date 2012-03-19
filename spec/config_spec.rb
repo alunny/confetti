@@ -347,6 +347,11 @@ describe Confetti::Config do
       end
 
       describe "access" do
+        before do
+          @config = Confetti::Config.new
+          @config.populate_from_xml(fixture_dir + "/config_with_access.xml")
+        end
+
         it "should append tags to the access set" do
           @config.access_set.size.should be 2
         end

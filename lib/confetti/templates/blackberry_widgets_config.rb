@@ -98,6 +98,12 @@ module Confetti
 
         gap ? 'com.phonegap' : 'org.apache.cordova'
       end
+
+      def access
+        @config.access_set.map do |a| 
+          { :subdomains => !!a.subdomains, :uri => a.origin }
+        end
+      end
     end
   end
 end

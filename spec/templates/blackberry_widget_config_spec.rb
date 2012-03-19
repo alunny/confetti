@@ -45,6 +45,7 @@ describe Confetti::Template::BlackberryWidgetsConfig do
       @config.author.href = "http://brucelee.cn"
       @config.description = "My New App, by Bruce Lee"
       @config.phonegap_version = "0.9.5.1"
+      @config.access_set << Confetti::Config::Access.new('*', true)
     end
 
     it "should accept the config object" do

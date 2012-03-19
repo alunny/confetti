@@ -29,7 +29,9 @@
 
 <access subdomains="true" uri="file:///store/home"/>
 <access subdomains="true" uri="file:///SDCard"/>
-<access subdomains="true" uri="*" />
+{{# access }}
+<access subdomains="{{ subdomains }}" uri="{{ uri }}" />
+{{/ access }}
 
 <icon rim:hover="false" src="resources/icon.png"/>
 <icon rim:hover="true" src="resources/icon_hover.png"/>
