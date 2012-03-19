@@ -14,7 +14,7 @@ module Confetti
                   :height, :width, :plist_icon_set
     attr_reader :author, :viewmodes, :name, :license, :content,
                 :icon_set, :feature_set, :preference_set, :xml_doc,
-                :splash_set, :plist_icon_set, :plugin_set, :access_set
+                :splash_set, :plist_icon_set, :access_set
 
     generate_and_write  :android_manifest, :android_strings, :webos_appinfo,
                         :ios_info, :symbian_wrt_info, :blackberry_widgets_config,
@@ -40,7 +40,6 @@ module Confetti
     Image       = Class.new Struct.new(:src, :height, :width, :extras)
     Feature     = Class.new Struct.new(:name, :required)
     Preference  = Class.new Struct.new(:name, :value, :readonly)
-    Plugin      = Class.new Struct.new(:name, :value, :platforms)
     Access      = Class.new Struct.new(:origin, :subdomains)
 
     def initialize(*args)
@@ -53,7 +52,6 @@ module Confetti
       @feature_set      = TypedSet.new Feature
       @splash_set       = TypedSet.new Image
       @preference_set   = TypedSet.new Preference
-      @plugin_set       = TypedSet.new Plugin
       @access_set       = TypedSet.new Access
       @viewmodes        = []
 
@@ -121,10 +119,6 @@ module Confetti
             next if attr["src"].nil? or attr["src"].empty?
             extras = grab_extras attr
             @splash_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
-          when "plugin"
-            plugin = Plugin.new(attr["name"], attr["value"])
-            plugin.platforms = plugin_platforms(ele)
-            @plugin_set << plugin
           end
         end
       end
@@ -169,14 +163,6 @@ module Confetti
       pref = preference_obj(name)
 
       pref && pref.value && pref.value.to_sym
-    end
-
-    # retrieve the specified platforms as a list of lowercase symbols
-    # extracted from children of ele
-    def plugin_platforms ele
-      ele.children.
-        select { |e| e.respond_to?(:name) and e.name == "platform" }.
-        map { |e| e.attributes["name"].downcase.to_sym }
     end
 
     # mostly an internal method to help with weird cases

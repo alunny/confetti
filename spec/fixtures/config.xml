@@ -50,9 +50,4 @@ THE SOFTWARE.</license>
 
   <access origin="http://foo.phonegap.com" />
   <access origin="http://bar.phonegap.com" subdomains="false" />
-
-  <gap:plugin name="ChildBrowser"
-              value="com.phonegap.plugins.childBrowser.ChildBrowser">
-    <platform name="android" />
-  </gap:plugin>
 </widget>
