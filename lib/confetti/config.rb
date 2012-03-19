@@ -171,5 +171,9 @@ module Confetti
       name = name.to_s
       @preference_set.detect { |pref| pref.name == name }
     end
+
+    def full_access?
+      @access_set.detect { |a| a.origin == '*' }
+    end
   end
 end

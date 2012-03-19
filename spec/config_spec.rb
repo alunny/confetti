@@ -508,4 +508,25 @@ describe Confetti::Config do
       @config.preference(:privacy).should be_nil
     end
   end
+
+  describe "full_access?" do
+    before do
+      @config = Confetti::Config.new
+    end
+
+    it "should be false with an empty access set" do
+      @config.full_access?.should be_false
+    end
+
+    it "should be true when origin='*' is in there" do
+      @config.access_set << Confetti::Config::Access.new('*')
+      @config.full_access?.should be_true
+    end
+
+    it "should be false with only other origins" do
+      @config.access_set << Confetti::Config::Access.new('http://mysite.com')
+      @config.access_set << Confetti::Config::Access.new('http://myothersite.com')
+      @config.full_access?.should be_false
+    end
+  end
 end
