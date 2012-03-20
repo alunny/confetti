@@ -100,9 +100,14 @@ module Confetti
       end
 
       def access
-        @config.access_set.reject { |a| a.origin.nil? }.map do |a|
+        @config.access_set.select { |a| valid_origin(a.origin) }.map do |a|
           { :subdomains => !!a.subdomains, :uri => a.origin }
         end
+      end
+
+      def valid_origin o
+        # not nil and (wildcard or with scheme)
+        !o.nil? && (o == '*' || o.match(/^\w+:\/\//))
       end
     end
   end

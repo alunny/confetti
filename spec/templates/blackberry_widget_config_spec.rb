@@ -232,5 +232,11 @@ describe Confetti::Template::BlackberryWidgetsConfig do
       @config.access_set << Confetti::Config::Access.new(nil)
       @template.access.should be_empty
     end
+
+    it "should not allow entries with no schemes" do
+      @config.access_set << Confetti::Config::Access.new("http://debug.phonegap.com")
+      @config.access_set << Confetti::Config::Access.new("docs.phonegap.com")
+      @template.access.length.should be 1
+    end
   end
 end
