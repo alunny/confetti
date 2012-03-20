@@ -221,4 +221,16 @@ describe Confetti::Template::BlackberryWidgetsConfig do
     end
 
   end
+
+  describe "#access" do
+    before do
+      @config = Confetti::Config.new
+      @template = @template_class.new(@config)
+    end
+
+    it "should be empty if there's only a nil tag" do
+      @config.access_set << Confetti::Config::Access.new(nil)
+      @template.access.should be_empty
+    end
+  end
 end

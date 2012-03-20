@@ -100,7 +100,7 @@ module Confetti
       end
 
       def access
-        @config.access_set.map do |a| 
+        @config.access_set.reject { |a| a.origin.nil? }.map do |a|
           { :subdomains => !!a.subdomains, :uri => a.origin }
         end
       end
