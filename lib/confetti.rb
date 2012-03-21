@@ -32,8 +32,11 @@ require 'confetti/templates/ios_info'
 require 'confetti/templates/ios_remote_plist'
 require 'confetti/templates/symbian_wrt_info'
 require 'confetti/templates/webos_appinfo'
+require 'confetti/templates/windows_phone7_manifest'
 
 require 'confetti/template_helper'
 
 require 'confetti/config'
 require 'confetti/config/feature'
+
+require 'digest/md5'
