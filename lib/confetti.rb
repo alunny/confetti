@@ -2,6 +2,7 @@ CURRENT_DIR = File.dirname(__FILE__)
 
 # stdlib
 require "rexml/document"
+require 'digest/md5'
 
 # external dependencies
 begin
@@ -32,6 +33,7 @@ require 'confetti/templates/ios_info'
 require 'confetti/templates/ios_remote_plist'
 require 'confetti/templates/symbian_wrt_info'
 require 'confetti/templates/webos_appinfo'
+require 'confetti/templates/windows_phone7_manifest'
 
 require 'confetti/template_helper'
 

@@ -395,6 +395,8 @@ describe Confetti::Config do
     it_should_have_generate_and_write_methods_for :symbian_wrt_info
 
     it_should_have_generate_and_write_methods_for :blackberry_widgets_config
+
+    it_should_have_generate_and_write_methods_for :windows_phone7_manifest
   end
 
   describe "icon helpers" do
