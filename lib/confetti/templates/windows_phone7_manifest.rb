@@ -53,6 +53,10 @@ module Confetti
         permissions.sort! 
         permissions.map { |f| { :name => f } }
       end
+
+      def output_filename 
+        "WMAppManifest.xml"
+      end
     end
   end
 end
