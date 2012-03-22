@@ -3,6 +3,8 @@ module Confetti
     class AndroidManifest < Base
       include JavaChecks
 
+      DEFAULT_MIN_SDK = "7"
+
       GAP_PERMISSIONS_MAP = {
         "camera"        => %w{CAMERA},
         "notification"  => %w{VIBRATE},
@@ -72,6 +74,27 @@ module Confetti
         choice = @config.preference("android-installLocation").to_s
 
         valid_choices.include?(choice) ? choice : "internalOnly"
+      end
+
+      def min_sdk_version
+        choice = @config.preference("android-minSdkVersion").to_s
+
+        int_value?(choice) ? choice : DEFAULT_MIN_SDK
+      end
+
+      def max_sdk_version_attribute
+        choice = @config.preference("android-maxSdkVersion")
+
+        if int_value?(choice)
+          "android:maxSdkVersion=\"#{ choice }\""
+        end
+      end
+
+      def int_value? val
+        return if val.nil?
+
+        integer = /^\d+$/
+        val.to_s.match(integer)
       end
     end
   end

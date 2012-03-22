@@ -179,4 +179,61 @@ describe Confetti::Template::AndroidManifest do
       end
     end
   end
+
+  describe "#min_sdk_version" do
+    before do
+      @config = Confetti::Config.new
+      @template = @template_class.new(@config)
+      @default = @template_class::DEFAULT_MIN_SDK
+    end
+
+    it "should default to the current default" do
+      @template.min_sdk_version.should == @default
+    end
+
+    describe "when set" do
+      before do
+        @sdk_pref = Confetti::Config::Preference.new "android-minSdkVersion"
+        @config.preference_set << @sdk_pref
+      end
+
+      it "should return that number" do
+        @sdk_pref.value = "12"
+        @template.min_sdk_version.should == "12"
+      end
+
+      it "should be nil if not a number" do
+        @sdk_pref.value = "twelve"
+        @template.min_sdk_version.should == @default
+      end
+    end
+  end
+
+  describe "#max_sdk_version_attribute" do
+    before do
+      @config = Confetti::Config.new
+      @template = @template_class.new(@config)
+    end
+
+    it "should default to nil" do
+      @template.max_sdk_version_attribute.should be_nil
+    end
+
+    describe "when set" do
+      before do
+        @sdk_pref = Confetti::Config::Preference.new "android-maxSdkVersion"
+        @config.preference_set << @sdk_pref
+      end
+
+      it "should return that number" do
+        @sdk_pref.value = "12"
+        @template.max_sdk_version_attribute.should == 'android:maxSdkVersion="12"'
+      end
+
+      it "should be nil if not a number" do
+        @sdk_pref.value = "twelve"
+        @template.max_sdk_version_attribute.should be_nil
+      end
+    end
+  end
 end
