@@ -146,4 +146,37 @@ describe Confetti::Template::AndroidManifest do
       @template.app_orientation.should == "unspecified"
     end
   end
+
+  describe "#install_location" do
+    before do
+      @config = Confetti::Config.new
+      @template = @template_class.new(@config)
+    end
+
+    it "should default to 'internalOnly' do" do
+      @template.install_location.should == "internalOnly"
+    end
+
+    describe "when set" do
+      before do
+        @install_pref = Confetti::Config::Preference.new "android-installLocation"
+        @config.preference_set << @install_pref
+      end
+
+      it "should use 'auto' when set to 'auto'" do
+        @install_pref.value = "auto"
+        @template.install_location.should == "auto"
+      end
+
+      it "should use 'preferExternal' when set to 'preferExternal'" do
+        @install_pref.value = "preferExternal"
+        @template.install_location.should == "preferExternal"
+      end
+
+      it "should use 'internalOnly' otherwise" do
+        @install_pref.value = "wherever"
+        @template.install_location.should == "internalOnly"
+      end
+    end
+  end
 end

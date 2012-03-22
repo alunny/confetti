@@ -66,6 +66,13 @@ module Confetti
         permissions.sort!
         permissions.map { |f| { :name => f } }
       end
+
+      def install_location
+        valid_choices = %w(internalOnly auto preferExternal)
+        choice = @config.preference("android-installLocation").to_s
+
+        valid_choices.include?(choice) ? choice : "internalOnly"
+      end
     end
   end
 end
