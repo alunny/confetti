@@ -3,7 +3,8 @@
     package="com.app.bare"
     android:installLocation="internalOnly"
     android:versionName="1.0.0"
-    android:versionCode="1">
+    android:versionCode="1"
+    android:windowSoftInputMode="adjustPan">
 
     <supports-screens
         android:largeScreens="true"

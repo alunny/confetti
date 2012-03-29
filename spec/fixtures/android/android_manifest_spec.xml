@@ -3,7 +3,8 @@
     package="com.whoever.awesome.app"
     android:installLocation="internalOnly"
     android:versionName="0.0.1"
-    android:versionCode="1">
+    android:versionCode="1"
+    android:windowSoftInputMode="adjustPan">
 
     <supports-screens
         android:largeScreens="true"
