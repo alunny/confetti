@@ -39,3 +39,4 @@ require 'confetti/template_helper'
 
 require 'confetti/config'
 require 'confetti/config/feature'
+require 'confetti/config/image'
