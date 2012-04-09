@@ -265,7 +265,9 @@ describe Confetti::Config do
         describe "with custom splash screen attributes" do
           before do
             @config = Confetti::Config.new
-            @config.populate_from_xml(fixture_dir + "/config-icons-custom-attribs.xml")
+            @config.populate_from_xml(
+              fixture_dir + "/config-icons-custom-attribs.xml"
+              )
           end
 
           it "should populate splash screen non-standards attributes to extras field" do
@@ -529,6 +531,89 @@ describe Confetti::Config do
       @config.access_set << Confetti::Config::Access.new('http://mysite.com')
       @config.access_set << Confetti::Config::Access.new('http://myothersite.com')
       @config.full_access?.should be_false
+    end
+  end
+
+  describe "platform and roll helpers" do
+    before do
+      file = "#{fixture_dir}/config-icons-custom-attribs-extended.xml"
+      @config = Confetti::Config.new file 
+    end
+
+    it "should return all blackberry icons with hover" do
+      match = @config.platform_assets(
+          @config.send(:icon_set),
+          { 
+            'platform' => 'blackberry',
+            'role' => 'hover'
+          }
+        )
+      match.length.should == 1
+      match.first.src.should == 'icons/icon_hover.png'
+    end
+
+    it "should return all icons" do
+      match = @config.platform_assets(@config.send(:icon_set),{})
+      match.length.should == 11
+    end
+
+    it "should find the best fit image for bb" do
+      match = @config.find_best_fit_img(
+        @config.send(:icon_set),
+        {
+          'platform' => 'blackberry',
+          'role' => 'hover'
+        }
+      )
+      match.src.should == "icons/icon_hover.png"
+    end
+
+    it "should find the best fit icon for winphone" do
+      # we will find a 68pixel image as it fits out platform
+      # specification
+      match = @config.find_best_fit_img(
+        @config.send(:icon_set),
+        {
+          'height' => '54',
+          'width' => '54',
+          'platform' => 'winphone',
+          'role' => 'default'
+        }
+      )
+      match.src.should == "icons/icon-68.png"
+    end
+
+    it "should find the best fit splash for android" do
+      # we will find a 68pixel image as it fits out platform
+      # specification
+      match = @config.find_best_fit_img(
+        @config.send(:splash_set),
+        {
+          'height' => '54',
+          'width' => '54',
+          'platform' => 'android',
+          'role' => 'default'
+        }
+      )
+      match.src.should == "splashes/splash-android.png"
+    end
+
+    it "should return the default icon: icon.png" do
+      @config.default_icon.src.should == "icons/icon.png"
+    end
+
+    it "should fail to return the default icon: icon.png" do
+      @config = Confetti::Config.new
+      @config.default_icon.should != nil 
+    end
+
+    it "should return the default splash: splash.png" do
+      @config.default_splash.src.should == "splashes/splash.png"
+    end
+
+    it "should fail to return the default splash: splash.png" do
+      @config = Confetti::Config.new
+      @config.default_splash.should != nil 
     end
   end
 end
