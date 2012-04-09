@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+    xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "com.alunny.confetti"
+	version 	= "1.0.0">
+
+	<name>Confetti Sample App</name>
+
+	<description>
+		This is a sample config.xml for integration testing with Confetti
+	</description>
+
+	<author href="http://alunny.github.com"
+		email="hardeep.shoker@nitobi.com">
+		Hardeep Shoker
+	</author>
+
+    <icon src="icons/icon.png" />
+    <gap:splash src="splashes/splash.png" />
+
+    <icon src="icons/icon.png" gap:platform="blackberry" />
+    <icon src="icons/icon_hover.png" gap:platform="blackberry" gap:role="hover"/>
+
+    <icon src="icons/icon-57.png" width="57" height="57"/>
+	<icon src="icons/icon-iphone-72.png" height="72" width="72" gap:platform="ios"/>
+    <icon src="icons/icon-114.png" width="114" height="114"/>
+
+    <icon src="icons/icon-36.png" width="36" height="36"/>
+    <icon src="icons/icon-48.png" width="48" height="48"/>
+	<icon src="icons/icon-android-72.png" height="72" width="72" gap:platform="android"/>
+    <gap:splash src="splashes/splash-android.png" gap:platform="android"/>
+
+	<icon src="icons/icon-173.png" width="173" height="173"/>
+	<icon src="icons/icon-68.png" gap:platform="winphone"/>
+
+	<feature name="http://api.phonegap.com/1.0/geolocation"/>
+	<feature name="http://api.phonegap.com/1.0/network"/>
+</widget>

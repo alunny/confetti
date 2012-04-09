@@ -37,7 +37,6 @@ module Confetti
     Name        = Class.new Struct.new(:name, :shortname)
     License     = Class.new Struct.new(:text, :href)
     Content     = Class.new Struct.new(:src, :type, :encoding)
-    Image       = Class.new Struct.new(:src, :height, :width, :extras)
     Feature     = Class.new Struct.new(:name, :required)
     Preference  = Class.new Struct.new(:name, :value, :readonly)
     Access      = Class.new Struct.new(:origin, :subdomains)
@@ -96,8 +95,7 @@ module Confetti
           when "description"
             @description = ele.text.nil? ? "" : ele.text.strip
           when "icon"
-            extras = grab_extras attr
-            @icon_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
+            @icon_set << Image.new(attr["src"], attr["height"], attr["width"], attr)
             # used for the info.plist file
             @plist_icon_set << attr["src"]
           when "feature"
@@ -117,8 +115,7 @@ module Confetti
           case ele.name
           when "splash"
             next if attr["src"].nil? or attr["src"].empty?
-            extras = grab_extras attr
-            @splash_set << Image.new(attr["src"], attr["height"], attr["width"], extras)
+            @splash_set << Image.new(attr["src"], attr["height"], attr["width"], attr)
           end
         end
       end
@@ -149,14 +146,6 @@ module Confetti
       end
     end
 
-    def grab_extras(attributes)
-      extras = attributes.keys.inject({}) do |hash, key|
-        hash[key] = attributes[key] unless Image.public_instance_methods.include? key
-        hash
-      end
-      extras
-    end
-
     # helper to retrieve a preference's value
     # returns nil if the preference doesn't exist
     def preference name
@@ -174,6 +163,64 @@ module Confetti
 
     def full_access?
       @access_set.detect { |a| a.origin == '*' }
+    end
+
+    def find_best_fit_img set, opts = {} 
+      opts['width'] ||= nil
+      opts['height'] ||= nil
+      opts['role'] ||= nil
+      opts['platform'] ||= nil
+
+      combos = [
+        {'height' => opts['height'], 'width' => opts['width']},
+        {'platform' => opts['platform'], 'role' => opts['role']},
+        {'platform' => opts['platform']}
+      ]
+
+      matched = set.clone
+
+      combos.each do |c|
+        platform_assets matched, c
+        if matched.length == 1
+          break 
+        elsif matched.empty?
+          matched = set.clone
+        end
+      end
+
+      return matched.first unless matched.empty?
+      nil
+    end
+
+    def default_icon
+      @icon_set.each do |icon|
+        return icon unless !File.basename(icon.src).match(/icon\.png$/i)
+      end
+      nil
+    end
+
+    def default_splash
+      @splash_set.each do |splash|
+        return splash unless !File.basename(splash.src).match(/splash\.png$/i)
+      end
+      nil
+    end
+
+    def platform_assets set, opts = {}
+      if opts.length == 0 or set.length == 0
+        return set
+      end
+
+      match = opts.shift
+      matched = reject_unmatched_assets match[0], match[1]
+      set.delete_if(&matched)
+      platform_assets set, opts
+    end
+
+    def reject_unmatched_assets property, value
+      return Proc.new do |asset|
+        !asset.respond_to?(property) or (asset.send(property) != value)
+      end
     end
   end
 end
