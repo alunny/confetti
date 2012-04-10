@@ -271,6 +271,7 @@ describe Confetti::Config do
           end
 
           it "should populate splash screen non-standards attributes to extras field" do
+            p @config.splash_set
             @config.splash_set.size.should be 1
             @config.splash_set.first.extras.should_not == nil
             @config.splash_set.first.extras.length.should be 1
@@ -534,15 +535,15 @@ describe Confetti::Config do
     end
   end
 
-  describe "platform and roll helpers" do
+  describe "platform and role helpers" do
     before do
       file = "#{fixture_dir}/config-icons-custom-attribs-extended.xml"
       @config = Confetti::Config.new file 
     end
 
     it "should return all blackberry icons with hover" do
-      match = @config.platform_assets(
-          @config.send(:icon_set),
+      match = @config.filter_images(
+          @config.icon_set,
           { 
             'platform' => 'blackberry',
             'role' => 'hover'
@@ -553,13 +554,13 @@ describe Confetti::Config do
     end
 
     it "should return all icons" do
-      match = @config.platform_assets(@config.send(:icon_set),{})
+      match = @config.filter_images(@config.icon_set,{})
       match.length.should == 11
     end
 
     it "should find the best fit image for bb" do
       match = @config.find_best_fit_img(
-        @config.send(:icon_set),
+        @config.icon_set,
         {
           'platform' => 'blackberry',
           'role' => 'hover'

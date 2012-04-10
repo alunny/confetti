@@ -165,31 +165,30 @@ module Confetti
       @access_set.detect { |a| a.origin == '*' }
     end
 
-    def find_best_fit_img set, opts = {} 
-      opts['width'] ||= nil
-      opts['height'] ||= nil
-      opts['role'] ||= nil
-      opts['platform'] ||= nil
+    def find_best_fit_img images, opts = {}
+      opts['width']     ||= nil
+      opts['height']    ||= nil
+      opts['role']      ||= nil
+      opts['platform']  ||= nil
 
-      combos = [
+      # filters to look through sets for
+      filters = [
         {'height' => opts['height'], 'width' => opts['width']},
         {'platform' => opts['platform'], 'role' => opts['role']},
         {'platform' => opts['platform']}
       ]
 
-      matched = set.clone
+      matches = nil
 
-      combos.each do |c|
-        platform_assets matched, c
-        if matched.length == 1
-          break 
-        elsif matched.empty?
-          matched = set.clone
+      filters.each do |filter|
+        matches = filter_images(images, filter)
+
+        if matches.length == 1
+          break
         end
       end
 
-      return matched.first unless matched.empty?
-      nil
+      matches.first unless matches.empty?
     end
 
     def default_icon
@@ -206,21 +205,17 @@ module Confetti
       nil
     end
 
-    def platform_assets set, opts = {}
-      if opts.length == 0 or set.length == 0
-        return set
+    def filter_images images, filter
+      imgs = images.clone
+
+      # filter can have multiple criteria
+      filter.each_pair do |name, value|
+        imgs = imgs.reject do |img|
+          !img.respond_to?(name) || img.send(name) != value
+        end
       end
 
-      match = opts.shift
-      matched = reject_unmatched_assets match[0], match[1]
-      set.delete_if(&matched)
-      platform_assets set, opts
-    end
-
-    def reject_unmatched_assets property, value
-      return Proc.new do |asset|
-        !asset.respond_to?(property) or (asset.send(property) != value)
-      end
+      imgs
     end
   end
 end
