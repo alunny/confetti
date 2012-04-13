@@ -39,7 +39,7 @@ module Confetti
     Content     = Class.new Struct.new(:src, :type, :encoding)
     Feature     = Class.new Struct.new(:name, :required)
     Preference  = Class.new Struct.new(:name, :value, :readonly)
-    Access      = Class.new Struct.new(:origin, :subdomains)
+    Access      = Class.new Struct.new(:origin, :subdomains, :browserOnly)
 
     def initialize(*args)
       @author           = Author.new
@@ -105,9 +105,9 @@ module Confetti
           when "license"
             @license = License.new(ele.text.nil? ? "" : ele.text.strip, attr["href"])
           when "access"
-            sub = attr["subdomains"]
-            sub = sub.nil? ? true : (sub != 'false')
-            @access_set << Access.new(attr["origin"], sub)
+            sub = boolean_value(attr["subdomains"], true)
+            browserOnly = boolean_value(attr["browserOnly"])
+            @access_set << Access.new(attr["origin"], sub, browserOnly)
           end
 
         # PhoneGap extensions (gap:)
@@ -216,6 +216,15 @@ module Confetti
       end
 
       imgs
+    end
+
+    # convert string (attribute) to boolean
+    def boolean_value value, default=false
+      if default
+        value != "false"
+      else
+        value == "true"
+      end
     end
   end
 end

@@ -271,7 +271,6 @@ describe Confetti::Config do
           end
 
           it "should populate splash screen non-standards attributes to extras field" do
-            p @config.splash_set
             @config.splash_set.size.should be 1
             @config.splash_set.first.extras.should_not == nil
             @config.splash_set.first.extras.length.should be 1
@@ -380,6 +379,14 @@ describe Confetti::Config do
 
           it "should allow subdomains to be set to false" do
             @bar.subdomains.should be_false
+          end
+
+          it "should default browserOnly to false" do
+            @bar.browserOnly.should be_false
+          end
+
+          it "should allow browserOnly to be set to true" do
+            @foo.browserOnly.should be_true
           end
         end
       end
@@ -615,6 +622,44 @@ describe Confetti::Config do
     it "should fail to return the default splash: splash.png" do
       @config = Confetti::Config.new
       @config.default_splash.should != nil 
+    end
+  end
+
+  describe "boolean_value" do
+    describe "without a default parameter" do
+      it "should default to false" do
+        @config.boolean_value(nil).should be_false
+      end
+
+      it "should return false for the string false" do
+        @config.boolean_value("false").should be_false
+      end
+
+      it "should return false for other strings" do
+        @config.boolean_value("falsey").should be_false
+      end
+
+      it "should return true for the string true" do
+        @config.boolean_value("true").should be_true
+      end
+    end
+
+    describe "with true set as the default" do
+      it "should default to true" do
+        @config.boolean_value(nil, true).should be_true
+      end
+
+      it "should return true for the string true" do
+        @config.boolean_value("true", true).should be_true
+      end
+
+      it "should return false for other strings" do
+        @config.boolean_value("falsey", true).should be_true
+      end
+
+      it "should return false for the string false" do
+        @config.boolean_value("false", true).should be_false
+      end
     end
   end
 end
