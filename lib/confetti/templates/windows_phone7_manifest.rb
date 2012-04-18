@@ -5,7 +5,7 @@ module Confetti
 
       GAP_PERMISSIONS_MAP = {
         'camera' => %w{ID_CAP_ISV_CAMERA
-                       D_HW_FRONTCAMERA},
+                       ID_HW_FRONTCAMERA},
         'contacts' => %w{ID_CAP_CONTACTS},
         'device' => %w{ID_CAP_IDENTITY_DEVICE},
         'geolocation' => %w{ID_CAP_LOCATION},
