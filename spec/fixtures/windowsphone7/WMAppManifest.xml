@@ -8,9 +8,9 @@
     
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
-      <Capability Name="D_HW_FRONTCAMERA" />
       <Capability Name="ID_CAP_ISV_CAMERA" />
       <Capability Name="ID_CAP_LOCATION" />
+      <Capability Name="ID_HW_FRONTCAMERA" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
     </Capabilities>
     
