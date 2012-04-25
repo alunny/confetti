@@ -22,7 +22,9 @@ module Confetti
       end
 
       def guid
-        guid = Digest::MD5.hexdigest @config.package 
+        package = @config.package
+        package ||= 'com.example.app'
+        guid = Digest::MD5.hexdigest package 
         res = "{#{ guid[0..7] }-#{ guid[8..11] }-"
         res << "#{ guid[12..15] }-#{ guid[16..19] }-"
         res << "#{ guid[20,guid.length-1]}}"
@@ -38,20 +40,32 @@ module Confetti
       end
 
       def capabilities
+        default_permissions = %w{camera contacts device geolocation
+            networking media}
         permissions = []                                                
+        capabilities = []                                                
         phonegap_api = /http\:\/\/api.phonegap.com\/1[.]0\/(\w+)/          
+        filtered_features = @config.feature_set.clone
 
-        feature_names = @config.feature_set.map { |f| f.name }          
-        feature_names.sort
+        filtered_features.each { |f|
+            next if f.name.nil?
+            matches = f.name.match(phonegap_api)
+            next unless matches.length > 1 
+            next unless GAP_PERMISSIONS_MAP.has_key?(matches[1])
+            permissions << matches[1]
+        }
 
-        feature_names.each do |f|
-          feature_name = f.match(phonegap_api)[1] if f.match(phonegap_api)
-          associated_permissions = GAP_PERMISSIONS_MAP[feature_name]
-          permissions.concat(associated_permissions) if associated_permissions
+        if @config.feature_set.empty? and
+            @config.preference(:permissions) != :none
+            permissions = default_permissions
         end
+
+        permissions.each { |p|
+            capabilities.concat(GAP_PERMISSIONS_MAP[p])
+        }
       
-        permissions.sort! 
-        permissions.map { |f| { :name => f } }
+        capabilities.sort! 
+        capabilities.map { |f| { :name => f } }
       end
 
       def output_filename 
