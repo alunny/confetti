@@ -169,11 +169,15 @@ module Confetti
       opts['width']     ||= nil
       opts['height']    ||= nil
       opts['role']      ||= nil
+      opts['density']      ||= nil
+      opts['state']      ||= nil
       opts['platform']  ||= nil
 
       # filters to look through sets for
       filters = [
         {'height' => opts['height'], 'width' => opts['width']},
+        {'platform' => opts['platform'], 'density' => opts['density']},
+        {'platform' => opts['platform'], 'state' => opts['state']},
         {'platform' => opts['platform'], 'role' => opts['role']},
         {'platform' => opts['platform']}
       ]
@@ -193,14 +197,14 @@ module Confetti
 
     def default_icon
       @icon_set.each do |icon|
-        return icon unless !File.basename(icon.src).match(/icon\.png$/i)
+        return icon if icon.src.match /^icon\.png$/i
       end
       nil
     end
 
     def default_splash
       @splash_set.each do |splash|
-        return splash unless !File.basename(splash.src).match(/splash\.png$/i)
+        return splash if splash.src.match /^splash\.png$/i
       end
       nil
     end

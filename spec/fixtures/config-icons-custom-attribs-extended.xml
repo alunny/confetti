@@ -1,38 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns		= "http://www.w3.org/ns/widgets"
-    xmlns:gap	= "http://phonegap.com/ns/1.0"
-	id		= "com.alunny.confetti"
-	version 	= "1.0.0">
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    id        = "com.phonegap.example"
+    version   = "1.0.0">
 
-	<name>Confetti Sample App</name>
+<name>Icon and Splash Demo</name>
 
-	<description>
-		This is a sample config.xml for integration testing with Confetti
-	</description>
+<description>
+Basic application to test and demonstrate icons and splash screens.
+</description>
 
-	<author href="http://alunny.github.com"
-		email="hardeep.shoker@nitobi.com">
-		Hardeep Shoker
-	</author>
+<author href="https://build.phonegap.com" email="shardeep@adobe.com">
+Hardeep Shoker
+</author>
 
-    <icon src="icons/icon.png" />
-    <gap:splash src="splashes/splash.png" />
+<!-- Icons -->
 
-    <icon src="icons/icon.png" gap:platform="blackberry" />
-    <icon src="icons/icon_hover.png" gap:platform="blackberry" gap:role="hover"/>
+<icon src="icon.png" />
+<icon src="icons/ios/icon.png" width="57" height="57" />
+<icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
+<icon src="icons/ios/icon_at_2x.png" width="114" height="114" />
+<icon src="icons/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
+<icon src="icons/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
+<icon src="icons/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
+<icon src="icons/bb/icon.png" gap:platform="blackberry" />
+<icon src="icons/bb/icon_hover.png" gap:platform="blackberry" gap:state="hover"/>
+<icon src="icons/winphone/icon.png" gap:platform="winphone" />
+<icon src="icons/winphone/tileicon.png" gap:platform="winphone" gap:role="background"/>
 
-    <icon src="icons/icon-57.png" width="57" height="57"/>
-	<icon src="icons/icon-iphone-72.png" height="72" width="72" gap:platform="ios"/>
-    <icon src="icons/icon-114.png" width="114" height="114"/>
+<!-- Splash Screens -->
+<gap:splash src="splash.png" />
+<gap:splash src="splash/ios/Default-Landscape.png" width="1024" height="786"/>
+<gap:splash src="splash/ios/Default-Portrait.png" width="786" height="1024" />
+<gap:splash src="splash/ios/Default.png" width="320" height="480" />
+<gap:splash src="splash/ios/Default_at_2x.png" width="640" height="960" />
+<gap:splash src="splash/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
+<gap:splash src="splash/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
+<gap:splash src="splash/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
+<gap:splash src="splash/bb/splash.png" gap:platform="blackberry" />
+<gap:splash src="splash/winphone/splash.png" gap:platform="winphone" />
 
-    <icon src="icons/icon-36.png" width="36" height="36"/>
-    <icon src="icons/icon-48.png" width="48" height="48"/>
-	<icon src="icons/icon-android-72.png" height="72" width="72" gap:platform="android"/>
-    <gap:splash src="splashes/splash-android.png" gap:platform="android"/>
-
-	<icon src="icons/icon-173.png" width="173" height="173"/>
-	<icon src="icons/icon-68.png" gap:platform="winphone"/>
-
-	<feature name="http://api.phonegap.com/1.0/geolocation"/>
-	<feature name="http://api.phonegap.com/1.0/network"/>
 </widget>

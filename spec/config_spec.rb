@@ -542,7 +542,7 @@ describe Confetti::Config do
     end
   end
 
-  describe "platform and role helpers" do
+  describe "icon and splash helpers" do
     before do
       file = "#{fixture_dir}/config-icons-custom-attribs-extended.xml"
       @config = Confetti::Config.new file 
@@ -553,11 +553,11 @@ describe Confetti::Config do
           @config.icon_set,
           { 
             'platform' => 'blackberry',
-            'role' => 'hover'
+            'state' => 'hover'
           }
         )
       match.length.should == 1
-      match.first.src.should == 'icons/icon_hover.png'
+      match.first.src.should == 'icons/bb/icon_hover.png'
     end
 
     it "should return all icons" do
@@ -570,10 +570,10 @@ describe Confetti::Config do
         @config.icon_set,
         {
           'platform' => 'blackberry',
-          'role' => 'hover'
+          'state' => 'hover'
         }
       )
-      match.src.should == "icons/icon_hover.png"
+      match.src.should == "icons/bb/icon_hover.png"
     end
 
     it "should find the best fit icon for winphone" do
@@ -582,13 +582,11 @@ describe Confetti::Config do
       match = @config.find_best_fit_img(
         @config.send(:icon_set),
         {
-          'height' => '54',
-          'width' => '54',
           'platform' => 'winphone',
-          'role' => 'default'
+          'role' => 'background'
         }
       )
-      match.src.should == "icons/icon-68.png"
+      match.src.should == "icons/winphone/tileicon.png"
     end
 
     it "should find the best fit splash for android" do
@@ -597,31 +595,29 @@ describe Confetti::Config do
       match = @config.find_best_fit_img(
         @config.send(:splash_set),
         {
-          'height' => '54',
-          'width' => '54',
           'platform' => 'android',
-          'role' => 'default'
+          'density' => 'ldpi'
         }
       )
-      match.src.should == "splashes/splash-android.png"
+      match.src.should == "splash/android/ldpi.png"
     end
 
     it "should return the default icon: icon.png" do
-      @config.default_icon.src.should == "icons/icon.png"
+      @config.default_icon.src.should == "icon.png"
     end
 
     it "should fail to return the default icon: icon.png" do
       @config = Confetti::Config.new
-      @config.default_icon.should != nil 
+      @config.default_icon.should == nil 
     end
 
     it "should return the default splash: splash.png" do
-      @config.default_splash.src.should == "splashes/splash.png"
+      @config.default_splash.src.should == "splash.png"
     end
 
     it "should fail to return the default splash: splash.png" do
       @config = Confetti::Config.new
-      @config.default_splash.should != nil 
+      @config.default_splash.should == nil 
     end
   end
 

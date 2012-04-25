@@ -1,7 +1,8 @@
 module Confetti
   class Config
     class Image 
-      attr_accessor :src, :width, :height, :extras, :role, :platform, :main
+      attr_accessor :src, :width, :height, :extras,
+        :role, :platform, :main, :density, :state
 
       def initialize *args
         @src = args.shift
@@ -15,6 +16,8 @@ module Confetti
         @role     = @extras['role']
         @platform = @extras['platform']
         @main     = @extras['main']
+        @density     = @extras['density']
+        @state     = @extras['state']
       end
     end
   end
