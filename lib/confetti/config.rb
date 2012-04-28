@@ -197,14 +197,14 @@ module Confetti
 
     def default_icon
       @icon_set.each do |icon|
-        return icon if icon.src.match /^icon\.png$/i
+        return icon if icon.src.match /^icon(\.[a-zA-Z0-9]+)+$/i
       end
       nil
     end
 
     def default_splash
       @splash_set.each do |splash|
-        return splash if splash.src.match /^splash\.png$/i
+        return splash if splash.src.match /^splash(\.[a-zA-Z0-9]+)$/i
       end
       nil
     end
