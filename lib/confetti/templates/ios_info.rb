@@ -18,6 +18,12 @@ module Confetti
         ]
       }
 
+      STATUS_BARS = {
+        :default              => "UIStatusBarStyleDefault",
+        :"black-transparent"  => "UIStatusBarStyleBlackTransparent",
+        :"black-opaque"       => "UIStatusBarStyleBlackOpaque"
+      }
+
       def icons
         @config.plist_icon_set
       end
@@ -56,6 +62,13 @@ module Confetti
 
       def prerendered_icon?
         @config.preference("prerendered-icon") == :true
+      end
+
+      def statusbar_style
+        pref = @config.preference("ios-statusbarstyle")
+        if pref
+          STATUS_BARS[pref]
+        end
       end
     end
   end

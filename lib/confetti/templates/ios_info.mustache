@@ -54,5 +54,9 @@
     <key>UIPrerenderedIcon</key>
     <true/>
     {{/ prerendered_icon? }}
+    {{# statusbar_style }}
+    <key>UIStatusBarStyle</key>
+    <string>{{ to_s }}</string>
+    {{/ statusbar_style }}
 </dict>
 </plist>

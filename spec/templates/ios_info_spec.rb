@@ -154,4 +154,37 @@ describe Confetti::Template::IosInfo do
       template.prerendered_icon?.should be_true
     end
   end
+
+  describe "#statusbar_style method" do
+    before do
+      @config = Confetti::Config.new("#{fixture_dir}/config.xml")
+      @template = @template_class.new(@config)
+    end
+
+    it "should be nil with no preference" do
+      @template.statusbar_style.should be_nil
+    end
+
+    describe "when set" do
+      before do
+        @status_pref = Confetti::Config::Preference.new("ios-statusbarstyle")
+        @config.preference_set << @status_pref
+      end
+
+      it "should be UIStatusBarStyleDefault for default" do
+        @status_pref.value = "default"
+        @template.statusbar_style.should == "UIStatusBarStyleDefault"
+      end
+
+      it "should be UIStatusBarStyleBlackTransparent for default" do
+        @status_pref.value = "black-transparent"
+        @template.statusbar_style.should == "UIStatusBarStyleBlackTransparent"
+      end
+
+      it "should be UIStatusBarStyleBlackOpaque for default" do
+        @status_pref.value = "black-opaque"
+        @template.statusbar_style.should == "UIStatusBarStyleBlackOpaque"
+      end
+    end
+  end
 end
