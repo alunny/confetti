@@ -20,7 +20,7 @@ module Confetti
 
       STATUS_BARS = {
         :default              => "UIStatusBarStyleDefault",
-        :"black-transparent"  => "UIStatusBarStyleBlackTransparent",
+        :"black-translucent"  => "UIStatusBarStyleBlackTranslucent",
         :"black-opaque"       => "UIStatusBarStyleBlackOpaque"
       }
 

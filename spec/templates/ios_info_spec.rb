@@ -177,8 +177,8 @@ describe Confetti::Template::IosInfo do
       end
 
       it "should be UIStatusBarStyleBlackTransparent for default" do
-        @status_pref.value = "black-transparent"
-        @template.statusbar_style.should == "UIStatusBarStyleBlackTransparent"
+        @status_pref.value = "black-translucent"
+        @template.statusbar_style.should == "UIStatusBarStyleBlackTranslucent"
       end
 
       it "should be UIStatusBarStyleBlackOpaque for default" do
