@@ -108,4 +108,26 @@ describe Confetti::Template::WindowsPhone7Manifest do
       end
     end
   end
+
+  describe "should write a valid manifest file" do
+
+    it "should write the file" do
+        @config = Confetti::Config.new
+        @config.feature_set <<
+            Confetti::Config::Feature.new(
+                "http://plugins.phonegap.com/ChildBrowser/2.0.1",
+                'true'
+                )
+        @config.feature_set <<
+            Confetti::Config::Feature.new(
+                "http://api.phonegap.com/1.0/geolocation",
+                'true'
+                )
+        @template = @template_class.new @config
+        @template.capabilities.should == [
+            {:name => "ID_CAP_LOCATION"},
+        ]
+        lambda { @template.render }.should_not raise_error
+    end
+  end
 end

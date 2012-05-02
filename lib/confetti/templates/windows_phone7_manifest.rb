@@ -50,7 +50,7 @@ module Confetti
         filtered_features.each { |f|
             next if f.name.nil?
             matches = f.name.match(phonegap_api)
-            next unless matches.length > 1 
+            next if matches.nil? or matches.length < 1 
             next unless GAP_PERMISSIONS_MAP.has_key?(matches[1])
             permissions << matches[1]
         }
