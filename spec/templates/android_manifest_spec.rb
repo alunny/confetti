@@ -235,5 +235,19 @@ describe Confetti::Template::AndroidManifest do
         @template.max_sdk_version_attribute.should be_nil
       end
     end
+
+    describe "output" do
+      before do
+        path = "#{ fixture_dir }/config_with_android_versions.xml"
+        @config = Confetti::Config.new(path)
+        @template = @template_class.new(@config)
+      end
+
+      it "should write the attributes correctly" do
+        rendered = @template.render       
+        rendered.should match 'android:minSdkVersion="8"'
+        rendered.should match 'android:maxSdkVersion="10"'
+      end
+    end
   end
 end

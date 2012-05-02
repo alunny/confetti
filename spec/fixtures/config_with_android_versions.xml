@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+  xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "com.alunny.confetti"
+	version 	= "1.0.0">
+
+	<name>Confetti Sample App</name>
+
+	<description>
+		This is a sample config.xml for integration testing with Confetti
+	</description>
+
+	<author href="http://alunny.github.com"
+		email="alunny@gmail.com">
+		Andrew Lunny
+	</author>
+
+	<icon src="icon.png" height="150" width="200" />
+
+  <gap:splash src="mainsplash.png" height="480" width="360" />
+
+	<preference name="universal" value="true"/>
+	<preference name="phonegap-version" value="1.3.0"/>
+
+  <preference name="android-minSdkVersion" value="8" />
+  <preference name="android-maxSdkVersion" value="10" />
+</widget>
