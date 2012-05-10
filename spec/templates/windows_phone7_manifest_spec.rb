@@ -51,7 +51,7 @@ describe Confetti::Template::WindowsPhone7Manifest do
             "true"
             )
         good_feature = Confetti::Config::Feature.new(
-            "http://api.phonegap.com/1.0/networking",
+            "http://api.phonegap.com/1.0/network",
             "true"
             )
         @config.feature_set << bad_feature

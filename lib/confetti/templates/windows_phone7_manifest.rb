@@ -9,7 +9,7 @@ module Confetti
         'contacts' => %w{ID_CAP_CONTACTS},
         'device' => %w{ID_CAP_IDENTITY_DEVICE},
         'geolocation' => %w{ID_CAP_LOCATION},
-        'networking' => %w{ID_CAP_NETWORKING},
+        'network' => %w{ID_CAP_NETWORKING},
         'media' => %w{ID_CAP_MICROPHONE},
       }
 
@@ -41,7 +41,7 @@ module Confetti
 
       def capabilities
         default_permissions = %w{camera contacts device geolocation
-            networking media}
+            network media}
         permissions = []                                                
         capabilities = []                                                
         phonegap_api = /http\:\/\/api.phonegap.com\/1[.]0\/(\w+)/          
