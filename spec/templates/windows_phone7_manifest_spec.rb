@@ -130,4 +130,15 @@ describe Confetti::Template::WindowsPhone7Manifest do
         lambda { @template.render }.should_not raise_error
     end
   end
+
+  describe "description" do
+    before do
+      @config = Confetti::Config.new "#{fixture_dir}/config-long-desc.xml"
+      @template = @template_class.new(@config)
+    end
+
+    it "should truncate the description to < 250 characters" do
+      @template.description.length.should be < 250
+    end
+  end
 end

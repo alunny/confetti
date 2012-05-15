@@ -31,7 +31,11 @@ module Confetti
       end
 
       def description
-        @config.description
+        if @config.description && @config.description.length >= 250
+          @config.description[0..247]
+        else
+          @config.description
+        end
       end
 
       def version

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+  xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "com.alunny.confetti"
+	version 	= "1.0.0">
+
+	<name>Confetti Sample App</name>
+
+	<description>
+    Bacon ipsum dolor sit amet prosciutto meatball rump frankfurter corned beef venison. Boudin rump shank ribeye ham hock, hamburger swine shankle jowl corned beef speck salami t-bone. Short ribs pork belly shoulder strip steak, turkey pancetta shank ribeye jowl speck. Swine boudin t-bone pork belly, tri-tip filet mignon shankle. Turkey prosciutto bresaola, venison meatloaf pork chop leberkas speck. Fatback strip steak speck boudin pork frankfurter, tongue pig shank meatball biltong beef jowl shankle. Jerky rump boudin, fatback short loin pork belly filet mignon turkey turducken capicola.
+
+    Rump corned beef swine hamburger, flank pork loin beef sirloin meatloaf chuck sausage andouille meatball. Sausage jerky frankfurter bacon hamburger pork loin spare ribs biltong shoulder, filet mignon capicola kielbasa bresaola. Capicola meatball pork belly leberkas hamburger, brisket speck turducken jowl strip steak rump kielbasa tri-tip chicken. Leberkas chicken beef ribs, ball tip meatloaf jerky turducken pork drumstick. Frankfurter ham hock drumstick hamburger ribeye andouille swine fatback turkey beef pork chop chicken. Jerky ham cow short ribs leberkas, ribeye salami turkey tail pork belly ball tip short loin.
+
+    Beef ribs ham flank pork loin. Fatback chicken pig, ribeye jerky kielbasa prosciutto cow chuck boudin short ribs capicola. Tenderloin pork chop pig, ham ribeye speck swine sirloin bacon. Hamburger shank tri-tip, ham hock ground round corned beef pork belly bresaola brisket kielbasa. Boudin beef short loin, capicola pig filet mignon meatball speck pork. Beef jowl tri-tip, tail bacon fatback chuck pork chop sirloin swine strip steak ham kielbasa.
+
+    Pork belly ham pork loin short loin ribeye. Tongue ham hock swine, bacon hamburger jerky turducken meatball shoulder drumstick cow ground round pastrami. Corned beef flank filet mignon ham hock tongue beef ribs, beef frankfurter tri-tip short loin turducken pork loin fatback. Biltong sausage beef ribs speck, bresaola turkey pork chop capicola ball tip. Sausage corned beef tongue beef tenderloin pork.
+
+    T-bone spare ribs rump, brisket biltong ball tip filet mignon hamburger turducken tri-tip tongue. Ham hock meatloaf pancetta, strip steak beef bacon brisket chuck bresaola drumstick. Pancetta leberkas biltong spare ribs pork, ground round ball tip brisket short loin drumstick ham jerky boudin. Pig hamburger spare ribs, frankfurter meatloaf pork belly tail sirloin chicken boudin turkey venison. Spare ribs salami frankfurter, tail pork belly brisket chuck. Ground round pancetta ham, sausage shoulder leberkas cow venison turkey meatloaf speck pork loin corned beef strip steak.
+	</description>
+
+  <license href="http://www.opensource.org/licenses/mit-license.php">The MIT License
+
+Copyright (c) 2011 Andrew Lunny
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</license>
+
+	<author href="http://alunny.github.com"
+		email="alunny@gmail.com">
+		Andrew Lunny
+	</author>
+
+	<icon src="icon.png" height="150" width="200" />
+
+  <gap:splash src="mainsplash.png" height="480" width="360" />
+
+	<preference name="universal" value="true"/>
+	<preference name="phonegap-version" value="1.3.0"/>
+
+	<feature name="http://api.phonegap.com/1.0/geolocation" required="true"/>
+	<feature name="http://api.phonegap.com/1.0/camera" required="true"/>
+	<feature name="http://api.phonegap.com/1.0/notification" required="true"/>
+
+  <access origin="*" />
+</widget>
