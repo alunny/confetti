@@ -521,6 +521,25 @@ describe Confetti::Config do
     end
   end
 
+  describe "feature accessor" do
+    before do
+      @camera_uri = "http://api.phonegap.com/1.0/camera"
+      @network_uri = "http://api.phonegap.com/1.0/network"
+
+      @config = Confetti::Config.new
+      @feature = Confetti::Config::Feature.new @camera_uri, "true"
+      @config.feature_set << @feature
+    end
+
+    it "should be nil when the feature is not there" do
+      @config.feature(@network_uri).should be_nil
+    end
+
+    it "should return the feature if it's there" do
+      @config.feature(@camera_uri).should == @feature
+    end
+  end
+
   describe "full_access?" do
     before do
       @config = Confetti::Config.new

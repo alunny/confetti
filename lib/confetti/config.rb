@@ -161,6 +161,10 @@ module Confetti
       @preference_set.detect { |pref| pref.name == name }
     end
 
+    def feature name
+      @feature_set.detect { |feature| feature.name == name }
+    end
+
     def full_access?
       @access_set.detect { |a| a.origin == '*' }
     end
