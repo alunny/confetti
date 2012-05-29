@@ -32,7 +32,7 @@ module Confetti
 
       def description
         if @config.description && @config.description.length >= 250
-          @config.description[0..247]
+          "#{ @config.description[0..245] }..."
         else
           @config.description
         end

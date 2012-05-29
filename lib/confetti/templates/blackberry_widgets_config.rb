@@ -57,7 +57,11 @@ module Confetti
       end
 
       def widget_description
-        @config.description
+        if @config.description && @config.description.length >= 500
+          "#{ @config.description[0..495] }..."
+        else
+          @config.description
+        end
       end
 
       def license_href

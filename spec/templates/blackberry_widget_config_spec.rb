@@ -239,4 +239,15 @@ describe Confetti::Template::BlackberryWidgetsConfig do
       @template.access.length.should be 1
     end
   end
+
+  describe "long descriptions" do
+    before do
+      @config = Confetti::Config.new "#{fixture_dir}/config-long-desc.xml"
+      @template = @template_class.new(@config)
+    end
+
+    it "should truncate the description to < 500 characters" do
+      @template.widget_description.length.should be < 500
+    end
+  end
 end
