@@ -404,10 +404,45 @@ describe Confetti::Config do
       before do
         @config = Confetti::Config.new
         @config.populate_from_xml(fixture_dir + "/config-plugins.xml")
+        @plugins = @config.plugin_set
       end
 
       it "should populate the plugin set" do
-        @config.plugin_set.size.should be 3
+        @plugins.size.should be 3
+      end
+
+      describe "plugin set created" do
+        before do
+          @child = @plugins.detect { |a| a.name == "ChildBrowser" }
+          @push = @plugins.detect { |a| a.name == "PushNotifications" }
+          @fbconnect = @plugins.detect { |a| a.name == "FBConnect" }
+        end
+
+        it "should set the version properties correctly" do
+          @child.version.should be_nil
+          @push.version.should == "~2.0"
+          @fbconnect.version.should == "~1"
+        end
+
+        describe "params" do
+          it "should be empty when none are specified" do
+            @child.param_set.should be_empty
+            @push.param_set.should be_empty
+          end
+
+          it "should be populated when specified" do
+            @fbconnect.param_set.size.should == 2
+          end
+
+          it "should be populated correctly" do
+            params = @fbconnect.param_set
+            key = params.detect { |pm| pm.name == "APIKey" }
+            secret = params.detect { |pm| pm.name == "APISecret" }
+
+            key.value.should == "SOMEKEY"
+            secret.value.should == "SOMESECRET"
+          end
+        end
       end
     end
   end

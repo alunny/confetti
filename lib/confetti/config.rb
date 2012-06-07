@@ -104,7 +104,12 @@ module Confetti
             @splash_set << Image.new(attr["src"], attr["height"], attr["width"], attr)
           when "plugin"
             next if attr["name"].nil? or attr["name"].empty?
-            @plugin_set << Plugin.new(attr["name"], attr["version"])
+            plugin = Plugin.new(attr["name"], attr["version"])
+            ele.each_element('param') do |param|
+              p_attr = param.attributes
+              plugin.param_set << Param.new(p_attr["name"], p_attr["value"])
+            end
+            @plugin_set << plugin
           end
         end
       end
