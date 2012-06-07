@@ -20,8 +20,8 @@ describe Confetti::Config::Feature do
       @feature.param_set.should be_a TypedSet
     end
 
-    it "should make the param_set set typed to Confetti::Config::Feature::Param" do
-      @feature.param_set.set_class.should be Confetti::Config::Feature::Param
+    it "should make the param_set set typed to Confetti::Config::Param" do
+      @feature.param_set.set_class.should be Confetti::Config::Param
     end
 
     it "should not allow the param_set to be clobbered" do

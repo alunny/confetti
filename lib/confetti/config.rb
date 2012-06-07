@@ -4,12 +4,6 @@ module Confetti
     include PhoneGap
     self.extend TemplateHelper
 
-    class XMLError < Confetti::Error ; end
-
-    class FileError < Confetti::Error ; end
-
-    class FiletypeError < Confetti::Error ; end
-
     attr_accessor :package, :version_string, :version_code, :description,
                   :height, :width, :plist_icon_set
     attr_reader :author, :viewmodes, :name, :license, :content,
@@ -31,15 +25,6 @@ module Confetti
         super method_name, *args
       end
     end
-
-    # classes that represent child elements
-    Author      = Class.new Struct.new(:name, :href, :email)
-    Name        = Class.new Struct.new(:name, :shortname)
-    License     = Class.new Struct.new(:text, :href)
-    Content     = Class.new Struct.new(:src, :type, :encoding)
-    Feature     = Class.new Struct.new(:name, :required)
-    Preference  = Class.new Struct.new(:name, :value, :readonly)
-    Access      = Class.new Struct.new(:origin, :subdomains, :browserOnly)
 
     def initialize(*args)
       @author           = Author.new

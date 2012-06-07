@@ -19,7 +19,6 @@ require 'typedset'
 require 'confetti/version'
 require 'confetti/error'
 require 'confetti/helpers'
-require 'confetti/phonegap'
 
 require 'confetti/template'
 require 'confetti/templates/base'
@@ -37,6 +36,8 @@ require 'confetti/templates/windows_phone7_manifest'
 
 require 'confetti/template_helper'
 
+require 'confetti/config/classes'
+require 'confetti/phonegap'
 require 'confetti/config'
 require 'confetti/config/feature'
 require 'confetti/config/image'
