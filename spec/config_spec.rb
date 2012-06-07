@@ -129,6 +129,14 @@ describe Confetti::Config do
         }
       }.should raise_error
     end
+
+    it "has a plugin_set field, that is a TypedSet" do
+      @config.plugin_set.should be_a TypedSet
+    end
+
+    it "plugin_set should be typed to plugin objects" do
+      @config.plugin_set.set_class.should be Confetti::Config::Plugin
+    end
   end
 
   describe "#initialize with file" do
@@ -389,6 +397,17 @@ describe Confetti::Config do
             @foo.browserOnly.should be_true
           end
         end
+      end
+    end
+
+    describe "plugins" do
+      before do
+        @config = Confetti::Config.new
+        @config.populate_from_xml(fixture_dir + "/config-plugins.xml")
+      end
+
+      it "should populate the plugin set" do
+        @config.plugin_set.size.should be 3
       end
     end
   end

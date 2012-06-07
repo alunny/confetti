@@ -30,7 +30,7 @@ describe Confetti::PhoneGap do
     end
   end
 
-  describe "#plugins" do
+  describe "#legacy_plugins" do
     before do
       @obj.feature_set = []
       childbrowser  = "http://plugins.phonegap.com/ChildBrowser/1.0.1"
@@ -44,17 +44,17 @@ describe Confetti::PhoneGap do
     end
 
     it "should return an array with 2 entries" do
-      @obj.plugins.length.should be 2
+      @obj.legacy_plugins.length.should be 2
     end
 
     it "should return an array with 2 Plugin objects" do
-      @obj.plugins.first.should be_a Confetti::PhoneGap::Plugin
-      @obj.plugins.last.should be_a Confetti::PhoneGap::Plugin
+      @obj.legacy_plugins.first.should be_a Confetti::PhoneGap::Plugin
+      @obj.legacy_plugins.last.should be_a Confetti::PhoneGap::Plugin
     end
 
     it "should return the right data as plugins" do
-      childbrowser = @obj.plugins.first
-      fbconnect = @obj.plugins.last
+      childbrowser = @obj.legacy_plugins.first
+      fbconnect = @obj.legacy_plugins.last
 
       childbrowser.name.should == "ChildBrowser"
       childbrowser.version.should == "1.0.1"

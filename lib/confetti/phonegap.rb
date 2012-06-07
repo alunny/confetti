@@ -25,7 +25,9 @@ module Confetti
       end
     end
 
-    def plugins
+    # deprecated in favor of gap:plugin tags
+    # still supported for ChildBrowser
+    def legacy_plugins
       p_name = /http:\/\/plugins[.]phonegap[.]com\/([^\/]*)\/([^\/]*)/
 
       # find features corresponding to plugins

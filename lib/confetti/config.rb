@@ -14,7 +14,7 @@ module Confetti
                   :height, :width, :plist_icon_set
     attr_reader :author, :viewmodes, :name, :license, :content,
                 :icon_set, :feature_set, :preference_set, :xml_doc,
-                :splash_set, :plist_icon_set, :access_set
+                :splash_set, :plist_icon_set, :access_set, :plugin_set
 
     generate_and_write  :android_manifest, :android_strings, :webos_appinfo,
                         :ios_info, :symbian_wrt_info, :blackberry_widgets_config,
@@ -52,6 +52,7 @@ module Confetti
       @splash_set       = TypedSet.new Image
       @preference_set   = TypedSet.new Preference
       @access_set       = TypedSet.new Access
+      @plugin_set       = TypedSet.new Plugin # defined in PhoneGap module
       @viewmodes        = []
 
       if args.length > 0 && is_file?(args.first)
@@ -116,6 +117,9 @@ module Confetti
           when "splash"
             next if attr["src"].nil? or attr["src"].empty?
             @splash_set << Image.new(attr["src"], attr["height"], attr["width"], attr)
+          when "plugin"
+            next if attr["name"].nil? or attr["name"].empty?
+            @plugin_set << Plugin.new(attr["name"], attr["version"])
           end
         end
       end
