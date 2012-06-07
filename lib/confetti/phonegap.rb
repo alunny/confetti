@@ -1,7 +1,6 @@
 module Confetti
   module PhoneGap
     PHONEGAP_APIS = %w{camera notification geolocation media contacts file network}
-    Plugin        = Class.new Struct.new(:name, :version)
 
     def add_stock_phonegap_apis
       PHONEGAP_APIS.each do |api|

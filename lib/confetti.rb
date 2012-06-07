@@ -37,6 +37,7 @@ require 'confetti/templates/windows_phone7_manifest'
 require 'confetti/template_helper'
 
 require 'confetti/config/classes'
+require 'confetti/phonegap/plugin'
 require 'confetti/phonegap'
 require 'confetti/config'
 require 'confetti/config/feature'
