@@ -39,8 +39,10 @@ module Confetti
       end
 
       def version
-        version = normalize_version @config.version_string
-        version << ".0" 
+        v = normalize_version(@config.version_string).split('.')
+
+        # after the first one, each segment can only have one character
+        "#{ v[0] }.#{ v[1][0..0] }.#{ v[2][0..0] }.0"
       end
 
       def capabilities

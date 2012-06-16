@@ -141,4 +141,22 @@ describe Confetti::Template::WindowsPhone7Manifest do
       @template.description.length.should be < 250
     end
   end
+
+  describe "version" do
+    before do
+      @config = Confetti::Config.new
+      @template = @template_class.new(@config)
+    end
+
+    it "should normalize the version to four parts" do
+      @config.version_string = "1.0.0"
+      @template.version.should == "1.0.0.0"
+    end
+
+    it "should ensure the non-initial numbers are one digit" do
+      # THIS IS STUPID
+      @config.version_string = "2012.05.20"
+      @template.version.should == "2012.0.2.0"
+    end
+  end
 end
