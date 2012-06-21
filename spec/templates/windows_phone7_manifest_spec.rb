@@ -159,4 +159,22 @@ describe Confetti::Template::WindowsPhone7Manifest do
       @template.version.should == "2012.0.2.0"
     end
   end
+
+  describe "author" do
+    before do
+      @config = Confetti::Config.new "spec/fixtures/config.xml"
+      @template = @template_class.new(@config)
+    end
+
+    it "should return the Confetti Author name in the normal case" do
+      @template.author.should == "Andrew Lunny"
+    end
+
+    it "should truncate the field to 50 chars or less" do
+      me = "Andrew John Lunny, son of William and Vivian, brother of Hugo"
+      short = "Andrew John Lunny, son of William and Vivian, brot"
+      @config.author.name = me
+      @template.author.should == short
+    end
+  end
 end

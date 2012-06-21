@@ -18,7 +18,7 @@ module Confetti
       end
 
       def author
-        @config.author.name
+        @config.author.name ? @config.author.name[0..49] : ""
       end
 
       def guid
