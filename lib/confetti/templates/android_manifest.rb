@@ -90,6 +90,21 @@ module Confetti
         end
       end
 
+      def config_changes
+          properties = [
+            "orientation",
+            "screenSize",
+            "keyboardHidden"
+          ]
+
+          if Integer(min_sdk_version) <= 12
+            properties.delete("screenSize")
+            properties.join("|")
+          else
+            properties.join("|")
+          end
+      end
+
       def int_value? val
         return if val.nil?
 

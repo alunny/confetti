@@ -250,4 +250,32 @@ describe Confetti::Template::AndroidManifest do
       end
     end
   end
+
+  describe "config_changes" do
+
+    it "should append screenSize when sdk version > 12" do
+      @config = Confetti::Config.new
+      @min_pref = Confetti::Config::Preference.new(
+          "android-minSdkVersion", "13"
+          )
+
+      @config.preference_set << @min_pref
+      @template = @template_class.new @config
+      @template.config_changes.should ==
+          "orientation|screenSize|keyboardHidden"
+    end
+
+    it "should not append screenSize when sdk version <= 12" do
+      @config = Confetti::Config.new
+      @min_pref = Confetti::Config::Preference.new(
+          "android-minSdkVersion", "10"
+          )
+
+      @config.preference_set << @min_pref
+      @template = @template_class.new @config
+      @template.config_changes.should ==
+          "orientation|keyboardHidden"
+
+    end
+  end
 end
