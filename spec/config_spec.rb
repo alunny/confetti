@@ -731,4 +731,23 @@ describe Confetti::Config do
       end
     end
   end
+
+  describe "serialization" do
+
+    before :each do
+      @config = Confetti::Config.new(File.join(
+          fixture_dir,
+          "config.xml"
+          ))
+    end
+
+    it "should define a to_s method" do
+      @config.to_s.kind_of?(String).should == true
+    end
+
+    it "should serialize when no filters provided" do
+      @config.to_s.should match /icon/
+      @config.filtered_to_s("//icon").should_not match /icon/
+    end
+  end
 end

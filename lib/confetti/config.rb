@@ -10,9 +10,10 @@ module Confetti
                 :icon_set, :feature_set, :preference_set, :xml_doc,
                 :splash_set, :plist_icon_set, :access_set, :plugin_set
 
-    generate_and_write  :android_manifest, :android_strings, :webos_appinfo,
-                        :ios_info, :symbian_wrt_info, :blackberry_widgets_config,
-                        :ios_remote_plist, :windows_phone7_manifest
+    generate_and_write  :android_manifest, :android_strings,
+                        :webos_appinfo, :ios_info, :symbian_wrt_info,
+                        :blackberry_widgets_config, :ios_remote_plist,
+                        :windows_phone7_manifest
 
     # handle bad generate/write calls
     def method_missing(method_name, *args)
@@ -37,7 +38,9 @@ module Confetti
       @splash_set       = TypedSet.new Image
       @preference_set   = TypedSet.new Preference
       @access_set       = TypedSet.new Access
-      @plugin_set       = TypedSet.new Plugin # defined in PhoneGap module
+
+      # defined in PhoneGap module
+      @plugin_set       = TypedSet.new Plugin
       @viewmodes        = []
 
       if args.length > 0 && is_file?(args.first)
@@ -75,25 +78,58 @@ module Confetti
         when "http://www.w3.org/ns/widgets"
           case ele.name
           when "name"
-            @name = Name.new(ele.text.nil? ? "" : ele.text.strip, attr["shortname"])
+            @name = Name.new(
+                ele.text.nil? ? "" : ele.text.strip,
+                attr["shortname"]
+                )
+
           when "author"
-            @author = Author.new(ele.text.nil? ? "" : ele.text.strip, attr["href"], attr["email"])
+            @author = Author.new(
+                ele.text.nil? ? "" : ele.text.strip,
+                attr["href"],
+                attr["email"]
+                )
+
           when "description"
             @description = ele.text.nil? ? "" : ele.text.strip
+
           when "icon"
-            @icon_set << Image.new(attr["src"], attr["height"], attr["width"], attr)
+            @icon_set << Image.new(
+                attr["src"],
+                attr["height"],
+                attr["width"],
+                attr
+                )
             # used for the info.plist file
             @plist_icon_set << attr["src"]
+
           when "feature"
-            @feature_set  << Feature.new(attr["name"], attr["required"])
+            @feature_set  << Feature.new(
+                attr["name"],
+                attr["required"]
+                )
+
           when "preference"
-            @preference_set << Preference.new(attr["name"], attr["value"], attr["readonly"])
+            @preference_set << Preference.new(
+                attr["name"],
+                attr["value"],
+                attr["readonly"]
+                )
+
           when "license"
-            @license = License.new(ele.text.nil? ? "" : ele.text.strip, attr["href"])
+            @license = License.new(
+                ele.text.nil? ? "" : ele.text.strip,
+                attr["href"]
+                )
+
           when "access"
             sub = boolean_value(attr["subdomains"], true)
             browserOnly = boolean_value(attr["browserOnly"])
-            @access_set << Access.new(attr["origin"], sub, browserOnly)
+            @access_set << Access.new(
+                attr["origin"],
+                sub,
+                browserOnly
+                )
           end
 
         # PhoneGap extensions (gap:)
@@ -101,13 +137,22 @@ module Confetti
           case ele.name
           when "splash"
             next if attr["src"].nil? or attr["src"].empty?
-            @splash_set << Image.new(attr["src"], attr["height"], attr["width"], attr)
+            @splash_set << Image.new(
+                attr["src"],
+                attr["height"],
+                attr["width"],
+                attr
+                )
+
           when "plugin"
             next if attr["name"].nil? or attr["name"].empty?
             plugin = Plugin.new(attr["name"], attr["version"])
             ele.each_element('param') do |param|
               p_attr = param.attributes
-              plugin.param_set << Param.new(p_attr["name"], p_attr["value"])
+              plugin.param_set << Param.new(
+                  p_attr["name"],
+                  p_attr["value"]
+                  )
             end
             @plugin_set << plugin
           end
@@ -227,6 +272,22 @@ module Confetti
       else
         value == "true"
       end
+    end
+
+    def filtered_to_s( xpaths = [] )
+      xpaths = [ xpaths ] unless xpaths.kind_of?(Array)
+
+      @xml = @xml_doc.dup
+
+      xpaths.each do |path|
+        @xml.root.elements.delete_all path
+      end
+
+      @xml.root.to_s
+    end
+
+    def to_s
+      @xml_doc.root.to_s
     end
   end
 end
