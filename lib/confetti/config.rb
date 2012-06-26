@@ -78,58 +78,37 @@ module Confetti
         when "http://www.w3.org/ns/widgets"
           case ele.name
           when "name"
-            @name = Name.new(
-                ele.text.nil? ? "" : ele.text.strip,
-                attr["shortname"]
-                )
+            @name = Name.new(ele.text.nil? ? "" : ele.text.strip,
+                              attr["shortname"])
 
           when "author"
-            @author = Author.new(
-                ele.text.nil? ? "" : ele.text.strip,
-                attr["href"],
-                attr["email"]
-                )
+            @author = Author.new(ele.text.nil? ? "" : ele.text.strip,
+                                  attr["href"], attr["email"])
 
           when "description"
             @description = ele.text.nil? ? "" : ele.text.strip
 
           when "icon"
-            @icon_set << Image.new(
-                attr["src"],
-                attr["height"],
-                attr["width"],
-                attr
-                )
+            @icon_set << Image.new(attr["src"], attr["height"], attr["width"],
+                                    attr)
             # used for the info.plist file
             @plist_icon_set << attr["src"]
 
           when "feature"
-            @feature_set  << Feature.new(
-                attr["name"],
-                attr["required"]
-                )
+            @feature_set  << Feature.new(attr["name"], attr["required"])
 
           when "preference"
-            @preference_set << Preference.new(
-                attr["name"],
-                attr["value"],
-                attr["readonly"]
-                )
+            @preference_set << Preference.new(attr["name"], attr["value"],
+                                              attr["readonly"])
 
           when "license"
-            @license = License.new(
-                ele.text.nil? ? "" : ele.text.strip,
-                attr["href"]
-                )
+            @license = License.new(ele.text.nil? ? "" : ele.text.strip,
+                                   attr["href"])
 
           when "access"
             sub = boolean_value(attr["subdomains"], true)
             browserOnly = boolean_value(attr["browserOnly"])
-            @access_set << Access.new(
-                attr["origin"],
-                sub,
-                browserOnly
-                )
+            @access_set << Access.new(attr["origin"], sub, browserOnly)
           end
 
         # PhoneGap extensions (gap:)
@@ -137,22 +116,15 @@ module Confetti
           case ele.name
           when "splash"
             next if attr["src"].nil? or attr["src"].empty?
-            @splash_set << Image.new(
-                attr["src"],
-                attr["height"],
-                attr["width"],
-                attr
-                )
+            @splash_set << Image.new(attr["src"], attr["height"], attr["width"],
+                                      attr)
 
           when "plugin"
             next if attr["name"].nil? or attr["name"].empty?
             plugin = Plugin.new(attr["name"], attr["version"])
             ele.each_element('param') do |param|
               p_attr = param.attributes
-              plugin.param_set << Param.new(
-                  p_attr["name"],
-                  p_attr["value"]
-                  )
+              plugin.param_set << Param.new(p_attr["name"], p_attr["value"])
             end
             @plugin_set << plugin
           end
