@@ -760,6 +760,7 @@ describe Confetti::Config do
 
     it "should serialize when no filters provided" do
       @config.to_s.should match /icon/
+      # this should remove all instances of icons from the string
       @config.filtered_to_s("//icon").should_not match /icon/
     end
 
@@ -770,6 +771,8 @@ describe Confetti::Config do
       end
 
       it "should render the config as valid xml" do
+        # if given a config object running a to_xml and feeding
+        # it back into a config object should produce the same contents
         out = ""
         @config.to_xml.write( out, 2 )
         config = Confetti::Config.new out
