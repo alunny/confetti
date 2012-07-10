@@ -265,7 +265,7 @@ module Confetti
     def filtered_to_s( xpaths = [] )
       xpaths = [ xpaths ] unless xpaths.kind_of?(Array)
 
-      xml = @xml_doc.dup
+      xml = @xml_doc.dup unless @xml_doc.nil?
       xml ||= to_xml
 
       xpaths.each do |path|
