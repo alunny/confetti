@@ -151,7 +151,8 @@ describe Confetti::Config do
     end
 
     it "should call #is_file? with an argument passed" do
-      @blank_config.should_receive(:is_file?)
+      @blank_config.stub( :populate_from_xml )
+      @blank_config.should_receive( :is_file? )
       @blank_config.send :initialize, "config.xml"
     end
 
@@ -159,6 +160,18 @@ describe Confetti::Config do
       @blank_config.stub(:is_file?).and_return(true)
       @blank_config.should_receive(:populate_from_xml).with("config.xml")
       @blank_config.send :initialize, "config.xml"
+    end
+
+    it "should call #populate_from_string when a string is passed" do
+      @blank_config.should_receive(
+        :populate_from_string).with("</widget>")
+      @blank_config.send :initialize, "</widget>"
+    end
+
+    it "should throw an exception when a bad config path is passed" do
+      lambda{
+        @blank_config.send :initialize, "config.xml"
+      }.should raise_error Confetti::Config::FileError
     end
   end
 
@@ -747,7 +760,28 @@ describe Confetti::Config do
 
     it "should serialize when no filters provided" do
       @config.to_s.should match /icon/
+      # this should remove all instances of icons from the string
       @config.filtered_to_s("//icon").should_not match /icon/
+    end
+
+    describe "#to_xml" do
+        
+      it "should define a to_xml method" do
+        @config.should respond_to :to_xml
+      end
+
+      it "should render the config as valid xml" do
+        # if given a config object running a to_xml and feeding
+        # it back into a config object should produce the same contents
+        out = ""
+        @config.to_xml.write( out, 2 )
+        config = Confetti::Config.new out
+        config.author.name.should == "Andrew Lunny"
+        config.feature_set.length.should == 3
+        config.preference_set.length.should == 2
+        config.icon_set.length.should == 1
+        config.splash_set.length.should == 1
+      end
     end
   end
 end

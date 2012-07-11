@@ -27,7 +27,7 @@ module Confetti
       end
     end
 
-    def initialize(*args)
+    def initialize( *args )
       @author           = Author.new
       @name             = Name.new
       @license          = License.new
@@ -43,27 +43,43 @@ module Confetti
       @plugin_set       = TypedSet.new Plugin
       @viewmodes        = []
 
-      if args.length > 0 && is_file?(args.first)
-        populate_from_xml args.first
+      return if args.empty?
+
+      input = args.first
+
+      if is_file?( input ) || File.extname( input ) == ".xml"
+        populate_from_xml input
+      elsif input.kind_of?( String )
+        populate_from_string input
       end
     end
 
     def populate_from_xml(xml_file)
       begin
         file = File.read(xml_file)
-        config_doc = REXML::Document.new(file).root
-      rescue REXML::ParseException
-        raise XMLError, "malformed config.xml"
       rescue Errno::ENOENT
         raise FileError, "file #{ xml_file } doesn't exist"
+      end
+      
+      populate file 
+    end
+
+    def populate_from_string( xml_str )
+      populate xml_str 
+    end
+
+    def populate( config_doc )
+      begin
+        config_doc = REXML::Document.new( config_doc ).root
+      rescue REXML::ParseException
+        raise XMLError, "malformed config.xml"
       end
 
       if config_doc.nil?
         raise XMLError, "no doc parsed"
       end
 
-      # save reference to xml doc
-      @xml_doc = config_doc
+      @xml_doc = config_doc # save reference to doc
 
       @package = config_doc.attributes["id"]
       @version_string = config_doc.attributes["version"]
@@ -249,17 +265,103 @@ module Confetti
     def filtered_to_s( xpaths = [] )
       xpaths = [ xpaths ] unless xpaths.kind_of?(Array)
 
-      @xml = @xml_doc.dup
+      xml = @xml_doc.dup unless @xml_doc.nil?
+      xml ||= to_xml
 
       xpaths.each do |path|
-        @xml.root.elements.delete_all path
+        xml.root.elements.delete_all path
       end
 
-      @xml.root.to_s
+      xml.root.to_s
     end
 
     def to_s
       @xml_doc.root.to_s
+    end
+
+    def to_xml
+      doc = REXML::Document.new
+
+      widget = REXML::Element.new( "widget" )
+      widget.add_attributes({
+        "xmlns" => "http://www.w3.org/ns/widgets",
+        "xmlns:gap" =>  "http://phonegap.com/ns/1.0",
+        "id" => @package,
+        "version" => @version_string
+        })
+
+      if !@version_code.nil?
+        widget.add_attribute({ "versionCode" => @version_code })
+      end
+
+      name = REXML::Element.new( "name" )
+      name.text = @name.name
+      name.add_attribute({ "shortname" => @name.shortname })
+
+      author = REXML::Element.new( "author" )
+      author.text = @author.name
+      author.add_attributes({
+          "href" => @author.href,
+          "email" => @author.email
+          })
+
+      description = REXML::Element.new( "description" )
+      description.text = @description
+
+      license = REXML::Element.new( "license" )
+      license.text = @license.text
+      license.add_attribute({ "href" => @license.href })
+
+      icons = []
+      @icon_set.each do | icon |
+        ico = REXML::Element.new( "icon" )
+        attrs = icon.defined_attrs
+        ico.add_attributes attrs
+        icons << ico
+      end
+
+      splashes = []
+      @splash_set.each do | splash |
+        spl = REXML::Element.new( "gap:splash" )
+        attrs = splash.defined_attrs
+        spl.add_attributes attrs
+        splashes << spl
+      end
+
+      preferences = []
+      @preference_set.each do | preference |
+        pref = REXML::Element.new( "preference" )
+        pref.add_attributes({
+            "name" => preference.name,
+            "value" => preference.value,
+            "readonly" => preference.readonly
+            })
+        preferences << pref
+      end
+
+      features = []
+      @feature_set.each do | feature |
+        feat = REXML::Element.new( "feature" )
+        feat.add_attributes({
+            "name" => feature.name,
+            "required" => feature.required,
+            })
+        features << feat 
+      end
+
+      widget.elements.add name 
+      widget.elements.add author
+      widget.elements.add description 
+      widget.elements.add license 
+
+      icons.each { | icon | widget.elements.add icon }
+      splashes.each { | splash | widget.elements.add splash }
+      preferences.each { | pref | widget.elements.add pref }
+      features.each { | feat | widget.elements.add feat }
+
+      doc << REXML::XMLDecl.new
+      doc.elements.add widget
+      doc
     end
   end
 end
