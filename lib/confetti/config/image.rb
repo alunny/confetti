@@ -19,6 +19,19 @@ module Confetti
         @density     = @extras['density']
         @state     = @extras['state']
       end
+
+      def defined_attrs
+        {
+            "src" => @src,
+            "height" => @height,
+            "width" => @width,
+            "gap:role" => @role,
+            "gap:platform" => @platform,
+            "gap:main" => @main,
+            "gap:density" => @density,
+            "gap:state" => @state
+        }
+      end
     end
   end
 end

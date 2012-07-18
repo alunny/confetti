@@ -19,4 +19,19 @@ describe Confetti::Config::Image do
     lambda { @image.height = 50 }.should_not raise_error
     @image.height.should == 50
   end
+
+  it "should define a attribute dump method" do
+    img = Confetti::Config::Image.new
+    attrs = img.defined_attrs
+    attrs.should == {
+        "gap:main"=>nil,
+        "gap:platform"=>nil,
+        "gap:state"=>nil,
+        "src"=>nil,
+        "gap:density"=>nil,
+        "height"=>nil,
+        "gap:role"=>nil,
+        "width"=>nil
+        }
+  end
 end

@@ -19,4 +19,15 @@ describe Confetti::Config::Preference do
     lambda { @pref.readonly = true }.should_not raise_error
     @pref.readonly.should be_true
   end
+
+  it "should define a defined_attrs method" do
+    pref = Confetti::Config::Preference.new(
+        "Some Preference", "Some Setting", false )
+
+    pref.defined_attrs.should == {
+      "name" => "Some Preference",
+      "value" => "Some Setting",
+      "readonly" => false
+    }
+  end
 end

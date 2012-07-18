@@ -30,4 +30,13 @@ describe Confetti::Config::Feature do
       }.should raise_error
     end
   end
+
+  it "should define a defined_attrs method" do
+    feature = Confetti::Config::Feature.new( "Geolocation", true )
+    
+    feature.defined_attrs.should == {
+      "name" => "Geolocation",
+      "required" => true 
+    }
+  end
 end

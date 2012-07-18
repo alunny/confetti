@@ -19,4 +19,13 @@ describe Confetti::Config::Content do
     lambda { @content.encoding = "GB2313" }.should_not raise_error
     @content.encoding.should == "GB2313"
   end
+
+  it "should define a defined_attrs method" do
+    content = Confetti::Config::Content.new(
+      "some/path", "text/html", "utf-8")
+
+    content.defined_attrs.should == {
+        "src" => "some/path", "type" => "text/html", "encoding" => "utf-8"
+    }
+  end
 end
