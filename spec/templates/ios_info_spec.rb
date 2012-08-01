@@ -186,5 +186,31 @@ describe Confetti::Template::IosInfo do
         @template.statusbar_style.should == "UIStatusBarStyleBlackOpaque"
       end
     end
+    
+    describe "#exit_on_suspend method" do
+      before do
+        @config = Confetti::Config.new("#{fixture_dir}/config.xml")
+        @template = @template_class.new(@config)
+      end
+
+      it "should be false with no preference" do
+        @template.exit_on_suspend?.should be_false
+      end
+
+      describe "when set" do
+
+        it "should be true for exit_on_suspend = false" do
+          @status_pref = Confetti::Config::Preference.new("exit-on-suspend", "false")
+          @config.preference_set << @status_pref
+          @template.exit_on_suspend?.should be_true
+        end
+
+        it "should be false for exit_on_suspend = true" do
+          @status_pref = Confetti::Config::Preference.new("exit-on-suspend", "true")
+          @config.preference_set << @status_pref
+          @template.exit_on_suspend?.should be_false
+        end
+      end
+    end
   end
 end
