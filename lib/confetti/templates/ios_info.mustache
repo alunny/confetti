@@ -46,10 +46,10 @@
     <key>{{ to_s }}</key>
     <string></string>
     {{/ devices }}
-    {{# exit_on_suspend }}
+    {{# exit_on_suspend? }}
     <key>UIApplicationExitsOnSuspend</key>
-    <false/>
-    {{/ exit_on_suspend }}
+    <true/>
+    {{/ exit_on_suspend? }}
     {{# fullscreen? }}
     <key>UIStatusBarHidden</key>
     <true/>

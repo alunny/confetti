@@ -199,16 +199,16 @@ describe Confetti::Template::IosInfo do
 
       describe "when set" do
 
-        it "should be true for exit_on_suspend = false" do
+        it "should be false for exit_on_suspend = false" do
           @status_pref = Confetti::Config::Preference.new("exit-on-suspend", "false")
           @config.preference_set << @status_pref
-          @template.exit_on_suspend?.should be_true
+          @template.exit_on_suspend?.should be_false
         end
 
-        it "should be false for exit_on_suspend = true" do
+        it "should be true for exit_on_suspend = true" do
           @status_pref = Confetti::Config::Preference.new("exit-on-suspend", "true")
           @config.preference_set << @status_pref
-          @template.exit_on_suspend?.should be_false
+          @template.exit_on_suspend?.should be_true
         end
       end
     end

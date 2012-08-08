@@ -57,7 +57,7 @@ module Confetti
       end
 
      def exit_on_suspend?
-        @config.preference("exit-on-suspend") == :false
+        @config.preference("exit-on-suspend") == :true
      end
 
       def fullscreen?
