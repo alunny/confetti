@@ -56,6 +56,10 @@ module Confetti
         ORIENTATIONS_MAP[@config.orientation]
       end
 
+     def exit_on_suspend?
+        @config.preference("exit-on-suspend") == :true
+     end
+
       def fullscreen?
         @config.preference(:fullscreen) == :true
       end
