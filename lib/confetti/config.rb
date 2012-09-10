@@ -73,6 +73,8 @@ module Confetti
         config_doc = REXML::Document.new( config_doc ).root
       rescue REXML::ParseException
         raise XMLError, "malformed config.xml"
+      rescue Iconv::InvalidCharacter
+        raise EncodingError, "unable to read config.xml"
       end
 
       if config_doc.nil?

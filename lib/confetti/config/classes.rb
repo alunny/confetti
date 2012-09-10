@@ -3,6 +3,7 @@ module Confetti
     class XMLError < Confetti::Error ; end
     class FileError < Confetti::Error ; end
     class FiletypeError < Confetti::Error ; end
+    class EncodingError < Confetti::Error ; end
 
     # classes that represent child elements
     class Author < Struct.new(:name, :href, :email)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-16" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+	xmlns:gap = "http://phonegap.com/ns/1.0"
+	id = "com.one.two"
+	version   = "0.0.1" 
+	versionCode ="1" >
+
+    <name>Bad Encoding Test</name>
+
+    <description>Testing for ICONV fail</description>
+	<icon src="icon.png" />
+	<preference name="permissions" value="none"/>
+
+    <author href="www.exxexe.com" email="user@exxexe.com">
+       Whoever
+    </author>
+
+</widget>

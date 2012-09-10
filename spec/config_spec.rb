@@ -202,6 +202,12 @@ describe Confetti::Config do
       }.should raise_error Confetti::Config::XMLError
     end
 
+    it "should contain Iconv errors (with utf-16)" do
+      lambda {
+        @config.populate_from_xml("#{ fixture_dir }/bad-encoding.xml")
+      }.should raise_error Confetti::Config::EncodingError
+    end
+
     describe "when setting attributes from config.xml" do
       before do
         @config.populate_from_xml(fixture_dir + "/config.xml")
