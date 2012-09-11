@@ -12,20 +12,38 @@ module Confetti
         elsif str.match /^(\d)+[.](\d)+[.](\d)+$/
           str
         elsif str.match /^((\d)+[.])*(\d)+$/
-          fix_version(str)
+          extend_version(str)
+        elsif str.match /^([\d\w]+)[.]([\d\w]+)[.]([\d\w]+)$/
+          deletter_version(str)
         else
           raise VersionError, "need a valid version number of the form 0.0.0"
         end
       end
 
       private
-        def fix_version(str)
+        def extend_version(str)
           segments = str.split('.')
 
           segments << '0' if segments.length == 1
           segments << '0' if segments.length == 2
 
           segments[0,3].join '.'
+        end
+
+        def deletter_version(str)
+          segments = str.split('.')
+          new_parts = []
+
+          segments.each do |seg|
+            unless /\d+/ =~ seg
+              seg.gsub!(/\w/, '')
+              seg = '0' if seg.length == 0
+            end
+
+            new_parts << seg
+          end
+
+          new_parts.join '.'
         end
     end
   end

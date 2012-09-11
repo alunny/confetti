@@ -158,6 +158,11 @@ describe Confetti::Template::WindowsPhone7Manifest do
       @config.version_string = "2012.05.20"
       @template.version.should == "2012.0.2.0"
     end
+
+    it "should ensure letters are converted to numbers" do
+      @config.version_string = "1.3.a"
+      @template.version.should == "1.3.0.0"
+    end
   end
 
   describe "author" do

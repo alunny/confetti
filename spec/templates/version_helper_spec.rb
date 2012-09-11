@@ -31,5 +31,9 @@ describe Confetti::Template::VersionHelper do
     it "should truncate extra digits if string has too many segments" do
       normalize_version('1.2.3.4.5').should == "1.2.3"
     end
+
+    it "should switch letters out for numbers" do
+      normalize_version('1.3.a').should == "1.3.0"
+    end
   end
 end
