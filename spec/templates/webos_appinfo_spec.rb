@@ -49,10 +49,6 @@ describe Confetti::Template::WebosAppinfo do
         @template = @template_class.new(@config)
       end
 
-      it "should set app_id correctly" do
-        @template.app_id.should == "com.whoever.awesome.app"
-      end
-
       it "should set class_name correctly" do
         @template.app_name.should == "Awesome App"
       end
@@ -63,6 +59,27 @@ describe Confetti::Template::WebosAppinfo do
 
       it "should render the correct appinfo.json" do
         @template.render.should == File.read("#{ fixture_dir }/webos/webos_appinfo_spec.json")
+      end
+
+      describe "app id" do
+        it "should set app_id correctly" do
+          @template.app_id.should == "com.whoever.awesome.app"
+        end
+
+        it "should convert nonsense to a real package" do
+          @config.package = "whatever"
+          @template.app_id.should == "com.whatever"
+        end
+
+        it "should downcase the package name" do
+          @config.package = "com.WhatEver"
+          @template.app_id.should == "com.whatever"
+        end
+
+        it "should only allow numbers and digits" do
+          @config.package = "com.What_Ever"
+          @template.app_id.should == "com.whatever"
+        end
       end
 
       describe "#version method" do

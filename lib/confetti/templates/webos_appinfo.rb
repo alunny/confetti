@@ -5,11 +5,8 @@ module Confetti
       include VersionHelper
 
       def app_id
-        if @config
-          if is_java_package_id(@config.package)
-            @config.package
-          end
-        end
+        pkg = convert_to_java_package_id(@config.package).downcase
+        pkg.gsub(/[^0-9a-z.]/,'')
       end
 
       def app_name
