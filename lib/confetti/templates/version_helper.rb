@@ -35,8 +35,8 @@ module Confetti
           new_parts = []
 
           segments.each do |seg|
-            unless /\d+/ =~ seg
-              seg.gsub!(/\w/, '')
+            unless /^\d+$/ =~ seg
+              seg.gsub!(/[^\d]/, '')
               seg = '0' if seg.length == 0
             end
 

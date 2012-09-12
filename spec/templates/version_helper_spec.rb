@@ -35,5 +35,9 @@ describe Confetti::Template::VersionHelper do
     it "should switch letters out for numbers" do
       normalize_version('1.3.a').should == "1.3.0"
     end
+
+    it "should remove letters when they're in there" do
+      normalize_version('1.3.5a').should == "1.3.5"
+    end
   end
 end
