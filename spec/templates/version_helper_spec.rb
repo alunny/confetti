@@ -16,8 +16,8 @@ describe Confetti::Template::VersionHelper do
       normalize_version('').should == "0.0.1"
     end
 
-    it "should raise an error if version_string isn't even close" do
-      lambda { normalize_version('barbeque') }.should raise_error
+    it "should return the default if version_string isn't even close" do
+      normalize_version('BBQ').should == "0.0.1"
     end
 
     it "should add empty digits if str has one segment" do

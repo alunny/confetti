@@ -88,9 +88,9 @@ describe Confetti::Template::WebosAppinfo do
           @template.version.should == "0.0.1"
         end
 
-        it "should raise an error if version_string isn't even close" do
+        it "should return the default if version_string isn't even close" do
           @config.version_string = 'breakfast'
-          lambda { @template.version }.should raise_error
+          @template.version.should == '0.0.1'
         end
 
         it "should add empty digits if string has one segment" do

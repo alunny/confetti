@@ -16,7 +16,7 @@ module Confetti
         elsif str.match /^([\d\w]+)[.]([\d\w]+)[.]([\d\w]+)$/
           deletter_version(str)
         else
-          raise VersionError, "need a valid version number of the form 0.0.0"
+          default
         end
       end
 
