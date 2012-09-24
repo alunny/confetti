@@ -45,7 +45,12 @@ module Confetti
       end
 
       def version_code
-        @config.version_code || '1'
+        if @config.version_code.nil?
+          '1'
+        else
+          int = @config.version_code.to_i
+          int == 0 ? '1' : int.to_s
+        end
       end
 
       def app_orientation

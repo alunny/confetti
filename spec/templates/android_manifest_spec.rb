@@ -250,4 +250,25 @@ describe Confetti::Template::AndroidManifest do
       end
     end
   end
+
+  describe "version_code" do
+    before do
+      @config = Confetti::Config.new
+      @template = @template_class.new(@config)
+    end
+
+    it "should be '1' by default" do
+      @template.version_code.should == "1"
+    end
+
+    it "should reflect an integer version code if present" do
+      @config.version_code = "12"
+      @template.version_code.should == "12"
+    end
+
+    it "should turn floats into integers" do
+      @config.version_code = "2.0.0"
+      @template.version_code.should == "2"
+    end
+  end
 end
