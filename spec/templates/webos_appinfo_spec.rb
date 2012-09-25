@@ -71,6 +71,11 @@ describe Confetti::Template::WebosAppinfo do
           @template.app_id.should == "com.whatever"
         end
 
+        it "should convert total nonsense to a default value" do
+          @config.package = "1"
+          @template.app_id.should == "com.phonegap.app"
+        end
+
         it "should downcase the package name" do
           @config.package = "com.WhatEver"
           @template.app_id.should == "com.whatever"

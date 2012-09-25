@@ -6,7 +6,13 @@ module Confetti
 
       def app_id
         pkg = convert_to_java_package_id(@config.package).downcase
-        pkg.gsub(/[^0-9a-z.]/,'')
+        pkg.gsub!(/[^0-9a-z.]/,'')
+
+        if is_java_package_id(pkg)
+          pkg
+        else
+          'com.phonegap.app'
+        end
       end
 
       def app_name
