@@ -21,7 +21,7 @@ module Confetti
         return self unless @config
 
         # old = 0.x, 1.0, 1.1, or 1.2
-        old = /^(0)|(1[.][0-2])/
+        old = /^(0)|^(1[.][0-2])/
 
         if @config.phonegap_version and @config.phonegap_version.match(old)
           self.template = @@legacy_template
