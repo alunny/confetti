@@ -220,6 +220,10 @@ describe Confetti::Template::BlackberryWidgetsConfig do
       @template.framework_namespace.should == 'org.apache.cordova'
     end
 
+    it "should be org.apache.cordova for 2.1.0" do
+      @config.phonegap_version = '2.1.0'
+      @template.framework_namespace.should == 'org.apache.cordova'
+    end
   end
 
   describe "#access" do
