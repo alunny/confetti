@@ -24,8 +24,8 @@ module Confetti
             filepath ||= File.join(Dir.pwd, template.output_filename)
 
             open(filepath, 'w') { |f| f.puts output }
-          rescue
-            raise IOError, "unable to write template file"
+          rescue SystemCallError
+            raise IOError, "SystemCallError: unable to write template file"
           end
         end
       end
