@@ -46,9 +46,12 @@ module Confetti
 
       def devices 
         nibs = ["NSMainNibFile"]
+
         @config.preference_set.each do |preference|
-          nibs << "NSMainNibFile~ipad"  if preference.name.match /^universal$/
+          next unless preference.name
+          nibs << "NSMainNibFile~ipad" if preference.name.match /^universal$/
         end
+
         nibs
       end
 

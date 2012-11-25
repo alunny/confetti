@@ -213,4 +213,12 @@ describe Confetti::Template::IosInfo do
       end
     end
   end
+
+  describe "devices" do
+    it "should not raise error with an empty preference" do
+      config = Confetti::Config.new("#{ fixture_dir }/config_empty_pref.xml")
+      template = @template_class.new(config)
+      lambda { template.devices }.should_not raise_error
+    end
+  end
 end
