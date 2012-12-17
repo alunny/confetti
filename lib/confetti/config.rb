@@ -180,7 +180,9 @@ module Confetti
     def preference name
       pref = preference_obj(name)
 
-      pref && pref.value && pref.value.to_sym
+      if pref && pref.value && !pref.value.empty?
+        pref.value.to_sym
+      end
     end
 
     # mostly an internal method to help with weird cases

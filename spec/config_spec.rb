@@ -208,6 +208,12 @@ describe Confetti::Config do
       }.should raise_error Confetti::Config::EncodingError
     end
 
+    it "should handle blank values in preference tags" do
+      lambda {
+        @config.populate_from_xml("#{ fixture_dir }/config_empty_value.xml")
+      }.should_not raise_error
+    end
+
     describe "when setting attributes from config.xml" do
       before do
         @config.populate_from_xml(fixture_dir + "/config.xml")
@@ -591,6 +597,13 @@ describe Confetti::Config do
       @config.preference_set << pref
 
       @config.preference(:privacy).should be_nil
+    end
+
+    it "should be nil when the preference has an empty string as the value" do
+      pref = Confetti::Config::Preference.new "nonsense", ""
+      @config.preference_set << pref
+
+      @config.preference(:nonsense).should be_nil
     end
   end
 
