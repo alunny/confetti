@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cordova>
+  <preference name="CFBundleIconFiles" value="[{{ icons }}]"/>
+  <preference name="UISupportedInterfaceOrientations" value="[{{ app_orientations }}]"/>
+  <preference name="UISupportedInterfaceOrientations~ipad" value="[{{ app_orientations }}]"/>
+  <preference name="CFBundleDevelopmentRegion" value="English"/>
+  <preference name="CFBundleDisplayName" value="{{ product_name }}"/>
+  <preference name="CFBundleExecutable" value="${EXECUTABLE_NAME}"/>
+  <preference name="CFBundleIconFile" value="icon.png"/>
+  <preference name="CFBundleIdentifier" value="{{ bundle_identifier }}"/>
+  <preference name="CFBundleInfoDictionaryVersion" value="6.0"/>
+  <preference name="CFBundleName" value="{{ product_name }}"/>
+  <preference name="CFBundlePackageType" value="APPL"/>
+  <preference name="CFBundleSignature" value="????"/>
+  <preference name="CFBundleVersion" value="{{ bundle_version }}"/>
+  <preference name="LSRequiresIPhoneOS" value="true"/>
+  {{# devices }}<preference name="{{ to_s }}" value=""/>
+  {{/ devices }}
+  {{# exit_on_suspend? }}<preference name="UIApplicationExitsOnSuspend" value="true"/>
+  {{/ exit_on_suspend? }}
+  {{# fullscreen? }}<preference name="UIStatusBarHidden" value="true"/>
+  {{/ fullscreen? }}
+  {{# prerendered_icon? }}<preference name="UIPrerenderedIcon" value="true"/>
+  {{/ prerendered_icon? }}
+  {{# statusbar_style }}<preference name="UIStatusBarStyle" value="{{ to_s }}"/>
+  {{/ statusbar_style }}<plugins/>
+  <access/>
+</cordova>

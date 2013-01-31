@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cordova>
+  <preference name="CFBundleIconFiles" value="['icon.png']"/>
+  <preference name="UISupportedInterfaceOrientations" value="['UIInterfaceOrientationPortrait','UIInterfaceOrientationPortraitUpsideDown','UIInterfaceOrientationLandscapeLeft','UIInterfaceOrientationLandscapeRight']"/>
+  <preference name="UISupportedInterfaceOrientations~ipad" value="['UIInterfaceOrientationPortrait','UIInterfaceOrientationPortraitUpsideDown','UIInterfaceOrientationLandscapeLeft','UIInterfaceOrientationLandscapeRight']"/>
+  <preference name="CFBundleDevelopmentRegion" value="English"/>
+  <preference name="CFBundleDisplayName" value="Confetti Sample App"/>
+  <preference name="CFBundleExecutable" value="${EXECUTABLE_NAME}"/>
+  <preference name="CFBundleIconFile" value="icon.png"/>
+  <preference name="CFBundleIdentifier" value="com.alunny.confetti"/>
+  <preference name="CFBundleInfoDictionaryVersion" value="6.0"/>
+  <preference name="CFBundleName" value="Confetti Sample App"/>
+  <preference name="CFBundlePackageType" value="APPL"/>
+  <preference name="CFBundleSignature" value="????"/>
+  <preference name="CFBundleVersion" value="1.0.0"/>
+  <preference name="LSRequiresIPhoneOS" value="true"/>
+  <preference name="NSMainNibFile" value=""/>
+  <preference name="NSMainNibFile~ipad" value=""/>
+  <plugins/>
+  <access/>
+</cordova>
