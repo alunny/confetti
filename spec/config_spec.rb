@@ -800,6 +800,7 @@ describe Confetti::Config do
         config.preference_set.length.should == 2
         config.icon_set.length.should == 1
         config.splash_set.length.should == 1
+        config.content.src.should == "not_index.html"
       end
     end
   end
