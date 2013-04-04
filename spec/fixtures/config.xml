@@ -48,5 +48,7 @@ THE SOFTWARE.</license>
 	<feature name="http://api.phonegap.com/1.0/camera" required="true"/>
 	<feature name="http://api.phonegap.com/1.0/notification" required="true"/>
 
+	<content src="not_index.html" />
+
   <access origin="*" />
 </widget>

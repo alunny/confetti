@@ -127,6 +127,10 @@ module Confetti
             sub = boolean_value(attr["subdomains"], true)
             browserOnly = boolean_value(attr["browserOnly"])
             @access_set << Access.new(attr["origin"], sub, browserOnly)
+
+          when "content"
+            @content = Content.new(attr["src"], attr["type"], attr["encoding"])
+
           end
 
         # PhoneGap extensions (gap:)
@@ -302,6 +306,12 @@ module Confetti
       name.text = @name.name
       name.add_attribute({ "shortname" => @name.shortname })
 
+      content = REXML::Element.new( "content" )
+      content.add_attributes({
+          "src" => @content.src,
+          "type" => @content.type
+        })
+
       author = REXML::Element.new( "author" )
       author.text = @author.name
       author.add_attributes({
@@ -357,6 +367,7 @@ module Confetti
       widget.elements.add author
       widget.elements.add description 
       widget.elements.add license 
+      widget.elements.add content
 
       icons.each { | icon | widget.elements.add icon }
       splashes.each { | splash | widget.elements.add splash }
