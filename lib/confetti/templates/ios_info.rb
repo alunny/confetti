@@ -67,6 +67,20 @@ module Confetti
         @config.preference(:fullscreen) == :true
       end
 
+      def url_schemes
+        result = []
+        
+        @config.url_scheme_set.each { |url_scheme|
+          result << {
+            :name => url_scheme.name || @config.package,
+            :role => %w{Editor Viewer Shell None}.find{|u| u == url_scheme.role} || "None",
+            :schemes => url_scheme.schemes
+          }
+        }
+        
+        result
+      end
+
       def prerendered_icon?
         @config.preference("prerendered-icon") == :true
       end
