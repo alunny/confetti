@@ -5,10 +5,11 @@ module Confetti
     self.extend TemplateHelper
 
     attr_accessor :package, :version_string, :version_code, :description,
-                  :height, :width, :plist_icon_set
+                  :height, :width, :plist_icon_set, :url_scheme_set
     attr_reader :author, :viewmodes, :name, :license, :content,
                 :icon_set, :feature_set, :preference_set, :xml_doc,
-                :splash_set, :plist_icon_set, :access_set, :plugin_set
+                :splash_set, :plist_icon_set, :access_set, :plugin_set,
+                :url_scheme_set
 
     generate_and_write  :android_manifest, :android_strings,
                         :webos_appinfo, :ios_info, :symbian_wrt_info,
@@ -38,6 +39,7 @@ module Confetti
       @splash_set       = TypedSet.new Image
       @preference_set   = TypedSet.new Preference
       @access_set       = TypedSet.new Access
+      @url_scheme_set   = TypedSet.new UrlScheme
 
       # defined in PhoneGap module
       @plugin_set       = TypedSet.new Plugin
@@ -140,7 +142,12 @@ module Confetti
             next if attr["src"].nil? or attr["src"].empty?
             @splash_set << Image.new(attr["src"], attr["height"], attr["width"],
                                       attr)
-
+          when "url-scheme"
+            schms = ele.elements.to_a('scheme').map { |a| a.text }
+            schms.reject! { |a| a.nil? || a.empty? }
+            next if schms.empty?
+            @url_scheme_set << UrlScheme.new(schms, attr["name"], attr["role"])
+            
           when "plugin"
             next if attr["name"].nil? or attr["name"].empty?
             plugin = Plugin.new(attr["name"], attr["version"])
@@ -208,8 +215,8 @@ module Confetti
       opts['width']     ||= nil
       opts['height']    ||= nil
       opts['role']      ||= nil
-      opts['density']      ||= nil
-      opts['state']      ||= nil
+      opts['density']   ||= nil
+      opts['state']     ||= nil
       opts['platform']  ||= nil
 
       # filters to look through sets for
@@ -341,6 +348,15 @@ module Confetti
         spl.add_attributes attrs
         splashes << spl
       end
+      
+      url_schemes = []
+      @url_scheme_set.each do | scheme |
+        schm = REXML::Element.new( "gap:url-scheme" )
+        schm.add_attributes({"name" => scheme.name }) unless scheme.name.nil?
+        schm.add_attributes({"role" => scheme.role }) unless scheme.role.nil?
+        scheme.schemes.each{|s| schm.add_element("scheme").add_text(s) }
+        url_schemes << schm
+      end
 
       preferences = []
       @preference_set.each do | preference |
@@ -373,6 +389,7 @@ module Confetti
       splashes.each { | splash | widget.elements.add splash }
       preferences.each { | pref | widget.elements.add pref }
       features.each { | feat | widget.elements.add feat }
+      url_schemes.each { | schm | widget.elements.add schm }
 
       doc << REXML::XMLDecl.new
       doc.elements.add widget
