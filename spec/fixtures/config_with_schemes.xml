@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns	= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		    = "com.nitobi.johngarrett"
+	version 	= "1.0"
+    versionCode = "5">
+
+	<name>John Garrett Drinking Game</name>
+
+	<description>
+        If you're watching a Canucks game, you need play this.
+	</description>
+
+	<author href="http://www.nitobi.com" email="support@nitobi.com">
+		Tim Kim, Ryan Betts, Fil Maj
+	</author>
+
+  <icon src="img/beer_72.png" width="72" height="72" />
+  <icon src="img/beer_48.png" width="48" height="48" />
+  <icon src="img/beer_36.png" width="36" height="36" />
+
+  <preference name="orientation" value="landscape" />
+
+  <gap:url-scheme name="com.phonegap.test" role="Shell">
+    <scheme>pgb</scheme>
+  </gap:url-scheme>
+
+</widget>

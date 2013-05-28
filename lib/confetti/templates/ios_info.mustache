@@ -62,5 +62,20 @@
     <key>UIStatusBarStyle</key>
     <string>{{ to_s }}</string>
     {{/ statusbar_style }}
-</dict>
+    <key>CFBundleURLTypes</key>
+    <array>{{# url_schemes }}
+      <dict>
+      <key>CFBundleTypeRole</key>
+      <string>{{ role }}</string>
+      <key>CFBundleURLName</key>
+      <string>{{ name }}</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        {{# schemes }}
+        <string>{{ to_s }}</string>
+        {{/ schemes }}
+      </array>
+      </dict>
+      {{/ url_schemes }}</array>
+    </dict>
 </plist>

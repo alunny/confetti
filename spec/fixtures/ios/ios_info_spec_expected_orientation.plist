@@ -42,5 +42,7 @@
     <true/>
     <key>NSMainNibFile</key>
     <string></string>
+    <key>CFBundleURLTypes</key>
+    <array></array>
     </dict>
 </plist>

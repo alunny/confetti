@@ -115,6 +115,17 @@ describe Confetti::Template::IosInfo do
       @template.render.should == File.read("#{ fixture_dir }/ios/ios_info_spec_expected_orientation.plist")
     end
   end
+  
+  describe "ios url schemes" do
+    before do
+      @config = Confetti::Config.new("#{fixture_dir}/config_with_schemes.xml")
+      @template = @template_class.new(@config)
+    end
+
+    it "should populate the info.plist with the schemes" do
+      @template.render.should == File.read("#{ fixture_dir }/ios/ios_info_spec_expected_schemes.plist")
+    end
+  end
 
   describe "should specify if the application is universal" do
     before do
