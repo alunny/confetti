@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Confetti::Config::Feature do
+  include HelpfulPaths
+
   before do
     @feature = Confetti::Config::Feature.new("Geolocation", nil)
   end
@@ -38,5 +40,17 @@ describe Confetti::Config::Feature do
       "name" => "Geolocation",
       "required" => true 
     }
+  end
+
+  context "with a config.xml" do
+
+    before :each do
+      @config = Confetti::Config.new "#{ fixture_dir }/config-features.xml"
+    end
+
+    it "should read the feature's param set" do
+      feature = @config.feature_set.detect{ | f | f.name == "notification" }
+      feature.param_set.length.should == 2
+    end
   end
 end

@@ -115,7 +115,14 @@ module Confetti
             @plist_icon_set << attr["src"]
 
           when "feature"
-            @feature_set  << Feature.new(attr["name"], attr["required"])
+            feature = Feature.new(attr["name"], attr["required"])
+
+            ele.each_element( 'param' ) do |param|
+              p_attr = param.attributes
+              feature.param_set << Param.new(p_attr["name"], p_attr["value"])
+            end
+
+            @feature_set  << feature
 
           when "preference"
             @preference_set << Preference.new(attr["name"], attr["value"],
@@ -376,6 +383,7 @@ module Confetti
             "name" => feature.name,
             "required" => feature.required,
             })
+
         features << feat 
       end
 
