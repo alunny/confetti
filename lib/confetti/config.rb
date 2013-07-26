@@ -9,7 +9,7 @@ module Confetti
     attr_reader :author, :viewmodes, :name, :license, :content,
                 :icon_set, :feature_set, :preference_set, :xml_doc,
                 :splash_set, :plist_icon_set, :access_set, :plugin_set,
-                :url_scheme_set
+                :url_scheme_set, :platform_set
 
     generate_and_write  :android_manifest, :android_strings,
                         :webos_appinfo, :ios_info, :symbian_wrt_info,
@@ -36,6 +36,7 @@ module Confetti
       @icon_set         = TypedSet.new Image
       @plist_icon_set   = [] 
       @feature_set      = TypedSet.new Feature
+      @platform_set     = TypedSet.new Platform
       @splash_set       = TypedSet.new Image
       @preference_set   = TypedSet.new Preference
       @access_set       = TypedSet.new Access
@@ -145,6 +146,8 @@ module Confetti
         # PhoneGap extensions (gap:)
         when "http://phonegap.com/ns/1.0"
           case ele.name
+          when "platform"
+            @platform_set << Platform.new(attr["name"])
           when "splash"
             next if attr["src"].nil? or attr["src"].empty?
             @splash_set << Image.new(attr["src"], attr["height"], attr["width"],
@@ -387,6 +390,15 @@ module Confetti
         features << feat 
       end
 
+      platforms = []
+      @platform_set.each do | platform |
+        plat = REXML::Element.new( "gap:platform" )
+        plat.add_attributes({
+            "name" => platform.name
+            })
+        platforms << plat 
+      end
+
       widget.elements.add name 
       widget.elements.add author
       widget.elements.add description 
@@ -397,6 +409,7 @@ module Confetti
       splashes.each { | splash | widget.elements.add splash }
       preferences.each { | pref | widget.elements.add pref }
       features.each { | feat | widget.elements.add feat }
+      platforms.each { | plat | widget.elements.add plat }
       url_schemes.each { | schm | widget.elements.add schm }
 
       doc << REXML::XMLDecl.new

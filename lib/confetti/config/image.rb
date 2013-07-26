@@ -16,8 +16,8 @@ module Confetti
         @role     = @extras['role']
         @platform = @extras['platform']
         @main     = @extras['main']
-        @density     = @extras['density']
-        @state     = @extras['state']
+        @density  = @extras['density']
+        @state    = @extras['state']
       end
 
       def defined_attrs

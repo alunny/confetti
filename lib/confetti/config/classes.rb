@@ -34,6 +34,14 @@ module Confetti
       end
     end
 
+    class Platform < Struct.new(:name)
+      def defined_attrs
+        {
+          "name" => self[ :name ]
+        }
+      end
+    end
+
     class Content < Struct.new(:src, :type, :encoding)
       def defined_attrs
         {
