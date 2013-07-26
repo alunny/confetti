@@ -113,6 +113,20 @@ describe Confetti::Config do
       }.should raise_error
     end
 
+    it "has an platform field, that is a TypedSet" do
+      @config.platform_set.should be_a TypedSet
+    end
+
+    it "platform_set should be typed to platform objects" do
+      @config.platform_set.set_class.should be Confetti::Config::Platform
+    end
+
+    it "should not allow platform_set to be clobbered" do
+      lambda { 
+        @config.platform_set = ['ios', 'android']
+      }.should raise_error
+    end
+
     it "has an preference_set field, that is a TypedSet" do
       @config.preference_set.should be_a TypedSet
     end
@@ -378,6 +392,20 @@ describe Confetti::Config do
           features_names.should include "http://api.phonegap.com/1.0/geolocation"
           features_names.should include "http://api.phonegap.com/1.0/camera"
           features_names.should include "http://api.phonegap.com/1.0/notification"
+        end
+      end
+
+      describe "platforms" do
+        it "should append platforms to the feature set" do
+          @config.platform_set.size.should be 3
+        end
+
+        it "should include the right platforms" do
+          # first tends to be last listed in xml document
+          platforms_names = @config.platform_set.map { |f| f.name }
+          platforms_names.should include "ios"
+          platforms_names.should include "android"
+          platforms_names.should include "webos"
         end
       end
 
