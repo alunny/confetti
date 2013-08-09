@@ -24,7 +24,7 @@
         android:debuggable="true" android:hardwareAccelerated="true">
         <activity android:name=".{{ class_name }}"
                   android:screenOrientation="{{ app_orientation }}"
-                  android:label="@string/app_name" android:configChanges="orientation|keyboardHidden">
+                  android:label="@string/app_name" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
