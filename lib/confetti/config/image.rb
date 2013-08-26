@@ -2,7 +2,7 @@ module Confetti
   class Config
     class Image 
       attr_accessor :src, :width, :height, :extras,
-        :role, :platform, :main, :density, :state, :keepOriginal
+        :role, :platform, :main, :density, :state, :keep_original
 
       def initialize *args
         @src = args.shift
@@ -18,7 +18,7 @@ module Confetti
         @main     = @extras['main']
         @density  = @extras['density']
         @state    = @extras['state']
-        @keepOriginal = @extras['keepOriginal']
+        @keep_original = @extras['keep_original']
       end
 
       def defined_attrs
@@ -31,7 +31,7 @@ module Confetti
             "gap:main" => @main,
             "gap:density" => @density,
             "gap:state" => @state,
-            "gap:keepOriginal" => @keepOriginal
+            "gap:keep_original" => @keep_original
         }
       end
     end

@@ -227,7 +227,6 @@ module Confetti
       opts['role']      ||= nil
       opts['density']   ||= nil
       opts['state']     ||= nil
-      opts['keepOriginal'] ||= nil
       opts['platform']  ||= nil
 
       # filters to look through sets for
@@ -235,7 +234,6 @@ module Confetti
         {'height' => opts['height'], 'width' => opts['width']},
         {'platform' => opts['platform'], 'density' => opts['density']},
         {'platform' => opts['platform'], 'state' => opts['state']},
-        {'platform' => opts['platform'], 'keepOriginal' => opts['keepOriginal']},
         {'platform' => opts['platform'], 'role' => opts['role']},
         {'platform' => opts['platform']}
       ]
