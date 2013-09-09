@@ -22,6 +22,10 @@ module Confetti
         "battery"       => %w{BROADCAST_STICKY}
       }
 
+      GAP_FEATURES_MAP = {
+        "camera"        => %w{camera}
+      }
+
       ORIENTATIONS_MAP = {
         :default    => "unspecified",
         :landscape  => "landscape",
@@ -58,20 +62,28 @@ module Confetti
       end
 
       def permissions
-        permissions = []
+        translate_feature GAP_PERMISSIONS_MAP
+      end
+
+      def features
+        translate_feature GAP_FEATURES_MAP
+      end
+
+      def translate_feature map
+        features = []
         phonegap_api = /http\:\/\/api.phonegap.com\/1[.]0\/(\w+)/
         feature_names = @config.feature_set.map { |f| f.name }
         feature_names.sort
 
         feature_names.each do |f|
           feature_name = f.match(phonegap_api)[1] if f.match(phonegap_api)
-          associated_permissions = GAP_PERMISSIONS_MAP[feature_name]
+          associated_features = map[feature_name]
 
-          permissions.concat(associated_permissions) if associated_permissions
+          features.concat(associated_features) if associated_features
         end
 
-        permissions.sort!
-        permissions.map { |f| { :name => f } }
+        features.sort!
+        features.map { |f| { :name => f } }
       end
 
       def install_location
