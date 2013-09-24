@@ -103,8 +103,22 @@ module Confetti
         choice = @config.preference("android-maxSdkVersion")
 
         if int_value?(choice)
-          "android:maxSdkVersion=\"#{ choice }\""
+          "android:maxSdkVersion=\"#{ choice }\" "
         end
+      end
+
+      def target_sdk_version_attribute
+        choice = @config.preference("android-targetSdkVersion")
+
+        if int_value?(choice)
+          "android:targetSdkVersion=\"#{ choice }\" "
+        end
+      end
+
+      def window_soft_input_mode
+        choice = @config.preference("android-windowSoftInputMode").to_s
+
+        choice == "" ? "stateUnspecified|adjustUnspecified" : choice
       end
 
       def int_value? val

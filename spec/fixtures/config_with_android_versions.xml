@@ -24,4 +24,5 @@
 
   <preference name="android-minSdkVersion" value="8" />
   <preference name="android-maxSdkVersion" value="10" />
+  <preference name="android-targetSdkVersion" value="9" />
 </widget>
