@@ -227,7 +227,7 @@ describe Confetti::Template::AndroidManifest do
 
       it "should return that number" do
         @sdk_pref.value = "12"
-        @template.max_sdk_version_attribute.should == 'android:maxSdkVersion="12"'
+        @template.max_sdk_version_attribute.should == 'android:maxSdkVersion="12" '
       end
 
       it "should be nil if not a number" do
@@ -247,6 +247,70 @@ describe Confetti::Template::AndroidManifest do
         rendered = @template.render       
         rendered.should match 'android:minSdkVersion="8"'
         rendered.should match 'android:maxSdkVersion="10"'
+      end
+    end
+  end
+
+  describe "#target_sdk_version_attribute" do
+    before do
+      @config = Confetti::Config.new
+      @template = @template_class.new(@config)
+    end
+
+    it "should default to nil" do
+      @template.target_sdk_version_attribute.should be_nil
+    end
+
+    describe "when set" do
+      before do
+        @sdk_pref = Confetti::Config::Preference.new "android-targetSdkVersion"
+        @config.preference_set << @sdk_pref
+      end
+
+      it "should return that number" do
+        @sdk_pref.value = "12"
+        @template.target_sdk_version_attribute.should == 'android:targetSdkVersion="12" '
+      end
+
+      it "should be nil if not a number" do
+        @sdk_pref.value = "twelve"
+        @template.target_sdk_version_attribute.should be_nil
+      end
+    end
+
+    describe "output" do
+      before do
+        path = "#{ fixture_dir }/config_with_android_versions.xml"
+        @config = Confetti::Config.new(path)
+        @template = @template_class.new(@config)
+      end
+
+      it "should write the attributes correctly" do
+        rendered = @template.render       
+        rendered.should match 'android:targetSdkVersion="9"'
+      end
+    end
+  end
+  
+  describe "#window_soft_input_mode" do
+    before do
+      @config = Confetti::Config.new
+      @template = @template_class.new(@config)
+    end
+
+    it "should default to 'internalOnly' do" do
+      @template.window_soft_input_mode.should == "stateUnspecified|adjustUnspecified"
+    end
+
+    describe "when set" do
+      before do
+        @install_pref = Confetti::Config::Preference.new "android-windowSoftInputMode"
+        @config.preference_set << @install_pref
+      end
+
+      it "should use 'auto' when set to 'auto'" do
+        @install_pref.value = "stateVisible|adjustResize"
+        @template.window_soft_input_mode.should == "stateVisible|adjustResize"
       end
     end
   end
