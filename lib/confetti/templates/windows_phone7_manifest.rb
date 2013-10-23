@@ -46,8 +46,7 @@ module Confetti
       end
 
       def capabilities
-        default_permissions = %w{camera contacts device geolocation
-            network media}
+        default_permissions = %w{}
         permissions = []                                                
         capabilities = []                                                
         phonegap_api = /http\:\/\/api.phonegap.com\/1[.]0\/(\w+)/          
