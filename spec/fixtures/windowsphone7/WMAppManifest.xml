@@ -18,11 +18,11 @@
       <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
     </Tasks>
     <Tokens>
-      <PrimaryToken TokenID="Cordova_1._5._0_Starter1Token" TaskName="_default">
+      <PrimaryToken TokenID="ConfettiSampleApp" TaskName="_default">
         <TemplateType5>
           <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
           <Count>0</Count>
-          <Title>Cordova_1._5._0_Starter1</Title>
+          <Title>ConfettiSampleApp</Title>
         </TemplateType5>
       </PrimaryToken>
     </Tokens>

@@ -1,11 +1,10 @@
 module Confetti
   module Template
-    class WindowsPhone7Manifest < Base
+    class WindowsPhone8Manifest < Base
       include VersionHelper
 
       GAP_PERMISSIONS_MAP = {
-        'camera' => %w{ID_CAP_ISV_CAMERA
-                       ID_HW_FRONTCAMERA},
+        'camera' => %w{ID_CAP_ISV_CAMERA},
         'contacts' => %w{ID_CAP_CONTACTS},
         'device' => %w{ID_CAP_IDENTITY_DEVICE},
         'geolocation' => %w{ID_CAP_LOCATION},
@@ -24,6 +23,16 @@ module Confetti
       def guid
         package = @config.package
         package ||= 'com.example.app'
+        guid = Digest::MD5.hexdigest package 
+        res = "{#{ guid[0..7] }-#{ guid[8..11] }-"
+        res << "#{ guid[12..15] }-#{ guid[16..19] }-"
+        res << "#{ guid[20,guid.length-1]}}"
+      end
+      
+      def producerguid
+        package = @config.package
+        package ||= 'com.example.app'
+        package = "#{package}" + "second";
         guid = Digest::MD5.hexdigest package 
         res = "{#{ guid[0..7] }-#{ guid[8..11] }-"
         res << "#{ guid[12..15] }-#{ guid[16..19] }-"
