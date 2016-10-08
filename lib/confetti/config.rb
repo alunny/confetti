@@ -12,9 +12,9 @@ module Confetti
                 :url_scheme_set, :platform_set
 
     generate_and_write  :android_manifest, :android_strings,
-                        :webos_appinfo, :ios_info, :symbian_wrt_info,
-                        :blackberry_widgets_config, :ios_remote_plist,
-                        :windows_phone7_manifest
+                        :webos_appinfo, :ios_info, :ios_config,
+                        :symbian_wrt_info, :blackberry_widgets_config, 
+                        :ios_remote_plist, :windows_phone7_manifest
 
     # handle bad generate/write calls
     def method_missing(method_name, *args)

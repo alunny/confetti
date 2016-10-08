@@ -41,6 +41,15 @@ describe 'Writing Output' do
       files_should_match @output_file, "#{ fixture_dir }/ios/ios_info_expected.plist"
     end
   end
+  
+  context "iOS" do
+    it "should read config.xml and spit out config.xml" do
+      @output_file = "#{ fixture_dir }/ios/ios_config_output.xml"
+      @config.write_ios_config @output_file
+
+      files_should_match @output_file, "#{ fixture_dir }/ios/ios_config_expected.xml"
+    end
+  end
 
   context "Symbian.wrt" do
     it "should read config.xml and spit out info.plist" do
